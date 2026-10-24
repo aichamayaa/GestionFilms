@@ -1,0 +1,1687 @@
+{
+  "acteurs": [
+    {
+      "nom": "Mathilde Rousseau",
+      "sexe": "F"
+    },
+    {
+      "nom": "Antoine Fortier",
+      "sexe": "H"
+    },
+    {
+      "nom": "Camille Beaulieu",
+      "sexe": "F"
+    },
+    {
+      "nom": "Julien Lacasse",
+      "sexe": "H"
+    },
+    {
+      "nom": "Léa Tremblay-Roy",
+      "sexe": "F"
+    },
+    {
+      "nom": "Gabriel Simard",
+      "sexe": "H"
+    },
+    {
+      "nom": "Noémie Charest",
+      "sexe": "F"
+    },
+    {
+      "nom": "Félix Bouchard",
+      "sexe": "H"
+    },
+    {
+      "nom": "Amélie Dubé",
+      "sexe": "F"
+    },
+    {
+      "nom": "Samuel Girard",
+      "sexe": "H"
+    },
+    {
+      "nom": "Rosalie Pelletier",
+      "sexe": "F"
+    },
+    {
+      "nom": "Mathis Côté",
+      "sexe": "H"
+    },
+    {
+      "nom": "Soraya Benali",
+      "sexe": "F"
+    },
+    {
+      "nom": "Karim Haddad",
+      "sexe": "H"
+    },
+    {
+      "nom": "Elena Castellano",
+      "sexe": "F"
+    },
+    {
+      "nom": "Mateo Vidal",
+      "sexe": "H"
+    },
+    {
+      "nom": "Aiko Tanaka",
+      "sexe": "F"
+    },
+    {
+      "nom": "Ren Kobayashi",
+      "sexe": "H"
+    },
+    {
+      "nom": "Priya Anand",
+      "sexe": "F"
+    },
+    {
+      "nom": "Arjun Mehta",
+      "sexe": "H"
+    },
+    {
+      "nom": "Amara Okafor",
+      "sexe": "F"
+    },
+    {
+      "nom": "Kwame Boateng",
+      "sexe": "H"
+    },
+    {
+      "nom": "Ingrid Sørensen",
+      "sexe": "F"
+    },
+    {
+      "nom": "Lukas Bergman",
+      "sexe": "H"
+    },
+    {
+      "nom": "Nadia Volkov",
+      "sexe": "F"
+    },
+    {
+      "nom": "Dimitri Sokolov",
+      "sexe": "H"
+    },
+    {
+      "nom": "Fatima Zahra",
+      "sexe": "F"
+    },
+    {
+      "nom": "Youssef Amrani",
+      "sexe": "H"
+    },
+    {
+      "nom": "Clara Jansen",
+      "sexe": "F"
+    },
+    {
+      "nom": "Pieter van Dijk",
+      "sexe": "H"
+    },
+    {
+      "nom": "Giulia Moretti",
+      "sexe": "F"
+    },
+    {
+      "nom": "Marco Ferrara",
+      "sexe": "H"
+    },
+    {
+      "nom": "Bianca Alves",
+      "sexe": "F"
+    },
+    {
+      "nom": "Rafael Nogueira",
+      "sexe": "H"
+    },
+    {
+      "nom": "Siobhan Walsh",
+      "sexe": "F"
+    },
+    {
+      "nom": "Declan O'Brien",
+      "sexe": "H"
+    },
+    {
+      "nom": "Freya Lindqvist",
+      "sexe": "F"
+    },
+    {
+      "nom": "Oskar Nilsson",
+      "sexe": "H"
+    },
+    {
+      "nom": "Imani Johnson",
+      "sexe": "F"
+    },
+    {
+      "nom": "Malik Thompson",
+      "sexe": "H"
+    }
+  ],
+  "realisateurs": [
+    {
+      "nom": "Odile Marchand"
+    },
+    {
+      "nom": "Benoît Lavigne"
+    },
+    {
+      "nom": "Simone Carrière"
+    },
+    {
+      "nom": "Hugo Desforges"
+    },
+    {
+      "nom": "Marianne Ouellet"
+    },
+    {
+      "nom": "Étienne Paquin"
+    },
+    {
+      "nom": "Claudine Rivard"
+    },
+    {
+      "nom": "Vincent Allaire"
+    },
+    {
+      "nom": "Noor El-Amin"
+    },
+    {
+      "nom": "Tobias Reinholt"
+    },
+    {
+      "nom": "Haruki Endo"
+    },
+    {
+      "nom": "Delphine Castel"
+    },
+    {
+      "nom": "Matteo Bianchi"
+    },
+    {
+      "nom": "Sophia Kallas"
+    },
+    {
+      "nom": "Adaeze Nwosu"
+    },
+    {
+      "nom": "Lars Kristiansen"
+    },
+    {
+      "nom": "Renata Souza"
+    },
+    {
+      "nom": "Idris Chamoun"
+    }
+  ],
+  "producteurs": [
+    {
+      "nom": "Agence Boréale Films"
+    },
+    {
+      "nom": "Studios Lac-Argent"
+    },
+    {
+      "nom": "Maison Pellerin Productions"
+    },
+    {
+      "nom": "Nordique Cinéma"
+    },
+    {
+      "nom": "Atelier du Fleuve"
+    },
+    {
+      "nom": "Productions Verdoyantes"
+    },
+    {
+      "nom": "Lanterne Rouge Films"
+    },
+    {
+      "nom": "Studio Hirondelle"
+    },
+    {
+      "nom": "Grand Angle Productions"
+    },
+    {
+      "nom": "Horizon Pacifique"
+    },
+    {
+      "nom": "Les Films du Chemin"
+    },
+    {
+      "nom": "Productions Clairière"
+    },
+    {
+      "nom": "Studio Méridien"
+    },
+    {
+      "nom": "Les Ateliers du Nord"
+    },
+    {
+      "nom": "Productions Alizé"
+    },
+    {
+      "nom": "Cinéma du Phare"
+    },
+    {
+      "nom": "Maison Ondine"
+    }
+  ],
+  "users": [
+    {
+      "nom": "Geneviève Fontaine",
+      "courriel": "genevieve.fontaine@cegep-exemple.ca",
+      "motDePasse": "DemoGenevieve!1",
+      "role": "A",
+      "preferences": {
+        "nbFilmsParPage": 12,
+        "courrielSiAjout": true,
+        "courrielSiAppropriation": true,
+        "courrielSiSuppression": true,
+        "couleurFond": "#FFFFFF",
+        "couleurTexte": "#1F3864"
+      }
+    },
+    {
+      "nom": "Marc-André Dubois",
+      "courriel": "marc-andre.dubois@cegep-exemple.ca",
+      "motDePasse": "DemoMarcandre!1",
+      "role": "S",
+      "preferences": {
+        "nbFilmsParPage": 12,
+        "courrielSiAjout": true,
+        "courrielSiAppropriation": true,
+        "courrielSiSuppression": false,
+        "couleurFond": "#FFFFFF",
+        "couleurTexte": "#1F3864"
+      }
+    },
+    {
+      "nom": "Chantal Bérubé",
+      "courriel": "chantal.berube@courriel-exemple.ca",
+      "motDePasse": "DemoChantal!1",
+      "role": "U",
+      "preferences": {
+        "nbFilmsParPage": 12,
+        "courrielSiAjout": true,
+        "courrielSiAppropriation": true,
+        "courrielSiSuppression": true,
+        "couleurFond": "#FDF6EC",
+        "couleurTexte": "#1F3864"
+      }
+    },
+    {
+      "nom": "Olivier Gauthier",
+      "courriel": "olivier.gauthier@courriel-exemple.ca",
+      "motDePasse": "DemoOlivier!1",
+      "role": "U",
+      "preferences": {
+        "nbFilmsParPage": 18,
+        "courrielSiAjout": false,
+        "courrielSiAppropriation": true,
+        "courrielSiSuppression": true,
+        "couleurFond": "#FFFFFF",
+        "couleurTexte": "#333333"
+      }
+    },
+    {
+      "nom": "Sophie Tardif",
+      "courriel": "sophie.tardif@courriel-exemple.ca",
+      "motDePasse": "DemoSophie!1",
+      "role": "U",
+      "preferences": {
+        "nbFilmsParPage": 12,
+        "courrielSiAjout": true,
+        "courrielSiAppropriation": false,
+        "courrielSiSuppression": true,
+        "couleurFond": "#EFF7F6",
+        "couleurTexte": "#1F3864"
+      }
+    },
+    {
+      "nom": "Patrick Lemieux",
+      "courriel": "patrick.lemieux@courriel-exemple.ca",
+      "motDePasse": "DemoPatrick!1",
+      "role": "U",
+      "preferences": {
+        "nbFilmsParPage": 24,
+        "courrielSiAjout": true,
+        "courrielSiAppropriation": true,
+        "courrielSiSuppression": true,
+        "couleurFond": "#FFFFFF",
+        "couleurTexte": "#1F3864"
+      }
+    },
+    {
+      "nom": "Isabelle Mercier",
+      "courriel": "isabelle.mercier@courriel-exemple.ca",
+      "motDePasse": "DemoIsabelle!1",
+      "role": "U",
+      "preferences": {
+        "nbFilmsParPage": 12,
+        "courrielSiAjout": true,
+        "courrielSiAppropriation": true,
+        "courrielSiSuppression": true,
+        "couleurFond": "#FFFFFF",
+        "couleurTexte": "#1F3864"
+      }
+    }
+  ],
+  "films": [
+    {
+      "titreFrancais": "Le Sillage du Nord",
+      "titreOriginal": "Le Sillage du Nord",
+      "anneeSortie": 2019,
+      "categorie": "Action",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Gaffes (Bloopers)"
+      ],
+      "resume": "Une garde forestière traque un groupe de braconniers à travers la taïga, sur fond de rivalité familiale.",
+      "dureeMinutes": 118,
+      "dvdOriginal": false,
+      "versionEtendue": true,
+      "visibleATous": false,
+      "nbDisques": 1,
+      "imagePochette": "film01.jpg",
+      "acteurs": [
+        "Mathilde Rousseau",
+        "Antoine Fortier",
+        "Mathis Côté"
+      ],
+      "realisateur": "Odile Marchand",
+      "producteur": "Agence Boréale Films",
+      "proprietaire": "Chantal Bérubé",
+      "detenteur": "Geneviève Fontaine",
+      "utilisateurMAJ": "Marc-André Dubois",
+      "dateMAJ": "2026-05-16"
+    },
+    {
+      "titreFrancais": "Les Dunes de Verre",
+      "titreOriginal": "Glass Dunes",
+      "anneeSortie": 2021,
+      "categorie": "Science-fiction",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Espagnol"
+      ],
+      "supplements": [
+        "Bande-annonce (Trailer)",
+        "Bande sonore"
+      ],
+      "resume": "Sur une planète minière en déclin, deux ingénieures découvrent que les tempêtes de sable cachent une forme de vie.",
+      "dureeMinutes": 132,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 2,
+      "imagePochette": "film02.jpg",
+      "acteurs": [
+        "Camille Beaulieu",
+        "Julien Lacasse",
+        "Aiko Tanaka"
+      ],
+      "realisateur": "Benoît Lavigne",
+      "producteur": "Studios Lac-Argent",
+      "proprietaire": "Patrick Lemieux",
+      "detenteur": "Patrick Lemieux",
+      "utilisateurMAJ": "Chantal Bérubé",
+      "dateMAJ": "2026-05-19"
+    },
+    {
+      "titreFrancais": "Un Dimanche à Trois",
+      "titreOriginal": "Un Dimanche à Trois",
+      "anneeSortie": 2017,
+      "categorie": "Comédie",
+      "format": "Panoramique",
+      "langues": [
+        "Espagnol",
+        "Français"
+      ],
+      "sousTitres": [
+        "Anglais",
+        "Français"
+      ],
+      "supplements": [
+        "Visionneur de scénario-maquette",
+        "Montages de prises ratées",
+        "Documentaire sur la création du film"
+      ],
+      "resume": "Un couple invite son voisin encombrant à un brunch qui tourne vite à la comédie des quiproquos.",
+      "dureeMinutes": 97,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film03.jpg",
+      "acteurs": [
+        "Léa Tremblay-Roy",
+        "Gabriel Simard"
+      ],
+      "realisateur": "Simone Carrière",
+      "producteur": "Maison Pellerin Productions",
+      "proprietaire": "Marc-André Dubois",
+      "detenteur": "Marc-André Dubois",
+      "utilisateurMAJ": "Olivier Gauthier",
+      "dateMAJ": "2026-05-22"
+    },
+    {
+      "titreFrancais": "La Dernière Berge",
+      "titreOriginal": "The Last Shore",
+      "anneeSortie": 2015,
+      "categorie": "Drame",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français",
+        "Espagnol"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Galerie d'images"
+      ],
+      "resume": "Un pêcheur revenu au village natal doit choisir entre vendre sa maison ou affronter son passé.",
+      "dureeMinutes": 108,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film04.jpg",
+      "acteurs": [
+        "Noémie Charest",
+        "Félix Bouchard",
+        "Amara Okafor"
+      ],
+      "realisateur": "Hugo Desforges",
+      "producteur": "Nordique Cinéma",
+      "proprietaire": "Sophie Tardif",
+      "detenteur": "Sophie Tardif",
+      "utilisateurMAJ": "Sophie Tardif",
+      "dateMAJ": "2026-05-25"
+    },
+    {
+      "titreFrancais": "Affaire Classée",
+      "titreOriginal": "Affaire Classée",
+      "anneeSortie": 2020,
+      "categorie": "Drame policier",
+      "format": "Normal",
+      "langues": [
+        "Anglais",
+        "Français"
+      ],
+      "sousTitres": [
+        "Français"
+      ],
+      "supplements": [
+        "Bande sonore",
+        "Montages de prises ratées"
+      ],
+      "resume": "Une détective reprend une enquête classée vingt ans plus tôt et découvre que le vrai coupable court toujours.",
+      "dureeMinutes": 114,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film05.jpg",
+      "acteurs": [
+        "Amélie Dubé",
+        "Samuel Girard",
+        "Nadia Volkov"
+      ],
+      "realisateur": "Marianne Ouellet",
+      "producteur": "Atelier du Fleuve",
+      "proprietaire": "Geneviève Fontaine",
+      "detenteur": "Patrick Lemieux",
+      "utilisateurMAJ": "Patrick Lemieux",
+      "dateMAJ": "2026-05-28"
+    },
+    {
+      "titreFrancais": "La Maison aux Corbeaux",
+      "titreOriginal": "The Crow House",
+      "anneeSortie": 2018,
+      "categorie": "Horreur",
+      "format": "Panoramique",
+      "langues": [
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Anglais",
+        "Français"
+      ],
+      "supplements": [
+        "Sélection des scènes",
+        "Notes de production",
+        "Bande sonore"
+      ],
+      "resume": "Une famille emménage dans un manoir isolé où les corbeaux semblent veiller sur un secret enterré.",
+      "dureeMinutes": 101,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film06.jpg",
+      "acteurs": [
+        "Rosalie Pelletier",
+        "Mathis Côté"
+      ],
+      "realisateur": "Étienne Paquin",
+      "producteur": "Productions Verdoyantes",
+      "proprietaire": "Olivier Gauthier",
+      "detenteur": "Olivier Gauthier",
+      "utilisateurMAJ": "Isabelle Mercier",
+      "dateMAJ": "2026-05-31"
+    },
+    {
+      "titreFrancais": "Valse pour Clara",
+      "titreOriginal": "Valse pour Clara",
+      "anneeSortie": 2016,
+      "categorie": "Comédie musicale",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français",
+        "Espagnol"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Notes de production"
+      ],
+      "resume": "Une pianiste de bar retrouve le goût de la scène grâce à une troupe de danseurs de rue.",
+      "dureeMinutes": 105,
+      "dvdOriginal": false,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film07.jpg",
+      "acteurs": [
+        "Soraya Benali",
+        "Karim Haddad",
+        "Clara Jansen"
+      ],
+      "realisateur": "Claudine Rivard",
+      "producteur": "Lanterne Rouge Films",
+      "proprietaire": "Isabelle Mercier",
+      "detenteur": "Isabelle Mercier",
+      "utilisateurMAJ": "Geneviève Fontaine",
+      "dateMAJ": "2026-06-03"
+    },
+    {
+      "titreFrancais": "Racines",
+      "titreOriginal": "Roots Below",
+      "anneeSortie": 2022,
+      "categorie": "Documentaire",
+      "format": "Normal",
+      "langues": [
+        "Espagnol",
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Français"
+      ],
+      "supplements": [
+        "Documentaire sur la création du film",
+        "Bande-annonce (Trailer)"
+      ],
+      "resume": "Un portrait sur trois générations d'une même famille de vignerons face au changement climatique.",
+      "dureeMinutes": 89,
+      "dvdOriginal": true,
+      "versionEtendue": true,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film08.jpg",
+      "acteurs": [
+        "Elena Castellano",
+        "Mateo Vidal"
+      ],
+      "realisateur": "Vincent Allaire",
+      "producteur": "Studio Hirondelle",
+      "proprietaire": "Chantal Bérubé",
+      "detenteur": "Chantal Bérubé",
+      "utilisateurMAJ": "Marc-André Dubois",
+      "dateMAJ": "2026-06-06"
+    },
+    {
+      "titreFrancais": "Le Pont des Âges",
+      "titreOriginal": "The Bridge of Ages",
+      "anneeSortie": 2014,
+      "categorie": "Historique",
+      "format": "Panoramique",
+      "langues": [
+        "Espagnol",
+        "Français"
+      ],
+      "sousTitres": [
+        "Anglais",
+        "Espagnol"
+      ],
+      "supplements": [
+        "Commentaires audio",
+        "Montages de prises ratées",
+        "Bande sonore"
+      ],
+      "resume": "Durant la construction d'un grand pont au XIXe siècle, un ingénieur et une ouvrière bravent les conventions.",
+      "dureeMinutes": 141,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 2,
+      "imagePochette": "film09.jpg",
+      "acteurs": [
+        "Aiko Tanaka",
+        "Ren Kobayashi",
+        "Bianca Alves"
+      ],
+      "realisateur": "Noor El-Amin",
+      "producteur": "Grand Angle Productions",
+      "proprietaire": "Patrick Lemieux",
+      "detenteur": "Chantal Bérubé",
+      "utilisateurMAJ": "Chantal Bérubé",
+      "dateMAJ": "2026-06-09"
+    },
+    {
+      "titreFrancais": "Code Lanterne",
+      "titreOriginal": "Code Lantern",
+      "anneeSortie": 2019,
+      "categorie": "Espionnage",
+      "format": "Blu-Ray",
+      "langues": [
+        "Espagnol",
+        "Anglais"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Montages de prises ratées"
+      ],
+      "resume": "Une analyste infiltrée doit transmettre un message vital avant que sa couverture ne s'effondre.",
+      "dureeMinutes": 123,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film10.jpg",
+      "acteurs": [
+        "Priya Anand",
+        "Arjun Mehta",
+        "Freya Lindqvist"
+      ],
+      "realisateur": "Tobias Reinholt",
+      "producteur": "Horizon Pacifique",
+      "proprietaire": "Marc-André Dubois",
+      "detenteur": "Marc-André Dubois",
+      "utilisateurMAJ": "Olivier Gauthier",
+      "dateMAJ": "2026-06-12"
+    },
+    {
+      "titreFrancais": "Lettres de Juin",
+      "titreOriginal": "Letters of June",
+      "anneeSortie": 2013,
+      "categorie": "Romantique",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Espagnol"
+      ],
+      "supplements": [
+        "Commentaires audio",
+        "Bande sonore"
+      ],
+      "resume": "Deux correspondants qui ne se sont jamais vus se donnent rendez-vous dix ans après leur première lettre.",
+      "dureeMinutes": 102,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film11.jpg",
+      "acteurs": [
+        "Amara Okafor",
+        "Kwame Boateng"
+      ],
+      "realisateur": "Haruki Endo",
+      "producteur": "Les Films du Chemin",
+      "proprietaire": "Sophie Tardif",
+      "detenteur": "Sophie Tardif",
+      "utilisateurMAJ": "Sophie Tardif",
+      "dateMAJ": "2026-06-15"
+    },
+    {
+      "titreFrancais": "Le Treizième Étage",
+      "titreOriginal": "The Thirteenth Floor",
+      "anneeSortie": 2021,
+      "categorie": "Suspense",
+      "format": "Panoramique",
+      "langues": [
+        "Espagnol",
+        "Français"
+      ],
+      "sousTitres": [
+        "Anglais",
+        "Français"
+      ],
+      "supplements": [
+        "Montages de prises ratées",
+        "Scènes inédites",
+        "Bande sonore"
+      ],
+      "resume": "Un gardien de nuit découvre qu'un étage de l'immeuble n'existe sur aucun plan officiel.",
+      "dureeMinutes": 110,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film12.jpg",
+      "acteurs": [
+        "Ingrid Sørensen",
+        "Lukas Bergman",
+        "Oskar Nilsson"
+      ],
+      "realisateur": "Delphine Castel",
+      "producteur": "Productions Clairière",
+      "proprietaire": "Geneviève Fontaine",
+      "detenteur": "Geneviève Fontaine",
+      "utilisateurMAJ": "Patrick Lemieux",
+      "dateMAJ": "2026-06-18"
+    },
+    {
+      "titreFrancais": "Plume et Tempête",
+      "titreOriginal": "Plume et Tempête",
+      "anneeSortie": 2020,
+      "categorie": "Film d'animation",
+      "format": "Blu-Ray",
+      "langues": [
+        "Espagnol",
+        "Français"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Notes de production"
+      ],
+      "resume": "Une jeune chouette craintive du vent doit traverser une tempête pour retrouver sa volée.",
+      "dureeMinutes": 94,
+      "dvdOriginal": false,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film13.jpg",
+      "acteurs": [
+        "Nadia Volkov",
+        "Dimitri Sokolov"
+      ],
+      "realisateur": "Matteo Bianchi",
+      "producteur": "Studio Méridien",
+      "proprietaire": "Olivier Gauthier",
+      "detenteur": "Geneviève Fontaine",
+      "utilisateurMAJ": "Isabelle Mercier",
+      "dateMAJ": "2026-06-21"
+    },
+    {
+      "titreFrancais": "La Piste du Coyote",
+      "titreOriginal": "Coyote's Trail",
+      "anneeSortie": 2017,
+      "categorie": "Western",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Espagnol"
+      ],
+      "supplements": [
+        "Montages de prises ratées",
+        "Galerie d'images"
+      ],
+      "resume": "Une ancienne shérif raccroche ses bottes jusqu'à ce qu'un vieil ennemi revienne menacer sa ville.",
+      "dureeMinutes": 119,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film14.jpg",
+      "acteurs": [
+        "Fatima Zahra",
+        "Youssef Amrani",
+        "Imani Johnson"
+      ],
+      "realisateur": "Sophia Kallas",
+      "producteur": "Les Ateliers du Nord",
+      "proprietaire": "Isabelle Mercier",
+      "detenteur": "Isabelle Mercier",
+      "utilisateurMAJ": "Geneviève Fontaine",
+      "dateMAJ": "2026-06-24"
+    },
+    {
+      "titreFrancais": "L'Horloger de Riga",
+      "titreOriginal": "The Rigan Clockmaker",
+      "anneeSortie": 2012,
+      "categorie": "Biographie",
+      "format": "Panoramique",
+      "langues": [
+        "Français",
+        "Anglais",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Espagnol",
+        "Anglais"
+      ],
+      "supplements": [
+        "Gaffes (Bloopers)",
+        "Fin alternative",
+        "Documentaire sur la création du film"
+      ],
+      "resume": "Le parcours d'un horloger devenu résistant, entre ateliers clandestins et messages chiffrés.",
+      "dureeMinutes": 127,
+      "dvdOriginal": true,
+      "versionEtendue": true,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film15.jpg",
+      "acteurs": [
+        "Clara Jansen",
+        "Pieter van Dijk"
+      ],
+      "realisateur": "Adaeze Nwosu",
+      "producteur": "Productions Alizé",
+      "proprietaire": "Chantal Bérubé",
+      "detenteur": "Chantal Bérubé",
+      "utilisateurMAJ": "Marc-André Dubois",
+      "dateMAJ": "2026-06-27"
+    },
+    {
+      "titreFrancais": "Le Jardin de Cendre",
+      "titreOriginal": "Garden of Ash",
+      "anneeSortie": 2023,
+      "categorie": "Fantastique",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Scènes supprimées"
+      ],
+      "resume": "Dans un jardin qui repousse chaque nuit, une botaniste cherche la fleur qui pourrait sauver sa sœur.",
+      "dureeMinutes": 116,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film16.jpg",
+      "acteurs": [
+        "Giulia Moretti",
+        "Marco Ferrara",
+        "Mathilde Rousseau"
+      ],
+      "realisateur": "Lars Kristiansen",
+      "producteur": "Cinéma du Phare",
+      "proprietaire": "Patrick Lemieux",
+      "detenteur": "Patrick Lemieux",
+      "utilisateurMAJ": "Chantal Bérubé",
+      "dateMAJ": "2026-06-30"
+    },
+    {
+      "titreFrancais": "Trois Jours à Vendre",
+      "titreOriginal": "Three Days to Sell",
+      "anneeSortie": 2015,
+      "categorie": "Criminel",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Français"
+      ],
+      "supplements": [
+        "Notes de production",
+        "Fin alternative"
+      ],
+      "resume": "Un petit escroc a trois jours pour revendre un bijou volé avant que son propriétaire ne le retrouve.",
+      "dureeMinutes": 99,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film17.jpg",
+      "acteurs": [
+        "Bianca Alves",
+        "Rafael Nogueira"
+      ],
+      "realisateur": "Renata Souza",
+      "producteur": "Maison Ondine",
+      "proprietaire": "Marc-André Dubois",
+      "detenteur": "Patrick Lemieux",
+      "utilisateurMAJ": "Olivier Gauthier",
+      "dateMAJ": "2026-07-03"
+    },
+    {
+      "titreFrancais": "Les Routes de Sel",
+      "titreOriginal": "Salt Roads",
+      "anneeSortie": 2018,
+      "categorie": "Road movie",
+      "format": "Panoramique",
+      "langues": [
+        "Espagnol",
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Anglais",
+        "Espagnol"
+      ],
+      "supplements": [
+        "Fin alternative",
+        "Notes de production",
+        "Bande sonore"
+      ],
+      "resume": "Deux sœurs brouillées traversent le pays en camion pour livrer les cendres de leur père.",
+      "dureeMinutes": 106,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": false,
+      "nbDisques": 1,
+      "imagePochette": "film18.jpg",
+      "acteurs": [
+        "Siobhan Walsh",
+        "Declan O'Brien",
+        "Antoine Fortier"
+      ],
+      "realisateur": "Idris Chamoun",
+      "producteur": "Agence Boréale Films",
+      "proprietaire": "Sophie Tardif",
+      "detenteur": "Sophie Tardif",
+      "utilisateurMAJ": "Sophie Tardif",
+      "dateMAJ": "2026-07-06"
+    },
+    {
+      "titreFrancais": "Nuit sur la Somme",
+      "titreOriginal": "Night on the Somme",
+      "anneeSortie": 2014,
+      "categorie": "Drame de guerre",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Commentaires audio"
+      ],
+      "resume": "Dans les tranchées, deux brancardiers que tout oppose apprennent à se faire confiance.",
+      "dureeMinutes": 138,
+      "dvdOriginal": false,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 2,
+      "imagePochette": "film19.jpg",
+      "acteurs": [
+        "Freya Lindqvist",
+        "Oskar Nilsson"
+      ],
+      "realisateur": "Odile Marchand",
+      "producteur": "Studios Lac-Argent",
+      "proprietaire": "Geneviève Fontaine",
+      "detenteur": "Geneviève Fontaine",
+      "utilisateurMAJ": "Patrick Lemieux",
+      "dateMAJ": "2026-07-09"
+    },
+    {
+      "titreFrancais": "Le Goût du Sel",
+      "titreOriginal": "A Taste of Salt",
+      "anneeSortie": 2019,
+      "categorie": "Comédie dramatique",
+      "format": "Normal",
+      "langues": [
+        "Anglais",
+        "Français"
+      ],
+      "sousTitres": [
+        "Anglais"
+      ],
+      "supplements": [
+        "Galerie d'images",
+        "Bande-annonce (Trailer)"
+      ],
+      "resume": "Un chef étoilé revient diriger la cantine de son village natal pour sauver l'école du quartier.",
+      "dureeMinutes": 103,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film20.jpg",
+      "acteurs": [
+        "Imani Johnson",
+        "Malik Thompson",
+        "Camille Beaulieu"
+      ],
+      "realisateur": "Benoît Lavigne",
+      "producteur": "Maison Pellerin Productions",
+      "proprietaire": "Olivier Gauthier",
+      "detenteur": "Olivier Gauthier",
+      "utilisateurMAJ": "Isabelle Mercier",
+      "dateMAJ": "2026-07-12"
+    },
+    {
+      "titreFrancais": "Adieu, Mademoiselle",
+      "titreOriginal": "Adieu, Mademoiselle",
+      "anneeSortie": 2011,
+      "categorie": "Mélodrame",
+      "format": "Panoramique",
+      "langues": [
+        "Français",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Espagnol",
+        "Français"
+      ],
+      "supplements": [
+        "Scènes supprimées",
+        "Montages de prises ratées",
+        "Notes de production"
+      ],
+      "resume": "Une gouvernante quitte la famille qu'elle a élevée, le temps de retrouver l'amour de sa jeunesse.",
+      "dureeMinutes": 112,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film21.jpg",
+      "acteurs": [
+        "Julien Lacasse",
+        "Léa Tremblay-Roy"
+      ],
+      "realisateur": "Simone Carrière",
+      "producteur": "Nordique Cinéma",
+      "proprietaire": "Isabelle Mercier",
+      "detenteur": "Chantal Bérubé",
+      "utilisateurMAJ": "Geneviève Fontaine",
+      "dateMAJ": "2026-07-15"
+    },
+    {
+      "titreFrancais": "La Cour Intérieure",
+      "titreOriginal": "The Inner Courtyard",
+      "anneeSortie": 2016,
+      "categorie": "Drame social",
+      "format": "Blu-Ray",
+      "langues": [
+        "Anglais",
+        "Espagnol"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Scènes inédites"
+      ],
+      "resume": "Dans un HLM promis à la démolition, les habitants organisent leur dernière fête de quartier.",
+      "dureeMinutes": 121,
+      "dvdOriginal": true,
+      "versionEtendue": true,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film22.jpg",
+      "acteurs": [
+        "Gabriel Simard",
+        "Noémie Charest",
+        "Samuel Girard"
+      ],
+      "realisateur": "Hugo Desforges",
+      "producteur": "Atelier du Fleuve",
+      "proprietaire": "Chantal Bérubé",
+      "detenteur": "Chantal Bérubé",
+      "utilisateurMAJ": "Marc-André Dubois",
+      "dateMAJ": "2026-07-18"
+    },
+    {
+      "titreFrancais": "Marée Noire",
+      "titreOriginal": "Black Tide",
+      "anneeSortie": 2020,
+      "categorie": "Catastrophe",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Anglais",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Espagnol"
+      ],
+      "supplements": [
+        "Scènes supprimées",
+        "Interprètes et artisans"
+      ],
+      "resume": "Une plateforme pétrolière en mer doit être évacuée en pleine tempête, sans attendre les secours.",
+      "dureeMinutes": 129,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film23.jpg",
+      "acteurs": [
+        "Félix Bouchard",
+        "Amélie Dubé"
+      ],
+      "realisateur": "Marianne Ouellet",
+      "producteur": "Productions Verdoyantes",
+      "proprietaire": "Patrick Lemieux",
+      "detenteur": "Patrick Lemieux",
+      "utilisateurMAJ": "Chantal Bérubé",
+      "dateMAJ": "2026-07-21"
+    },
+    {
+      "titreFrancais": "Monsieur le Maire",
+      "titreOriginal": "Mister Mayor",
+      "anneeSortie": 2017,
+      "categorie": "Comédie satirique",
+      "format": "Panoramique",
+      "langues": [
+        "Français",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Anglais",
+        "Espagnol"
+      ],
+      "supplements": [
+        "Scènes inédites",
+        "Sauvegarde d'écran",
+        "Bande sonore"
+      ],
+      "resume": "Un maire de village se retrouve malgré lui candidat à la présidentielle après une blague virale.",
+      "dureeMinutes": 95,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film24.jpg",
+      "acteurs": [
+        "Rosalie Pelletier",
+        "Soraya Benali",
+        "Elena Castellano"
+      ],
+      "realisateur": "Étienne Paquin",
+      "producteur": "Lanterne Rouge Films",
+      "proprietaire": "Marc-André Dubois",
+      "detenteur": "Marc-André Dubois",
+      "utilisateurMAJ": "Olivier Gauthier",
+      "dateMAJ": "2026-07-24"
+    },
+    {
+      "titreFrancais": "Les Pas de Mira",
+      "titreOriginal": "Mira's Steps",
+      "anneeSortie": 2021,
+      "categorie": "Danse",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Sauvegarde d'écran"
+      ],
+      "resume": "Une danseuse revient à son studio d'enfance pour monter un spectacle avec une nouvelle génération.",
+      "dureeMinutes": 100,
+      "dvdOriginal": false,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film25.jpg",
+      "acteurs": [
+        "Karim Haddad",
+        "Mateo Vidal"
+      ],
+      "realisateur": "Claudine Rivard",
+      "producteur": "Studio Hirondelle",
+      "proprietaire": "Sophie Tardif",
+      "detenteur": "Geneviève Fontaine",
+      "utilisateurMAJ": "Sophie Tardif",
+      "dateMAJ": "2026-07-27"
+    },
+    {
+      "titreFrancais": "Ouverture en Ré Mineur",
+      "titreOriginal": "Opening in D Minor",
+      "anneeSortie": 2013,
+      "categorie": "Musical",
+      "format": "Normal",
+      "langues": [
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Espagnol"
+      ],
+      "supplements": [
+        "Sauvegarde d'écran",
+        "Sélection des scènes"
+      ],
+      "resume": "Un orchestre de quartier répète un concert qui doit sauver leur salle de la fermeture.",
+      "dureeMinutes": 124,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film26.jpg",
+      "acteurs": [
+        "Ren Kobayashi",
+        "Arjun Mehta",
+        "Kwame Boateng"
+      ],
+      "realisateur": "Vincent Allaire",
+      "producteur": "Grand Angle Productions",
+      "proprietaire": "Geneviève Fontaine",
+      "detenteur": "Geneviève Fontaine",
+      "utilisateurMAJ": "Patrick Lemieux",
+      "dateMAJ": "2026-07-30"
+    },
+    {
+      "titreFrancais": "La Chambre Close",
+      "titreOriginal": "The Closed Room",
+      "anneeSortie": 2022,
+      "categorie": "Drame psychologique",
+      "format": "Panoramique",
+      "langues": [
+        "Français",
+        "Anglais",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Espagnol",
+        "Anglais"
+      ],
+      "supplements": [
+        "Visionneur de scénario-maquette",
+        "Sauvegarde d'écran",
+        "Gaffes (Bloopers)"
+      ],
+      "resume": "Une psychiatre suit un patient qui refuse de quitter sa chambre depuis trois ans, pour une raison inattendue.",
+      "dureeMinutes": 107,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film27.jpg",
+      "acteurs": [
+        "Priya Anand",
+        "Amara Okafor"
+      ],
+      "realisateur": "Noor El-Amin",
+      "producteur": "Horizon Pacifique",
+      "proprietaire": "Olivier Gauthier",
+      "detenteur": "Olivier Gauthier",
+      "utilisateurMAJ": "Isabelle Mercier",
+      "dateMAJ": "2026-08-02"
+    },
+    {
+      "titreFrancais": "Poing de Jade",
+      "titreOriginal": "Jade Fist",
+      "anneeSortie": 2015,
+      "categorie": "Film d'art martial",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Gaffes (Bloopers)"
+      ],
+      "resume": "Une élève d'un vieux maître doit défendre son école contre un clan rival venu réclamer son terrain.",
+      "dureeMinutes": 104,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film28.jpg",
+      "acteurs": [
+        "Ingrid Sørensen",
+        "Nadia Volkov",
+        "Fatima Zahra"
+      ],
+      "realisateur": "Tobias Reinholt",
+      "producteur": "Les Films du Chemin",
+      "proprietaire": "Isabelle Mercier",
+      "detenteur": "Isabelle Mercier",
+      "utilisateurMAJ": "Geneviève Fontaine",
+      "dateMAJ": "2026-08-05"
+    },
+    {
+      "titreFrancais": "Chroniques d'un Été",
+      "titreOriginal": "Chronicles of a Summer Town",
+      "anneeSortie": 2018,
+      "categorie": "Chronique",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Anglais"
+      ],
+      "supplements": [
+        "Bande-annonce (Trailer)",
+        "Documentaire sur la création du film"
+      ],
+      "resume": "Le quotidien d'un village balnéaire raconté à travers cinq étés successifs.",
+      "dureeMinutes": 111,
+      "dvdOriginal": true,
+      "versionEtendue": true,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film29.jpg",
+      "acteurs": [
+        "Lukas Bergman",
+        "Dimitri Sokolov"
+      ],
+      "realisateur": "Haruki Endo",
+      "producteur": "Productions Clairière",
+      "proprietaire": "Chantal Bérubé",
+      "detenteur": "Patrick Lemieux",
+      "utilisateurMAJ": "Marc-André Dubois",
+      "dateMAJ": "2026-08-08"
+    },
+    {
+      "titreFrancais": "Le Verdict de Minuit",
+      "titreOriginal": "Midnight Verdict",
+      "anneeSortie": 2019,
+      "categorie": "Drame judiciaire",
+      "format": "Panoramique",
+      "langues": [
+        "Anglais",
+        "Français"
+      ],
+      "sousTitres": [
+        "Espagnol",
+        "Français"
+      ],
+      "supplements": [
+        "Galerie d'images",
+        "Visionneur de scénario-maquette",
+        "Interprètes et artisans"
+      ],
+      "resume": "Une avocate débutante plaide sa première grande affaire contre son propre mentor.",
+      "dureeMinutes": 133,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 2,
+      "imagePochette": "film30.jpg",
+      "acteurs": [
+        "Youssef Amrani",
+        "Pieter van Dijk",
+        "Marco Ferrara"
+      ],
+      "realisateur": "Delphine Castel",
+      "producteur": "Studio Méridien",
+      "proprietaire": "Patrick Lemieux",
+      "detenteur": "Patrick Lemieux",
+      "utilisateurMAJ": "Chantal Bérubé",
+      "dateMAJ": "2026-08-11"
+    },
+    {
+      "titreFrancais": "Deux Agents et un Chat",
+      "titreOriginal": "Two Agents and a Cat",
+      "anneeSortie": 2016,
+      "categorie": "Comédie policière",
+      "format": "Blu-Ray",
+      "langues": [
+        "Français"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Bande sonore"
+      ],
+      "resume": "Deux policiers que tout oppose héritent d'une enquête... et d'un chat témoin essentiel.",
+      "dureeMinutes": 92,
+      "dvdOriginal": false,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film31.jpg",
+      "acteurs": [
+        "Clara Jansen",
+        "Giulia Moretti"
+      ],
+      "realisateur": "Matteo Bianchi",
+      "producteur": "Les Ateliers du Nord",
+      "proprietaire": "Marc-André Dubois",
+      "detenteur": "Marc-André Dubois",
+      "utilisateurMAJ": "Olivier Gauthier",
+      "dateMAJ": "2026-08-14"
+    },
+    {
+      "titreFrancais": "Premier Bal",
+      "titreOriginal": "First Dance",
+      "anneeSortie": 2014,
+      "categorie": "Adolescent",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Anglais"
+      ],
+      "supplements": [
+        "Montages de prises ratées",
+        "Fin alternative"
+      ],
+      "resume": "Une adolescente timide s'inscrit en secret à un concours de danse pour impressionner sa meilleure amie.",
+      "dureeMinutes": 98,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film32.jpg",
+      "acteurs": [
+        "Rafael Nogueira",
+        "Declan O'Brien",
+        "Julien Lacasse"
+      ],
+      "realisateur": "Sophia Kallas",
+      "producteur": "Productions Alizé",
+      "proprietaire": "Sophie Tardif",
+      "detenteur": "Sophie Tardif",
+      "utilisateurMAJ": "Sophie Tardif",
+      "dateMAJ": "2026-08-17"
+    },
+    {
+      "titreFrancais": "Le Duel des Lames",
+      "titreOriginal": "Duel of Blades",
+      "anneeSortie": 2012,
+      "categorie": "Cape et d'épée",
+      "format": "Panoramique",
+      "langues": [
+        "Français",
+        "Anglais"
+      ],
+      "sousTitres": [
+        "Espagnol",
+        "Anglais"
+      ],
+      "supplements": [
+        "Scènes inédites",
+        "Galerie d'images",
+        "Gaffes (Bloopers)"
+      ],
+      "resume": "Un jeune noble déchu apprend l'escrime auprès d'un maître d'armes pour reconquérir son domaine.",
+      "dureeMinutes": 125,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film33.jpg",
+      "acteurs": [
+        "Siobhan Walsh",
+        "Freya Lindqvist"
+      ],
+      "realisateur": "Adaeze Nwosu",
+      "producteur": "Cinéma du Phare",
+      "proprietaire": "Geneviève Fontaine",
+      "detenteur": "Olivier Gauthier",
+      "utilisateurMAJ": "Patrick Lemieux",
+      "dateMAJ": "2026-08-20"
+    },
+    {
+      "titreFrancais": "Sous les Projecteurs",
+      "titreOriginal": "Under the Spotlights",
+      "anneeSortie": 2020,
+      "categorie": "Spectacle musical",
+      "format": "Blu-Ray",
+      "langues": [
+        "Espagnol",
+        "Anglais"
+      ],
+      "sousTitres": [],
+      "supplements": [
+        "Documentaire sur la création du film"
+      ],
+      "resume": "Une troupe de cabaret itinérante prépare la représentation qui pourrait la faire connaître enfin.",
+      "dureeMinutes": 109,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film34.jpg",
+      "acteurs": [
+        "Oskar Nilsson",
+        "Malik Thompson",
+        "Gabriel Simard"
+      ],
+      "realisateur": "Lars Kristiansen",
+      "producteur": "Maison Ondine",
+      "proprietaire": "Olivier Gauthier",
+      "detenteur": "Olivier Gauthier",
+      "utilisateurMAJ": "Isabelle Mercier",
+      "dateMAJ": "2026-08-23"
+    },
+    {
+      "titreFrancais": "Rue des Sirènes, Saison 1",
+      "titreOriginal": "Siren Street, Season 1",
+      "anneeSortie": 2021,
+      "categorie": "Série TV",
+      "format": "Normal",
+      "langues": [
+        "Français",
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Français"
+      ],
+      "supplements": [
+        "Commentaires audio",
+        "Documentaire sur la création du film"
+      ],
+      "resume": "Premier épisode d'une chronique chorale dans un immeuble donnant sur le port d'une ville côtière.",
+      "dureeMinutes": 45,
+      "dvdOriginal": true,
+      "versionEtendue": false,
+      "visibleATous": false,
+      "nbDisques": 1,
+      "imagePochette": "film35.jpg",
+      "acteurs": [
+        "Imani Johnson",
+        "Mathilde Rousseau",
+        "Camille Beaulieu"
+      ],
+      "realisateur": "Renata Souza",
+      "producteur": "Agence Boréale Films",
+      "proprietaire": "Isabelle Mercier",
+      "detenteur": "Isabelle Mercier",
+      "utilisateurMAJ": "Geneviève Fontaine",
+      "dateMAJ": "2026-08-26"
+    },
+    {
+      "titreFrancais": "Au Fil de Nos Silences",
+      "titreOriginal": "Au Fil de Nos Silences",
+      "anneeSortie": 2017,
+      "categorie": "Comédie sentimentale",
+      "format": "Panoramique",
+      "langues": [
+        "Espagnol"
+      ],
+      "sousTitres": [
+        "Espagnol",
+        "Français"
+      ],
+      "supplements": [
+        "Bande-annonce (Trailer)",
+        "Interprètes et artisans",
+        "Notes de production"
+      ],
+      "resume": "Deux collègues de bureau que tout sépare se découvrent, à leur grande surprise, un humour commun.",
+      "dureeMinutes": 101,
+      "dvdOriginal": true,
+      "versionEtendue": true,
+      "visibleATous": true,
+      "nbDisques": 1,
+      "imagePochette": "film36.jpg",
+      "acteurs": [
+        "Malik Thompson",
+        "Antoine Fortier"
+      ],
+      "realisateur": "Idris Chamoun",
+      "producteur": "Studios Lac-Argent",
+      "proprietaire": "Chantal Bérubé",
+      "detenteur": "Chantal Bérubé",
+      "utilisateurMAJ": "Marc-André Dubois",
+      "dateMAJ": "2026-08-29"
+    }
+  ],
+  "emprunts": [
+    {
+      "film": "Le Sillage du Nord",
+      "utilisateur": "Geneviève Fontaine",
+      "dateEmprunt": "2026-07-27"
+    },
+    {
+      "film": "Affaire Classée",
+      "utilisateur": "Patrick Lemieux",
+      "dateEmprunt": "2026-07-31"
+    },
+    {
+      "film": "Le Pont des Âges",
+      "utilisateur": "Chantal Bérubé",
+      "dateEmprunt": "2026-08-04"
+    },
+    {
+      "film": "Plume et Tempête",
+      "utilisateur": "Geneviève Fontaine",
+      "dateEmprunt": "2026-08-08"
+    },
+    {
+      "film": "Trois Jours à Vendre",
+      "utilisateur": "Patrick Lemieux",
+      "dateEmprunt": "2026-08-12"
+    },
+    {
+      "film": "Adieu, Mademoiselle",
+      "utilisateur": "Chantal Bérubé",
+      "dateEmprunt": "2026-08-16"
+    },
+    {
+      "film": "Les Pas de Mira",
+      "utilisateur": "Geneviève Fontaine",
+      "dateEmprunt": "2026-08-20"
+    },
+    {
+      "film": "Chroniques d'un Été",
+      "utilisateur": "Patrick Lemieux",
+      "dateEmprunt": "2026-08-24"
+    },
+    {
+      "film": "Le Duel des Lames",
+      "utilisateur": "Olivier Gauthier",
+      "dateEmprunt": "2026-08-28"
+    }
+  ]
+}
