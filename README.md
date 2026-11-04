@@ -6,13 +6,11 @@ Application Web de gestion des DVDs d’un groupe d’utilisateurs.
 - API : Node.js, Express 5, Mongoose, JWT, bcrypt (bcryptjs), Nodemailer
 - Base de données : MongoDB
 
-## Prérequis
-
+## Ce que tu as besoin avant l'installation
 - Node.js 22.22 ou plus récent (version LTS)
 - MongoDB en fonction sur `mongodb://127.0.0.1:27017` (modifiable dans `server/.env`)
 
 ## Installation
-
 
 - npm install
 - npm run installer
