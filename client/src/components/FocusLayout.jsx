@@ -25,7 +25,7 @@ export default function FocusLayout() {
       <main className="contenu">
         <Outlet />
       </main>
-      <footer className="pied">Gestion de films – Programmation Web client II</footer>
+      <footer className="pied">Gestion de films · Projet full-stack par Aicha M. Touré · React, Express, MongoDB</footer>
     </div>
   );
 }

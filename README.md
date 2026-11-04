@@ -1,44 +1,66 @@
-# Gestion de films – Projet final
+# Gestion de films
 
-Application Web de gestion des DVDs d’un groupe d’utilisateurs.
+Application web full-stack pour gérer une collection de DVD partagée entre plusieurs utilisateurs : consultation du catalogue, emprunts, appropriation de films, préférences personnelles et notifications par courriel.
 
-- Frontend : React 19, React Router 8, Context API, Zod, CSS
-- API : Node.js, Express 5, Mongoose, JWT, bcrypt (bcryptjs), Nodemailer
-- Base de données : MongoDB
+**Démo en ligne : https://gestionfilms.vercel.app**
 
-## Ce que tu as besoin avant l'installation
-- Node.js 22.22 ou plus récent (version LTS)
-- MongoDB en fonction sur `mongodb://127.0.0.1:27017` (modifiable dans `server/.env`)
+## Compte de démonstration
 
-## Installation
+Connectez-vous avec :
 
-- npm install
-- npm run installer
-- npm run peupler
+- Identifiant : `[courriel ou prénom d'un utilisateur de donnees.json]`
+- Mot de passe : `[son motDePasse dans donnees.json]`
 
-La commande `npm run peupler` vide la base `gestion_films` et la remplit avec le jeu de données de démarrage (7 utilisateurs, 36 films, acteurs, réalisateurs, producteurs et emprunts).
+Vous pouvez aussi cliquer sur **Créer un compte** pour vous inscrire.
 
-## Démarrage en développement
+## Fonctionnalités
 
-- npm run dev
+- Authentification par jeton JWT (connexion et inscription)
+- Mots de passe hachés avec bcrypt
+- Catalogue de films avec acteurs, réalisateurs et producteurs
+- Gestion des emprunts
+- Rôles utilisateur et administrateur
+- Préférences par utilisateur (nombre de films par page, couleurs, notifications)
+- Envoi de courriels par SMTP (Gmail)
 
-- Client : http://localhost:5173
-- API : http://localhost:3001
+## Technologies
 
-On peut aussi lancer les deux parties séparément : `npm run dev --prefix server` et `npm run dev --prefix client`.
+- **Frontend :** React, Vite, React Router
+- **Backend :** Node.js, Express
+- **Base de données :** MongoDB Atlas (Mongoose)
+- **Déploiement :** Vercel (client et serveur dans un seul projet)
 
-## Démarrage en mode production
+## Lancer le projet en local
 
-- npm start
+1. Cloner le dépôt :
+   ```
+   git clone https://github.com/aichamayaa/GestionFilms.git
+   ```
+2. Créer `server/.env` à partir de `server/.env.example` et remplir les valeurs.
+3. Installer et peupler la base :
+   ```
+   cd server
+   npm install
+   node --env-file=.env src/seed/seed.js
+   node --env-file=.env src/index.js
+   ```
+4. Dans un second terminal :
+   ```
+   cd client
+   npm install
+   npm run dev
+   ```
 
-Le client est compilé, ensuite l’API sert l’application complète sur http://localhost:3001.
+L'API démarre sur `http://localhost:3001`.
 
-## Comptes de démonstration
+## Variables d'environnement
 
-Maya Toure	maya@admin.ca	Administrateur	mdp: 222222
-Matante Leguire	matante@demo.ca	Utilisateur	mdp: 111111
-Issa Mercier    issamer@demo.ca	Utilisateur	mdp:333333	
-Mass Aicha Toure maichatoure@yahoo.ca  Superutilisateur mdp: 000000
-Olivier Primeau primeau@demo.ca	Utilisateur	mdp: 444444
-Catherine Lager	lager@demo.ca	Utilisateur	mdp: 555555
-David Guetta	guetta@demo.ca	Utilisateur	mdp: 666666
+Voir `server/.env.example`. Sur Vercel, elles se configurent dans *Settings → Environment Variables*.
+
+## Limites connues
+
+- Sur la version en ligne, les pochettes téléversées ne sont pas conservées (le disque de Vercel est en lecture seule). Les pochettes du jeu de données sont incluses dans le projet.
+
+## Auteure
+
+Aicha M. Toure · https://github.com/aichamayaa
