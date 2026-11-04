@@ -1,3 +1,5 @@
+import { connecter } from './db.js';
+import { assurerAdminIntegre } from './services/utilisateurs.js';
 import express from 'express';
 import cors from 'cors';
 import fs from 'node:fs';
@@ -14,7 +16,10 @@ import pochetteRoutes from './routes/pochettes.js';
 export function creerApp() {
   const app = express();
 
-  fs.mkdirSync(config.dossierPochettes, { recursive: true });
+   try {
+    fs.mkdirSync(config.dossierPochettes, { recursive: true });
+  } catch {
+  }
 
   app.use(cors({ origin: config.urlClient }));
   app.use(express.json({ limit: '1mb' }));
@@ -44,4 +49,23 @@ export function creerApp() {
   app.use(gestionnaireErreurs);
 
   return app;
+}
+
+const app = creerApp();
+
+let pret = null;
+
+export default async function handler(req, res) {
+  try {
+    pret ??= (async () => {
+      await connecter();
+      await assurerAdminIntegre();
+    })();
+    await pret;
+  } catch (erreur) {
+    pret = null;
+    console.error(erreur);
+    return res.status(500).json({ message: 'Erreur de connexion à la base de données.' });
+  }
+  return app(req, res);
 }
