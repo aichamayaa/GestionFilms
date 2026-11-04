@@ -12,6 +12,7 @@ import {
   hacherMotDePasse,
   presenterUtilisateur,
   trouverParIdentifiant,
+  verifierUnicite,
 } from '../services/utilisateurs.js';
 import User from '../models/User.js';
 
@@ -32,6 +33,29 @@ export async function connexion(req, res) {
   }
 
   res.json({ token: creerJeton(utilisateur), utilisateur: presenterUtilisateur(utilisateur) });
+}
+
+export async function inscription(req, res) {
+  const nom = String(req.body.nom ?? '').trim();
+  const courriel = String(req.body.courriel ?? '').trim().toLowerCase();
+  const motDePasse = String(req.body.motDePasse ?? '');
+
+  if (!nom || !courriel || motDePasse.length < 6) {
+    throw new ErreurHttp(400, 'Prénom, courriel et mot de passe (6 caractères min.) sont requis.');
+  }
+
+  const erreurs = await verifierUnicite({ nom, courriel });
+  if (Object.keys(erreurs).length > 0) {
+    throw new ErreurHttp(409, Object.values(erreurs)[0], erreurs);
+  }
+
+  const utilisateur = await User.create({
+    nom,
+    courriel,
+    motDePasseHache: await hacherMotDePasse(motDePasse),
+  });
+
+  res.status(201).json({ utilisateur: presenterUtilisateur(utilisateur) });
 }
 
 export async function moi(req, res) {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, useLocation } from 'react-router';
+import { Link, Navigate, useLocation } from 'react-router';
 import { useAuth } from '../context/AuthContext.jsx';
 import { ErreurApi } from '../api/client.js';
 import { connexionSchema, validerFormulaire } from '../validation.js';
@@ -78,6 +78,10 @@ export default function Connexion() {
             {envoi ? 'Connexion en cours…' : 'Se connecter'}
           </button>
         </form>
+
+        <p className="connexion-sous-titre">
+          Pas de compte ? <Link to="/inscription">Créer un compte</Link>
+        </p>
       </div>
     </div>
   );

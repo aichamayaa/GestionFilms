@@ -4,25 +4,37 @@ import { creerApp } from './app.js';
 import { assurerAdminIntegre } from './services/utilisateurs.js';
 import { smtpActif } from './services/courriel.js';
 
-async function demarrer() {
-  try {
+const app = creerApp();
+
+let pret = null;
+function preparer() {
+  pret ??= (async () => {
     await connecter();
+    await assurerAdminIntegre();
+  })();
+  return pret;
+}
+
+if (!process.env.VERCEL) {
+  try {
+    await preparer();
   } catch (erreur) {
-    console.error(`Connexion à MongoDB impossible (${config.mongoUri}) : ${erreur.message}`);
+    console.error(`Connexion à MongoDB impossible : ${erreur.message}`);
     process.exit(1);
   }
-
-  await assurerAdminIntegre();
-
-  const app = creerApp();
   app.listen(config.port, () => {
     console.log(`API démarrée sur http://localhost:${config.port}`);
-    console.log(
-      smtpActif()
-        ? `Courriels envoyés par le serveur SMTP ${config.smtp.hote}`
-        : 'Aucun serveur SMTP configuré : les courriels sont affichés dans la boîte d’envoi de l’application.'
-    );
+    console.log(smtpActif() ? `Courriels envoyés par ${config.smtp.hote}` : 'Aucun serveur SMTP configuré.');
   });
 }
 
-demarrer();
+export default async function handler(req, res) {
+  try {
+    await preparer();
+    return app(req, res);
+  } catch (erreur) {
+    pret = null;
+    console.error(erreur);
+    res.status(500).json({ message: 'Erreur de connexion à la base de données.' });
+  }
+}

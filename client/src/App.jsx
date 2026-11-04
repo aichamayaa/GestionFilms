@@ -16,11 +16,13 @@ import BoiteEnvoi from './pages/BoiteEnvoi.jsx';
 import GestionUtilisateurs from './pages/GestionUtilisateurs.jsx';
 import FormulaireUtilisateur from './pages/FormulaireUtilisateur.jsx';
 import Introuvable from './pages/Introuvable.jsx';
+import Inscription from './pages/Inscription';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/connexion" element={<Connexion />} />
+      <Route path="/inscription" element={<Inscription />} />
 
       <Route element={<RouteProtegee />}>
         <Route element={<MenuLayout />}>
