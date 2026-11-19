@@ -9,7 +9,7 @@ export class ErreurHttp extends Error {
 }
 
 export function routeInconnue(req, res) {
-  res.status(404).json({ message: 'Ressource introuvable.' });
+  res.status(404).json({ message: 'Resource not found.' });
 }
 
 export function gestionnaireErreurs(err, req, res, next) {
@@ -26,38 +26,38 @@ export function gestionnaireErreurs(err, req, res, next) {
     for (const [champ, detail] of Object.entries(err.errors)) {
       erreurs[champ] = detail.message;
     }
-    return res.status(400).json({ message: 'Les données fournies ne sont pas valides.', erreurs });
+    return res.status(400).json({ message: 'The data provided is not valid.', erreurs });
   }
 
   if (err instanceof mongoose.Error.CastError) {
-    return res.status(400).json({ message: 'Identifiant ou valeur non valide.' });
+    return res.status(400).json({ message: 'Invalid identifier or value.' });
   }
 
   if (err && err.code === 11000) {
     const champ = Object.keys(err.keyPattern ?? {})[0];
     if (champ === 'titreFrancais') {
       return res.status(409).json({
-        message: 'Un DVD portant ce titre existe déjà.',
-        erreurs: { titreFrancais: 'Un DVD portant ce titre existe déjà.' },
+        message: 'A DVD with this title already exists.',
+        erreurs: { titreFrancais: 'A DVD with this title already exists.' },
       });
     }
     if (champ === 'courriel') {
       return res.status(409).json({
-        message: 'Cette adresse courriel est déjà utilisée.',
-        erreurs: { courriel: 'Cette adresse courriel est déjà utilisée.' },
+        message: 'This email address is already in use.',
+        erreurs: { courriel: 'This email address is already in use.' },
       });
     }
-    return res.status(409).json({ message: 'Cette valeur existe déjà.' });
+    return res.status(409).json({ message: 'This value already exists.' });
   }
 
   if (err && err.code === 'LIMIT_FILE_SIZE') {
-    return res.status(400).json({ message: 'L’image ne doit pas dépasser 2 Mo.' });
+    return res.status(400).json({ message: 'The image must not exceed 2 MB.' });
   }
 
   if (err && err.type === 'entity.parse.failed') {
-    return res.status(400).json({ message: 'Le corps de la requête n’est pas du JSON valide.' });
+    return res.status(400).json({ message: 'The request body is not valid JSON.' });
   }
 
   console.error(err);
-  return res.status(500).json({ message: 'Une erreur interne est survenue.' });
+  return res.status(500).json({ message: 'An internal error occurred.' });
 }

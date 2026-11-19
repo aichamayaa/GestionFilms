@@ -4,10 +4,10 @@ export default function Introuvable() {
   return (
     <section className="page page-etroite">
       <div className="panneau vide">
-        <h1>Page introuvable</h1>
-        <p>La page que vous cherchez n’existe pas ou a été déplacée.</p>
+        <h1>Page not found</h1>
+        <p>The page you’re looking for doesn’t exist or has been moved.</p>
         <Link to="/dvds" className="bouton bouton-primaire">
-          Retour à la liste des DVDs
+          Back to the DVD list
         </Link>
       </div>
     </section>

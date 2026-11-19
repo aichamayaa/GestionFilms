@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     definirSurNonAutorise((message) => {
-      deconnecter(message || 'Votre session a expiré. Veuillez vous reconnecter.');
+      deconnecter(message || 'Your session has expired. Please sign in again.');
     });
   }, [deconnecter]);
 
@@ -73,7 +73,7 @@ export function AuthProvider({ children }) {
         if (erreur.name === 'AbortError') {
           return;
         }
-        deconnecter(erreur.statut === 401 ? 'Votre session a expiré. Veuillez vous reconnecter.' : '');
+        deconnecter(erreur.statut === 401 ? 'Your session has expired. Please sign in again.' : '');
       });
     return () => controleur.abort();
   }, [deconnecter]);
@@ -88,7 +88,7 @@ export function AuthProvider({ children }) {
     }
     const delai = Math.max(expiration - Date.now(), 0);
     const minuterie = setTimeout(() => {
-      deconnecter('Votre session a expiré. Veuillez vous reconnecter.');
+      deconnecter('Your session has expired. Please sign in again.');
     }, Math.min(delai, 2147483000));
     return () => clearTimeout(minuterie);
   }, [jeton, deconnecter]);
@@ -140,7 +140,7 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   const contexte = useContext(AuthContext);
   if (!contexte) {
-    throw new Error('useAuth doit être utilisé dans un AuthProvider.');
+    throw new Error('useAuth must be used inside an AuthProvider.');
   }
   return contexte;
 }

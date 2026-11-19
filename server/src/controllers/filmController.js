@@ -17,7 +17,7 @@ import {
 } from '../services/films.js';
 import { resoudreActeurs, resoudreProducteur, resoudreRealisateur } from '../services/personnes.js';
 import { aviser } from '../services/courriel.js';
-import { COURRIEL_ADMIN } from '../constantes.js';
+import { COURRIEL_ADMIN, traduire } from '../constantes.js';
 
 const PORTEES = ['tous', 'en-main', 'utilisateur'];
 const TRIS = ['titre', 'utilisateur', 'utilisateur-titre'];
@@ -40,13 +40,13 @@ const CHAMPS_SIMPLES = [
 ];
 
 function formaterDate(date) {
-  return new Date(date).toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+  return new Date(date).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 async function chargerFilm(id) {
   const film = await Film.findById(id);
   if (!film) {
-    throw new ErreurHttp(404, 'Ce DVD est introuvable.');
+    throw new ErreurHttp(404, 'This DVD could not be found.');
   }
   return film;
 }
@@ -54,15 +54,15 @@ async function chargerFilm(id) {
 async function chargerUtilisateurCible(id) {
   const cible = await User.findById(id);
   if (!cible || cible.courriel === COURRIEL_ADMIN) {
-    throw new ErreurHttp(400, 'L’utilisateur choisi est introuvable.', { pourUtilisateurId: 'Utilisateur introuvable.' });
+    throw new ErreurHttp(400, 'The selected user could not be found.', { pourUtilisateurId: 'User not found.' });
   }
   return cible;
 }
 
 async function verifierTitre(titre, idExclu) {
   if (await titreExiste(titre, idExclu)) {
-    throw new ErreurHttp(409, 'Un DVD portant ce titre existe déjà.', {
-      titreFrancais: 'Un DVD portant ce titre existe déjà.',
+    throw new ErreurHttp(409, 'A DVD with this title already exists.', {
+      titreFrancais: 'A DVD with this title already exists.',
     });
   }
 }
@@ -90,7 +90,7 @@ export async function lister(req, res) {
 
   if (portee === 'en-main') {
     if (req.user.role === 'A') {
-      throw new ErreurHttp(403, 'Cette fonctionnalité ne s’applique pas à l’administrateur.');
+      throw new ErreurHttp(403, 'This feature does not apply to the administrator.');
     }
     conditions.push({ detenteurId: req.user._id });
   }
@@ -98,11 +98,11 @@ export async function lister(req, res) {
   let utilisateurChoisi = null;
   if (portee === 'utilisateur') {
     if (!/^[0-9a-fA-F]{24}$/.test(String(req.query.utilisateurId ?? ''))) {
-      throw new ErreurHttp(400, 'Choisissez un utilisateur.');
+      throw new ErreurHttp(400, 'Choose a user.');
     }
     utilisateurChoisi = await User.findById(req.query.utilisateurId).select('nom courriel');
     if (!utilisateurChoisi || utilisateurChoisi.courriel === COURRIEL_ADMIN) {
-      throw new ErreurHttp(404, 'Cet utilisateur est introuvable.');
+      throw new ErreurHttp(404, 'This user could not be found.');
     }
     conditions.push({ detenteurId: utilisateurChoisi._id });
   }
@@ -138,7 +138,7 @@ export async function lister(req, res) {
 export async function obtenir(req, res) {
   const film = await chargerFilm(req.params.id);
   if (!peutVoir(req.user, film)) {
-    throw new ErreurHttp(403, 'Ce DVD n’est pas visible par tous.');
+    throw new ErreurHttp(403, 'This DVD is not visible to everyone.');
   }
   await film.populate(POPULATION_DETAIL);
   res.json({ film: formaterDetail(film, req.user) });
@@ -150,7 +150,7 @@ export async function ajouter(req, res) {
 
   if (donnees.pourUtilisateurId && donnees.pourUtilisateurId !== String(req.user._id)) {
     if (req.user.role !== 'S') {
-      throw new ErreurHttp(403, 'Seul un superutilisateur peut ajouter un DVD pour un autre utilisateur.');
+      throw new ErreurHttp(403, 'Only a superuser can add a DVD for another user.');
     }
     cible = await chargerUtilisateurCible(donnees.pourUtilisateurId);
   }
@@ -168,19 +168,19 @@ export async function ajouter(req, res) {
 
   await film.populate(POPULATION_DETAIL);
 
-  const aPropos = cible._id.equals(req.user._id) ? '' : ` pour ${cible.nom}`;
+  const aPropos = cible._id.equals(req.user._id) ? '' : ` for ${cible.nom}`;
   await aviser(
     'courrielSiAjout',
-    `Nouveau DVD : ${film.titreFrancais}`,
+    `New DVD: ${film.titreFrancais}`,
     [
-      'Bonjour,',
+      'Hello,',
       '',
-      `${req.user.nom} a ajouté le DVD « ${film.titreFrancais} »${aPropos} à la collection.`,
-      film.categorie ? `Catégorie : ${film.categorie}` : null,
-      film.anneeSortie ? `Année de sortie : ${film.anneeSortie}` : null,
-      `Détenteur : ${cible.nom}`,
+      `${req.user.nom} added the DVD “${film.titreFrancais}”${aPropos} to the collection.`,
+      film.categorie ? `Category: ${traduire(film.categorie)}` : null,
+      film.anneeSortie ? `Release year: ${film.anneeSortie}` : null,
+      `Holder: ${cible.nom}`,
       '',
-      'Gestion de films',
+      'Film Management',
     ]
       .filter((ligne) => ligne !== null)
       .join('\n')
@@ -193,7 +193,7 @@ export async function modifier(req, res) {
   const film = await chargerFilm(req.params.id);
 
   if (!calculerPermissions(req.user, film).modifier) {
-    throw new ErreurHttp(403, 'Vous ne pouvez pas modifier ce DVD.');
+    throw new ErreurHttp(403, 'You can’t edit this DVD.');
   }
 
   const donnees = valider(filmSchema, req.body);
@@ -212,7 +212,7 @@ export async function supprimer(req, res) {
   const film = await chargerFilm(req.params.id);
 
   if (!calculerPermissions(req.user, film).supprimer) {
-    throw new ErreurHttp(403, 'Vous ne pouvez pas supprimer ce DVD.');
+    throw new ErreurHttp(403, 'You can’t delete this DVD.');
   }
 
   await Film.deleteOne({ _id: film._id });
@@ -220,20 +220,20 @@ export async function supprimer(req, res) {
 
   await aviser(
     'courrielSiSuppression',
-    `DVD retiré : ${film.titreFrancais}`,
+    `DVD removed: ${film.titreFrancais}`,
     [
-      'Bonjour,',
+      'Hello,',
       '',
-      `${req.user.nom} a retiré le DVD « ${film.titreFrancais} » de la collection.`,
-      film.detenteurNom ? `Il était en main chez : ${film.detenteurNom}` : null,
+      `${req.user.nom} removed the DVD “${film.titreFrancais}” from the collection.`,
+      film.detenteurNom ? `It was held by: ${film.detenteurNom}` : null,
       '',
-      'Gestion de films',
+      'Film Management',
     ]
       .filter((ligne) => ligne !== null)
       .join('\n')
   );
 
-  res.json({ message: 'Le DVD a été supprimé.' });
+  res.json({ message: 'The DVD was deleted.' });
 }
 
 export async function approprier(req, res) {
@@ -241,22 +241,22 @@ export async function approprier(req, res) {
   const film = await chargerFilm(req.params.id);
 
   if (!peutVoir(req.user, film)) {
-    throw new ErreurHttp(403, 'Ce DVD n’est pas visible par tous.');
+    throw new ErreurHttp(403, 'This DVD is not visible to everyone.');
   }
 
   let nouveau = req.user;
   if (nouveauDetenteurId && nouveauDetenteurId !== String(req.user._id)) {
     if (req.user.role !== 'S') {
-      throw new ErreurHttp(403, 'Seul un superutilisateur peut effectuer cette opération pour un autre utilisateur.');
+      throw new ErreurHttp(403, 'Only a superuser can do this on behalf of another user.');
     }
     nouveau = await chargerUtilisateurCible(nouveauDetenteurId);
   }
 
   if (film.detenteurId && film.detenteurId.equals(nouveau._id)) {
-    throw new ErreurHttp(400, `Ce DVD est déjà en main chez ${nouveau.nom}.`);
+    throw new ErreurHttp(400, `This DVD is already held by ${nouveau.nom}.`);
   }
 
-  const ancienNom = film.detenteurNom || 'personne';
+  const ancienNom = film.detenteurNom || 'nobody';
 
   film.detenteurId = nouveau._id;
   film.detenteurNom = nouveau.nom;
@@ -266,18 +266,18 @@ export async function approprier(req, res) {
 
   await Emprunt.create({ filmId: film._id, utilisateurId: nouveau._id });
 
-  const parQui = nouveau._id.equals(req.user._id) ? '' : ` (opération effectuée par ${req.user.nom})`;
+  const parQui = nouveau._id.equals(req.user._id) ? '' : ` (action performed by ${req.user.nom})`;
   await aviser(
     'courrielSiAppropriation',
-    `DVD changé de main : ${film.titreFrancais}`,
+    `DVD changed hands: ${film.titreFrancais}`,
     [
-      'Bonjour,',
+      'Hello,',
       '',
-      `Le DVD « ${film.titreFrancais} » est maintenant en main chez ${nouveau.nom}${parQui}.`,
-      `Il était auparavant chez : ${ancienNom}`,
-      `Date : ${formaterDate(film.dateMAJ)}`,
+      `The DVD “${film.titreFrancais}” is now held by ${nouveau.nom}${parQui}.`,
+      `It was previously held by: ${ancienNom}`,
+      `Date: ${formaterDate(film.dateMAJ)}`,
       '',
-      'Gestion de films',
+      'Film Management',
     ].join('\n')
   );
 
@@ -288,7 +288,7 @@ export async function approprier(req, res) {
 export async function historique(req, res) {
   const film = await chargerFilm(req.params.id);
   if (!peutVoir(req.user, film)) {
-    throw new ErreurHttp(403, 'Ce DVD n’est pas visible par tous.');
+    throw new ErreurHttp(403, 'This DVD is not visible to everyone.');
   }
 
   const emprunts = await Emprunt.find({ filmId: film._id })

@@ -38,7 +38,7 @@ async function requete(methode, chemin, { corps, formData, signal } = {}) {
     if (erreur.name === 'AbortError') {
       throw erreur;
     }
-    throw new ErreurApi(0, 'Impossible de joindre le serveur. Vérifiez que l’API est démarrée.');
+    throw new ErreurApi(0, 'Unable to reach the server. Check that the API is running.');
   }
 
   let donnees = null;
@@ -52,7 +52,7 @@ async function requete(methode, chemin, { corps, formData, signal } = {}) {
     if (reponse.status === 401 && jeton && chemin !== '/auth/connexion') {
       surNonAutorise(donnees?.message);
     }
-    throw new ErreurApi(reponse.status, donnees?.message ?? 'Une erreur est survenue.', donnees?.erreurs);
+    throw new ErreurApi(reponse.status, donnees?.message ?? 'Something went wrong.', donnees?.erreurs);
   }
 
   return donnees;

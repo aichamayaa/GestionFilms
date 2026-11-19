@@ -20,6 +20,6 @@ export const config = {
     secure: process.env.SMTP_SECURE === 'true',
     utilisateur: process.env.SMTP_UTILISATEUR || '',
     motDePasse: process.env.SMTP_MOT_DE_PASSE || '',
-    expediteur: process.env.SMTP_EXPEDITEUR || 'Gestion de films <no-reply@gestionfilms.local>',
+    expediteur: process.env.SMTP_EXPEDITEUR || 'Film Management <no-reply@gestionfilms.local>',
   },
 };

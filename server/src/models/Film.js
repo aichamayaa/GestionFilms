@@ -14,7 +14,7 @@ const filmSchema = new Schema(
       type: [{ type: String, enum: SUPPLEMENTS }],
       validate: {
         validator: (valeurs) => valeurs.length <= 3,
-        message: 'Un DVD ne peut avoir plus de trois suppléments.',
+        message: 'A DVD can’t have more than three extras.',
       },
     },
     resume: String,

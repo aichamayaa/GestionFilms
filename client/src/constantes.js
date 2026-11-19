@@ -83,15 +83,104 @@ export const SUPPLEMENTS = [
 ];
 
 export const ROLES = {
-  A: 'Administrateur',
-  S: 'Super utilisateur',
-  U: 'Utilisateur',
+  A: 'Administrator',
+  S: 'Superuser',
+  U: 'User',
 };
 
 export const NB_PAR_PAGE_OPTIONS = Array.from({ length: 32 }, (_, i) => 6 + i * 3);
 
 export const TRIS = [
-  { valeur: 'titre', libelle: 'Titre français' },
-  { valeur: 'utilisateur', libelle: 'Nom de l’utilisateur' },
-  { valeur: 'utilisateur-titre', libelle: 'Nom de l’utilisateur, puis titre' },
+  { valeur: 'titre', libelle: 'French title' },
+  { valeur: 'utilisateur', libelle: 'User name' },
+  { valeur: 'utilisateur-titre', libelle: 'User name, then title' },
 ];
+
+const LIBELLES_EN = {
+  // Categories
+  'Action': 'Action',
+  'Adolescent': 'Teen',
+  'Biographie': 'Biography',
+  "Cape et d'épée": 'Swashbuckler',
+  'Catastrophe': 'Disaster',
+  'Chronique': 'Chronicle',
+  'Comédie de moeurs': 'Comedy of manners',
+  "Comédie d'horreur": 'Horror comedy',
+  'Comédie dramatique': 'Comedy-drama',
+  'Comédie fantaisiste': 'Fantasy comedy',
+  'Comédie musicale': 'Musical comedy',
+  'Comédie policière': 'Crime comedy',
+  'Comédie satirique': 'Satirical comedy',
+  'Comédie sentimentale': 'Romantic comedy',
+  'Comédie': 'Comedy',
+  'Criminel': 'Crime',
+  'Danse': 'Dance',
+  'Dessins animés': 'Cartoons',
+  'Documentaire': 'Documentary',
+  'Drame de guerre': 'War drama',
+  'Drame de moeurs': 'Drama of manners',
+  "Drame d'horreur": 'Horror drama',
+  'Drame judiciaire': 'Courtroom drama',
+  'Drame musical': 'Musical drama',
+  'Drame poétique': 'Poetic drama',
+  'Drame policier': 'Police drama',
+  'Drame psychologique': 'Psychological drama',
+  'Drame sentimental': 'Romantic drama',
+  'Drame social': 'Social drama',
+  'Drame': 'Drama',
+  'Espionnage': 'Spy',
+  'Expérimental': 'Experimental',
+  'Fantastique': 'Fantasy',
+  'Film à sketches': 'Sketch film',
+  "Film d'animation": 'Animated film',
+  "Film d'art martial": 'Martial arts film',
+  'Historique': 'Historical',
+  'Horreur': 'Horror',
+  'Humoristique': 'Humor',
+  'Marionnettes': 'Puppets',
+  'Mélodrame': 'Melodrama',
+  'Musical': 'Musical',
+  'Road movie': 'Road movie',
+  'Romantique': 'Romance',
+  'Science-fiction': 'Science fiction',
+  'Série policière': 'Crime series',
+  'Série TV': 'TV series',
+  "Spectacle d'humour": 'Stand-up comedy',
+  'Spectacle musical': 'Music performance',
+  'Suspense': 'Suspense',
+  'Western': 'Western',
+  // Formats
+  'Blu-Ray': 'Blu-ray',
+  'Normal': 'Standard',
+  'Panoramique': 'Widescreen',
+  // Languages
+  'Français': 'French',
+  'Anglais': 'English',
+  'Espagnol': 'Spanish',
+  // Extras
+  'Bande-annonce (Trailer)': 'Trailer',
+  'Bande sonore': 'Soundtrack',
+  'Commentaires audio': 'Audio commentary',
+  'Documentaire sur la création du film': 'Making-of documentary',
+  'Fin alternative': 'Alternate ending',
+  'Gaffes (Bloopers)': 'Bloopers',
+  "Galerie d'images": 'Image gallery',
+  'Interprètes et artisans': 'Cast and crew',
+  'Montages de prises ratées': 'Outtake reel',
+  'Notes de production': 'Production notes',
+  "Sauvegarde d'écran": 'Screen saver',
+  'Scènes inédites': 'Unreleased scenes',
+  'Scènes supprimées': 'Deleted scenes',
+  'Sélection des scènes': 'Scene selection',
+  'Visionneur de scénario-maquette': 'Storyboard viewer',
+};
+
+// The values stored in the database stay in French (categories, formats, languages, extras).
+// These helpers only change how they are displayed.
+export function traduire(valeur) {
+  return LIBELLES_EN[valeur] ?? valeur;
+}
+
+export function trierParLibelle(liste) {
+  return [...liste].sort((a, b) => traduire(a).localeCompare(traduire(b), 'en'));
+}

@@ -7,7 +7,7 @@ export default function Pochette({ fichier, titre, classe = '' }) {
 
   if (!url || enErreur) {
     return (
-      <div className={`pochette pochette-vide ${classe}`} role="img" aria-label={`Aucune pochette pour ${titre}`}>
+      <div className={`pochette pochette-vide ${classe}`} role="img" aria-label={`No cover for ${titre}`}>
         <span>{titre}</span>
       </div>
     );
@@ -17,7 +17,7 @@ export default function Pochette({ fichier, titre, classe = '' }) {
     <img
       className={`pochette ${classe}`}
       src={url}
-      alt={`Pochette de ${titre}`}
+      alt={`Cover of ${titre}`}
       loading="lazy"
       onError={() => setEnErreur(true)}
     />

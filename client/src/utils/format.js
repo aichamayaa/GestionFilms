@@ -1,15 +1,17 @@
+import { traduire } from '../constantes.js';
+
 export function formaterDate(valeur) {
   if (!valeur) {
-    return 'Non précisée';
+    return 'Not specified';
   }
-  return new Date(valeur).toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+  return new Date(valeur).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 export function formaterDateHeure(valeur) {
   if (!valeur) {
     return '';
   }
-  return new Date(valeur).toLocaleString('fr-CA', {
+  return new Date(valeur).toLocaleString('en-CA', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -20,16 +22,16 @@ export function formaterDateHeure(valeur) {
 
 export function formaterOuiNon(valeur) {
   if (valeur === true) {
-    return 'Oui';
+    return 'Yes';
   }
   if (valeur === false) {
-    return 'Non';
+    return 'No';
   }
-  return 'Non précisé';
+  return 'Not specified';
 }
 
 export function formaterListe(valeurs) {
-  return valeurs && valeurs.length > 0 ? valeurs.join(', ') : 'Aucun';
+  return valeurs && valeurs.length > 0 ? valeurs.map(traduire).join(', ') : 'None';
 }
 
 export function urlPochette(fichier) {

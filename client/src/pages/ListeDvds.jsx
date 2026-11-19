@@ -10,9 +10,9 @@ import Chargement from '../components/Chargement.jsx';
 import Pagination from '../components/Pagination.jsx';
 
 const TITRES = {
-  tous: 'DVDs de tous les utilisateurs',
-  'en-main': 'Mes DVDs en main',
-  utilisateur: 'DVDs d’un autre utilisateur',
+  tous: 'All users’ DVDs',
+  'en-main': 'DVDs I’m holding',
+  utilisateur: 'Another user’s DVDs',
 };
 
 export default function ListeDvds({ portee }) {
@@ -94,11 +94,11 @@ export default function ListeDvds({ portee }) {
   return (
     <section className="page">
       <div className="page-entete">
-        <h1>{recherche ? 'Résultats de la recherche' : TITRES[portee]}</h1>
+        <h1>{recherche ? 'Search results' : TITRES[portee]}</h1>
         {donnees && (
           <p className="page-compte" aria-live="polite">
             {donnees.total} DVD{donnees.total > 1 ? 's' : ''}
-            {donnees.utilisateur ? ` en main chez ${donnees.utilisateur.nom}` : ''}
+            {donnees.utilisateur ? ` held by ${donnees.utilisateur.nom}` : ''}
           </p>
         )}
       </div>
@@ -111,14 +111,14 @@ export default function ListeDvds({ portee }) {
       {portee === 'utilisateur' && (
         <div className="panneau barre-outils">
           <div className="champ champ-ligne">
-            <label htmlFor="choix-utilisateur">{estAdmin ? 'Utilisateur' : 'Autre utilisateur'}</label>
+            <label htmlFor="choix-utilisateur">{estAdmin ? 'User' : 'Other user'}</label>
             <select
               id="choix-utilisateur"
               value={idChoisi}
               onChange={(e) => modifierParametres({ u: e.target.value, page: 1 })}
-              title="Choisir l’utilisateur dont vous voulez voir les DVDs"
+              title="Choose the user whose DVDs you want to see"
             >
-              <option value="">Choisir un utilisateur</option>
+              <option value="">Choose a user</option>
               {choix.map((u) => (
                 <option key={u._id} value={u._id}>
                   {u.nom}
@@ -133,37 +133,37 @@ export default function ListeDvds({ portee }) {
         <div className="panneau barre-outils">
           <form className="recherche" onSubmit={lancerRecherche} role="search">
             <label htmlFor="recherche" className="sr-seulement">
-              Rechercher un titre
+              Search for a title
             </label>
             <input
               id="recherche"
               type="search"
               value={saisie}
               onChange={(e) => setSaisie(e.target.value)}
-              placeholder="Titre français ou original, en entier ou en partie"
-              title="Rechercher sur une partie ou la totalité du titre français ou du titre original"
+              placeholder="French or original title, full or partial"
+              title="Search part or all of the French or original title"
             />
             <button type="submit" className="bouton bouton-primaire">
-              Rechercher
+              Search
             </button>
             {recherche && (
               <button
                 type="button"
                 className="bouton bouton-secondaire"
                 onClick={() => modifierParametres({ q: '', page: 1 })}
-                title="Afficher de nouveau tous les DVDs"
+                title="Show all DVDs again"
               >
-                Retour
+                Back
               </button>
             )}
           </form>
           <div className="champ champ-ligne">
-            <label htmlFor="tri">Trier par</label>
+            <label htmlFor="tri">Sort by</label>
             <select
               id="tri"
               value={tri}
               onChange={(e) => modifierParametres({ tri: e.target.value === 'titre' ? '' : e.target.value, page: 1 })}
-              title="Choisir l’ordre alphabétique d’affichage"
+              title="Choose the alphabetical display order"
             >
               {TRIS.map((option) => (
                 <option key={option.valeur} value={option.valeur}>
@@ -178,16 +178,16 @@ export default function ListeDvds({ portee }) {
       {chargement && <Chargement />}
 
       {!chargement && portee === 'utilisateur' && !idChoisi && (
-        <p className="vide panneau">Choisissez un utilisateur dans la liste pour afficher ses DVDs.</p>
+        <p className="vide panneau">Choose a user from the list to see their DVDs.</p>
       )}
 
       {!chargement && donnees && donnees.films.length === 0 && (
         <p className="vide panneau">
           {recherche
-            ? `Aucun DVD ne correspond à « ${q} ».`
+            ? `No DVD matches “${q}”.`
             : portee === 'en-main'
-              ? 'Vous n’avez aucun DVD en main pour le moment.'
-              : 'Aucun DVD à afficher.'}
+              ? 'You aren’t holding any DVDs right now.'
+              : 'No DVDs to display.'}
         </p>
       )}
 
@@ -205,7 +205,7 @@ export default function ListeDvds({ portee }) {
             ))}
           </ol>
           <p className="page-position">
-            Page {donnees.page} sur {donnees.nbPages}
+            Page {donnees.page} of {donnees.nbPages}
           </p>
           <Pagination page={donnees.page} nbPages={donnees.nbPages} onChanger={(p) => modifierParametres({ page: p })} />
         </>

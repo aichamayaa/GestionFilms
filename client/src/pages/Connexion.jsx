@@ -34,7 +34,7 @@ export default function Connexion() {
     try {
       await connecter(identifiant.trim(), motDePasse);
     } catch (erreur) {
-      setErreurGenerale(erreur instanceof ErreurApi ? erreur.message : 'Une erreur inattendue est survenue.');
+      setErreurGenerale(erreur instanceof ErreurApi ? erreur.message : 'An unexpected error occurred.');
       setEnvoi(false);
     }
   }
@@ -42,45 +42,45 @@ export default function Connexion() {
   return (
     <div className="connexion-page">
       <div className="connexion-carte panneau">
-        <h1 className="connexion-titre">Gestion de films</h1>
-        <p className="connexion-sous-titre">Connectez-vous pour consulter la collection de DVDs du groupe.</p>
+        <h1 className="connexion-titre">Film Management</h1>
+        <p className="connexion-sous-titre">Sign in to browse the group’s DVD collection.</p>
 
         <Alerte type="info">{messageSession}</Alerte>
         <Alerte type="erreur">{erreurGenerale}</Alerte>
 
         <form onSubmit={soumettre} noValidate>
-          <Champ id="identifiant" libelle="Identifiant" erreur={erreurs.identifiant}>
+          <Champ id="identifiant" libelle="Username" erreur={erreurs.identifiant}>
             <input
               id="identifiant"
               type="text"
               value={identifiant}
               onChange={(e) => setIdentifiant(e.target.value)}
-              placeholder="Prénom ou adresse courriel"
-              title="Entrez votre prénom ou votre adresse courriel"
+              placeholder="First name or email address"
+              title="Enter your first name or email address"
               autoComplete="username"
               autoFocus
               aria-invalid={erreurs.identifiant ? 'true' : undefined}
             />
           </Champ>
-          <Champ id="motDePasse" libelle="Mot de passe" erreur={erreurs.motDePasse}>
+          <Champ id="motDePasse" libelle="Password" erreur={erreurs.motDePasse}>
             <input
               id="motDePasse"
               type="password"
               value={motDePasse}
               onChange={(e) => setMotDePasse(e.target.value)}
-              placeholder="Votre mot de passe"
-              title="Entrez votre mot de passe"
+              placeholder="Your password"
+              title="Enter your password"
               autoComplete="current-password"
               aria-invalid={erreurs.motDePasse ? 'true' : undefined}
             />
           </Champ>
           <button type="submit" className="bouton bouton-primaire bouton-large" disabled={envoi}>
-            {envoi ? 'Connexion en cours…' : 'Se connecter'}
+            {envoi ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
 
         <p className="connexion-sous-titre">
-          Pas de compte ? <Link to="/inscription">Créer un compte</Link>
+          No account? <Link to="/inscription">Create an account</Link>
         </p>
       </div>
     </div>

@@ -11,13 +11,13 @@ export default function FocusLayout() {
     <div className="application">
       <header className="entete">
         <div className="entete-interieur">
-          <span className="marque">Gestion de films</span>
+          <span className="marque">Film Management</span>
           <div className="entete-espace" />
           <div className="session">
             <span className="session-nom">{utilisateur.nom}</span>
             <span className="badge badge-role">{ROLES[utilisateur.role]}</span>
-            <Link to={retour} className="bouton bouton-contour" title="Retourner à la liste des DVDs">
-              Retour à la liste
+            <Link to={retour} className="bouton bouton-contour" title="Back to the DVD list">
+              Back to list
             </Link>
           </div>
         </div>
@@ -25,7 +25,7 @@ export default function FocusLayout() {
       <main className="contenu">
         <Outlet />
       </main>
-      <footer className="pied">Gestion de films · Projet full-stack par Aicha M. Touré · React, Express, MongoDB</footer>
+      <footer className="pied">Film Management · Full-stack project by Aicha M. Touré · React, Express, MongoDB</footer>
     </div>
   );
 }

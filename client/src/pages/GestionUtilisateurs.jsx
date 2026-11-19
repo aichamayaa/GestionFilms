@@ -48,7 +48,7 @@ export default function GestionUtilisateurs() {
     setErreur('');
     try {
       await api.supprimerUtilisateur(utilisateur._id);
-      setMessage(`L’utilisateur ${utilisateur.nom} a été supprimé.`);
+      setMessage(`User ${utilisateur.nom} was deleted.`);
       setASupprimer(null);
       charger();
     } catch (e) {
@@ -62,9 +62,9 @@ export default function GestionUtilisateurs() {
   return (
     <section className="page">
       <div className="page-entete">
-        <h1>Gestion des utilisateurs</h1>
-        <Link to="/administration/utilisateurs/nouveau" className="bouton bouton-primaire" title="Enregistrer un nouvel utilisateur">
-          Ajouter un utilisateur
+        <h1>User management</h1>
+        <Link to="/administration/utilisateurs/nouveau" className="bouton bouton-primaire" title="Register a new user">
+          Add a user
         </Link>
       </div>
 
@@ -80,15 +80,15 @@ export default function GestionUtilisateurs() {
       {!chargement && (
         <div className="panneau tableau-conteneur">
           <table className="tableau">
-            <caption className="sr-seulement">Liste des utilisateurs et des superutilisateurs</caption>
+            <caption className="sr-seulement">List of users and superusers</caption>
             <thead>
               <tr>
-                <th scope="col">N°</th>
-                <th scope="col">Prénom</th>
-                <th scope="col">Courriel</th>
-                <th scope="col">Rôle</th>
-                <th scope="col">DVDs possédés</th>
-                <th scope="col">DVDs en main</th>
+                <th scope="col">No.</th>
+                <th scope="col">First name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">DVDs owned</th>
+                <th scope="col">DVDs held</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -104,22 +104,22 @@ export default function GestionUtilisateurs() {
                   <td>
                     {aSupprimer === u._id ? (
                       <div className="actions-ligne">
-                        <span>Supprimer ?</span>
+                        <span>Delete?</span>
                         <button type="button" className="bouton bouton-petit bouton-danger" onClick={() => supprimer(u)} disabled={suppression}>
-                          Confirmer
+                          Confirm
                         </button>
                         <button type="button" className="bouton bouton-petit bouton-secondaire" onClick={() => setASupprimer(null)} disabled={suppression}>
-                          Annuler
+                          Cancel
                         </button>
                       </div>
                     ) : (
                       <div className="actions-ligne">
-                        <Link to={`/administration/utilisateurs/${u._id}`} className="bouton bouton-petit bouton-secondaire" title={`Modifier ${u.nom}`}>
-                          Modifier
+                        <Link to={`/administration/utilisateurs/${u._id}`} className="bouton bouton-petit bouton-secondaire" title={`Edit ${u.nom}`}>
+                          Edit
                         </Link>
                         {u.role !== 'A' && (
-                          <button type="button" className="bouton bouton-petit bouton-danger-contour" onClick={() => setASupprimer(u._id)} title={`Supprimer ${u.nom}`}>
-                            Supprimer
+                          <button type="button" className="bouton bouton-petit bouton-danger-contour" onClick={() => setASupprimer(u._id)} title={`Delete ${u.nom}`}>
+                            Delete
                           </button>
                         )}
                       </div>

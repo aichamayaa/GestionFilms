@@ -1,5 +1,6 @@
 import Pochette from './Pochette.jsx';
 import { formaterDate, formaterListe, formaterOuiNon } from '../utils/format.js';
+import { traduire } from '../constantes.js';
 
 function Ligne({ libelle, children }) {
   return (
@@ -19,38 +20,38 @@ export default function DetailsDvd({ film }) {
       <div className="fiche-contenu">
         <h1 className="fiche-titre">{film.titreFrancais}</h1>
         <dl className="fiche-donnees">
-          <Ligne libelle="Titre original">{film.titreOriginal || 'Non précisé'}</Ligne>
-          <Ligne libelle="Année de sortie">{film.anneeSortie ?? 'Non précisée'}</Ligne>
-          <Ligne libelle="Catégorie">{film.categorie || 'Non précisée'}</Ligne>
-          <Ligne libelle="Réalisateur">{film.realisateur?.nom ?? 'Non précisé'}</Ligne>
-          <Ligne libelle="Producteur">{film.producteur?.nom ?? 'Non précisé'}</Ligne>
-          <Ligne libelle="Acteurs principaux">
-            {film.acteurs.length > 0 ? film.acteurs.map((a) => a.nom).join(', ') : 'Non précisés'}
+          <Ligne libelle="Original title">{film.titreOriginal || 'Not specified'}</Ligne>
+          <Ligne libelle="Release year">{film.anneeSortie ?? 'Not specified'}</Ligne>
+          <Ligne libelle="Category">{film.categorie ? traduire(film.categorie) : 'Not specified'}</Ligne>
+          <Ligne libelle="Director">{film.realisateur?.nom ?? 'Not specified'}</Ligne>
+          <Ligne libelle="Producer">{film.producteur?.nom ?? 'Not specified'}</Ligne>
+          <Ligne libelle="Main actors">
+            {film.acteurs.length > 0 ? film.acteurs.map((a) => a.nom).join(', ') : 'Not specified'}
           </Ligne>
-          <Ligne libelle="Durée">{film.dureeMinutes ? `${film.dureeMinutes} minutes` : 'Non précisée'}</Ligne>
-          <Ligne libelle="Format">{film.format || 'Non précisé'}</Ligne>
-          <Ligne libelle="Langues">{formaterListe(film.langues)}</Ligne>
-          <Ligne libelle="Sous-titres">{formaterListe(film.sousTitres)}</Ligne>
-          <Ligne libelle="Suppléments">
+          <Ligne libelle="Duration">{film.dureeMinutes ? `${film.dureeMinutes} minutes` : 'Not specified'}</Ligne>
+          <Ligne libelle="Format">{film.format ? traduire(film.format) : 'Not specified'}</Ligne>
+          <Ligne libelle="Languages">{formaterListe(film.langues)}</Ligne>
+          <Ligne libelle="Subtitles">{formaterListe(film.sousTitres)}</Ligne>
+          <Ligne libelle="Extras">
             {film.supplements.length > 0 ? (
               <ul className="liste-simple">
                 {film.supplements.map((supplement) => (
-                  <li key={supplement}>{supplement}</li>
+                  <li key={supplement}>{traduire(supplement)}</li>
                 ))}
               </ul>
             ) : (
-              'Aucun'
+              'None'
             )}
           </Ligne>
-          <Ligne libelle="Nombre de disques">{film.nbDisques ?? 'Non précisé'}</Ligne>
-          <Ligne libelle="DVD original ?">{formaterOuiNon(film.dvdOriginal)}</Ligne>
-          <Ligne libelle="Version étendue ?">{formaterOuiNon(film.versionEtendue)}</Ligne>
-          <Ligne libelle="Visible à tous ?">{formaterOuiNon(film.visibleATous)}</Ligne>
-          <Ligne libelle="Résumé">{film.resume || 'Aucun résumé'}</Ligne>
-          <Ligne libelle="Propriétaire">{film.proprietaire?.nom ?? 'Inconnu'}</Ligne>
-          <Ligne libelle="En main chez">{film.detenteur?.nom ?? 'Personne'}</Ligne>
-          <Ligne libelle="Dernière mise à jour effectuée le">{formaterDate(film.dateMAJ)}</Ligne>
-          <Ligne libelle="Dernière mise à jour effectuée par">{film.utilisateurMAJ?.nom ?? 'Inconnu'}</Ligne>
+          <Ligne libelle="Number of discs">{film.nbDisques ?? 'Not specified'}</Ligne>
+          <Ligne libelle="Original DVD?">{formaterOuiNon(film.dvdOriginal)}</Ligne>
+          <Ligne libelle="Extended edition?">{formaterOuiNon(film.versionEtendue)}</Ligne>
+          <Ligne libelle="Visible to everyone?">{formaterOuiNon(film.visibleATous)}</Ligne>
+          <Ligne libelle="Summary">{film.resume || 'No summary'}</Ligne>
+          <Ligne libelle="Owner">{film.proprietaire?.nom ?? 'Unknown'}</Ligne>
+          <Ligne libelle="Held by">{film.detenteur?.nom ?? 'Nobody'}</Ligne>
+          <Ligne libelle="Last updated on">{formaterDate(film.dateMAJ)}</Ligne>
+          <Ligne libelle="Last updated by">{film.utilisateurMAJ?.nom ?? 'Unknown'}</Ligne>
         </dl>
       </div>
     </article>

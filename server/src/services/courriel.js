@@ -65,7 +65,7 @@ export async function envoyerCourriel({ destinataires, sujet, corps, expediteur,
     } catch (erreur) {
       entree.statut = 'echec';
       entree.erreur = erreur.message;
-      console.error('Échec de l’envoi du courriel :', erreur.message);
+      console.error('Failed to send email:', erreur.message);
     }
   }
 

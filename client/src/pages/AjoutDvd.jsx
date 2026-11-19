@@ -19,13 +19,13 @@ export default function AjoutDvd() {
     }
     return utilisateurs.map((u) => ({
       _id: u._id,
-      libelle: u._id === utilisateur._id ? `${u.nom} (moi)` : u.nom,
+      libelle: u._id === utilisateur._id ? `${u.nom} (me)` : u.nom,
     }));
   }, [estSuper, utilisateurs, utilisateur._id]);
 
   async function ajouter(donnees) {
     const reponse = await api.ajouterFilm(donnees);
-    navigate(retour, { state: { message: `Le DVD « ${reponse.film.titreFrancais} » a été ajouté.` } });
+    navigate(retour, { state: { message: `The DVD “${reponse.film.titreFrancais}” was added.` } });
   }
 
   if (estSuper && chargement) {
@@ -36,9 +36,9 @@ export default function AjoutDvd() {
     <section className="page page-etroite">
       <Alerte type="erreur">{erreur}</Alerte>
       <FormulaireDvd
-        titre="Ajout d’un DVD"
+        titre="Add a DVD"
         valeursInitiales={{ ...VALEURS_VIDES, pourUtilisateurId: estSuper ? utilisateur._id : '' }}
-        libelleBouton="Ajouter le DVD"
+        libelleBouton="Add DVD"
         onSoumettre={ajouter}
         onAnnuler={() => navigate(retour)}
         utilisateursCibles={cibles}

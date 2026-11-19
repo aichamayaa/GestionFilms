@@ -6,7 +6,7 @@ export default function Alerte({ type = 'erreur', children, onFermer }) {
     <div className={`alerte alerte-${type}`} role={type === 'erreur' ? 'alert' : 'status'}>
       <div className="alerte-texte">{children}</div>
       {onFermer && (
-        <button type="button" className="alerte-fermer" onClick={onFermer} title="Fermer ce message" aria-label="Fermer ce message">
+        <button type="button" className="alerte-fermer" onClick={onFermer} title="Close this message" aria-label="Close this message">
           ×
         </button>
       )}

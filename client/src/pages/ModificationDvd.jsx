@@ -15,7 +15,7 @@ export default function ModificationDvd() {
 
   async function modifier(donnees) {
     const reponse = await api.modifierFilm(id, donnees);
-    navigate(retour, { state: { message: `Le DVD « ${reponse.film.titreFrancais} » a été modifié.` } });
+    navigate(retour, { state: { message: `The DVD “${reponse.film.titreFrancais}” was updated.` } });
   }
 
   if (chargement) {
@@ -25,9 +25,9 @@ export default function ModificationDvd() {
   if (erreur || !film) {
     return (
       <section className="page page-etroite">
-        <Alerte type="erreur">{erreur || 'Ce DVD est introuvable.'}</Alerte>
+        <Alerte type="erreur">{erreur || 'This DVD could not be found.'}</Alerte>
         <Link to={retour} className="bouton bouton-secondaire">
-          Retour à la liste
+          Back to list
         </Link>
       </section>
     );
@@ -36,9 +36,9 @@ export default function ModificationDvd() {
   if (!film.permissions.modifier) {
     return (
       <section className="page page-etroite">
-        <Alerte type="erreur">Vous ne pouvez pas modifier ce DVD.</Alerte>
+        <Alerte type="erreur">You can’t edit this DVD.</Alerte>
         <Link to={retour} className="bouton bouton-secondaire">
-          Retour à la liste
+          Back to list
         </Link>
       </section>
     );
@@ -46,15 +46,15 @@ export default function ModificationDvd() {
 
   const pourAutrui = film.detenteur && film.detenteur._id !== utilisateur._id;
   const information = pourAutrui
-    ? `Vous effectuez cette modification pour ${film.detenteur.nom}, qui a ce DVD en main.`
+    ? `You are making this change on behalf of ${film.detenteur.nom}, who is holding this DVD.`
     : null;
 
   return (
     <section className="page page-etroite">
       <FormulaireDvd
-        titre={`Modification du DVD « ${film.titreFrancais} »`}
+        titre={`Edit DVD “${film.titreFrancais}”`}
         valeursInitiales={valeursDepuisFilm(film)}
-        libelleBouton="Enregistrer les modifications"
+        libelleBouton="Save changes"
         onSoumettre={modifier}
         onAnnuler={() => navigate(retour)}
         informationPourQui={information}

@@ -47,46 +47,46 @@ function FormulaireMotDePasse() {
 
   return (
     <form className="panneau" onSubmit={soumettre} noValidate>
-      <h2>Changement du mot de passe</h2>
+      <h2>Change password</h2>
       <Alerte type="succes" onFermer={() => setSucces('')}>
         {succes}
       </Alerte>
       <Alerte type="erreur">{erreurGenerale}</Alerte>
-      <Champ id="ancienMotDePasse" libelle="Mot de passe actuel" erreur={erreurs.ancienMotDePasse}>
+      <Champ id="ancienMotDePasse" libelle="Current password" erreur={erreurs.ancienMotDePasse}>
         <input
           id="ancienMotDePasse"
           type="password"
           value={valeurs.ancienMotDePasse}
           onChange={(e) => changer('ancienMotDePasse', e.target.value)}
-          placeholder="Votre mot de passe actuel"
+          placeholder="Your current password"
           autoComplete="current-password"
           aria-invalid={erreurs.ancienMotDePasse ? 'true' : undefined}
         />
       </Champ>
-      <Champ id="nouveauMotDePasse" libelle="Nouveau mot de passe" erreur={erreurs.nouveauMotDePasse} aide="Au moins 6 caractères.">
+      <Champ id="nouveauMotDePasse" libelle="New password" erreur={erreurs.nouveauMotDePasse} aide="At least 6 characters.">
         <input
           id="nouveauMotDePasse"
           type="password"
           value={valeurs.nouveauMotDePasse}
           onChange={(e) => changer('nouveauMotDePasse', e.target.value)}
-          placeholder="Nouveau mot de passe"
+          placeholder="New password"
           autoComplete="new-password"
           aria-invalid={erreurs.nouveauMotDePasse ? 'true' : undefined}
         />
       </Champ>
-      <Champ id="confirmation" libelle="Confirmation du nouveau mot de passe" erreur={erreurs.confirmation}>
+      <Champ id="confirmation" libelle="Confirm new password" erreur={erreurs.confirmation}>
         <input
           id="confirmation"
           type="password"
           value={valeurs.confirmation}
           onChange={(e) => changer('confirmation', e.target.value)}
-          placeholder="Saisissez-le une seconde fois"
+          placeholder="Enter it again"
           autoComplete="new-password"
           aria-invalid={erreurs.confirmation ? 'true' : undefined}
         />
       </Champ>
       <button type="submit" className="bouton bouton-primaire" disabled={envoi}>
-        {envoi ? 'Enregistrement…' : 'Changer le mot de passe'}
+        {envoi ? 'Saving…' : 'Change password'}
       </button>
     </form>
   );
@@ -126,7 +126,7 @@ function FormulairePreferences() {
     try {
       const reponse = await api.modifierPreferences(donnees);
       mettreAJourUtilisateur(reponse.utilisateur);
-      setSucces('Vos préférences ont été enregistrées.');
+      setSucces('Your preferences have been saved.');
     } catch (e) {
       if (e instanceof ErreurApi) {
         setErreurs(e.erreurs);
@@ -139,18 +139,18 @@ function FormulairePreferences() {
 
   return (
     <form className="panneau" onSubmit={soumettre} noValidate>
-      <h2>Préférences</h2>
+      <h2>Preferences</h2>
       <Alerte type="succes" onFermer={() => setSucces('')}>
         {succes}
       </Alerte>
       <Alerte type="erreur">{erreurGenerale}</Alerte>
 
-      <Champ id="nbFilmsParPage" libelle="Nombre de DVDs affichés par page" erreur={erreurs.nbFilmsParPage} aide="De 6 à 99, par incréments de 3.">
+      <Champ id="nbFilmsParPage" libelle="DVDs shown per page" erreur={erreurs.nbFilmsParPage} aide="From 6 to 99, in steps of 3.">
         <select
           id="nbFilmsParPage"
           value={valeurs.nbFilmsParPage}
           onChange={(e) => changer('nbFilmsParPage', Number(e.target.value))}
-          title="Nombre de DVDs affichés sur chaque page de résultats"
+          title="Number of DVDs shown on each results page"
         >
           {NB_PAR_PAGE_OPTIONS.map((n) => (
             <option key={n} value={n}>
@@ -160,45 +160,45 @@ function FormulairePreferences() {
         </select>
       </Champ>
 
-      <Groupe libelle="Courriels automatiques">
+      <Groupe libelle="Automatic emails">
         <CaseACocher
           id="courrielSiAjout"
-          libelle="Me prévenir par courriel lors de l’ajout d’un DVD"
+          libelle="Email me when a DVD is added"
           coche={valeurs.courrielSiAjout}
           onChange={(v) => changer('courrielSiAjout', v)}
         />
         <CaseACocher
           id="courrielSiSuppression"
-          libelle="Me prévenir par courriel lors du retrait d’un DVD"
+          libelle="Email me when a DVD is removed"
           coche={valeurs.courrielSiSuppression}
           onChange={(v) => changer('courrielSiSuppression', v)}
         />
         <CaseACocher
           id="courrielSiAppropriation"
-          libelle="Me prévenir par courriel lors de l’appropriation d’un DVD"
+          libelle="Email me when a DVD is claimed"
           coche={valeurs.courrielSiAppropriation}
           onChange={(v) => changer('courrielSiAppropriation', v)}
         />
       </Groupe>
 
-      <Groupe libelle="Couleurs de l’interface" erreur={erreurs.couleurFond || erreurs.couleurTexte}>
+      <Groupe libelle="Interface colors" erreur={erreurs.couleurFond || erreurs.couleurTexte}>
         <div className="champs-ligne">
-          <Champ id="couleurFond" libelle="Couleur de fond">
+          <Champ id="couleurFond" libelle="Background color">
             <input
               id="couleurFond"
               type="color"
               value={valeurs.couleurFond || COULEUR_FOND_DEFAUT}
               onChange={(e) => changer('couleurFond', e.target.value)}
-              title="Couleur de fond de l’interface"
+              title="Interface background color"
             />
           </Champ>
-          <Champ id="couleurTexte" libelle="Couleur du texte">
+          <Champ id="couleurTexte" libelle="Text color">
             <input
               id="couleurTexte"
               type="color"
               value={valeurs.couleurTexte || COULEUR_TEXTE_DEFAUT}
               onChange={(e) => changer('couleurTexte', e.target.value)}
-              title="Couleur du texte de l’interface"
+              title="Interface text color"
             />
           </Champ>
         </div>
@@ -207,12 +207,12 @@ function FormulairePreferences() {
           className="bouton bouton-petit bouton-secondaire"
           onClick={() => setValeurs((v) => ({ ...v, couleurFond: '', couleurTexte: '' }))}
         >
-          Rétablir les couleurs par défaut
+          Restore default colors
         </button>
       </Groupe>
 
       <button type="submit" className="bouton bouton-primaire" disabled={envoi}>
-        {envoi ? 'Enregistrement…' : 'Enregistrer les préférences'}
+        {envoi ? 'Saving…' : 'Save preferences'}
       </button>
     </form>
   );
@@ -224,22 +224,22 @@ export default function Personnalisation() {
   return (
     <section className="page page-etroite">
       <div className="page-entete">
-        <h1>Personnalisation de l’environnement</h1>
+        <h1>Settings</h1>
       </div>
 
       <div className="panneau">
-        <h2>Mon compte</h2>
+        <h2>My account</h2>
         <dl className="fiche-donnees">
           <div className="fiche-ligne">
-            <dt>Prénom</dt>
+            <dt>First name</dt>
             <dd>{utilisateur.nom}</dd>
           </div>
           <div className="fiche-ligne">
-            <dt>Courriel</dt>
+            <dt>Email</dt>
             <dd>{utilisateur.courriel}</dd>
           </div>
         </dl>
-        <p className="aide">Seul l’administrateur peut modifier le prénom et le courriel d’un utilisateur.</p>
+        <p className="aide">Only the administrator can change a user’s first name and email.</p>
       </div>
 
       <FormulaireMotDePasse />

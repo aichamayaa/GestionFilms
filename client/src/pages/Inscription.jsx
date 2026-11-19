@@ -14,16 +14,16 @@ export default function Inscription() {
       body: JSON.stringify({ nom, courriel, motDePasse }),
     });
     const data = await res.json();
-    setMessage(res.ok ? 'Compte créé! Vous pouvez vous connecter.' : data.message || 'Erreur');
+    setMessage(res.ok ? 'Account created! You can now sign in.' : data.message || 'Error');
   };
 
   return (
     <form onSubmit={envoyer}>
-      <h2>Créer un compte</h2>
-      <input placeholder="Prénom" value={nom} onChange={(e) => setNom(e.target.value)} required />
-      <input type="email" placeholder="Courriel" value={courriel} onChange={(e) => setCourriel(e.target.value)} required />
-      <input type="password" placeholder="Mot de passe" value={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} required />
-      <button type="submit">S'inscrire</button>
+      <h2>Create an account</h2>
+      <input placeholder="First name" value={nom} onChange={(e) => setNom(e.target.value)} required />
+      <input type="email" placeholder="Email" value={courriel} onChange={(e) => setCourriel(e.target.value)} required />
+      <input type="password" placeholder="Password" value={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} required />
+      <button type="submit">Sign up</button>
       <p>{message}</p>
     </form>
   );

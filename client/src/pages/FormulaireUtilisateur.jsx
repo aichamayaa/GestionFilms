@@ -74,8 +74,8 @@ export default function FormulaireUtilisateur() {
       navigate('/administration/utilisateurs', {
         state: {
           message: modification
-            ? `L’utilisateur ${donnees.nom} a été modifié.`
-            : `L’utilisateur ${donnees.nom} a été enregistré. Un courriel de confirmation lui a été envoyé.`,
+            ? `User ${donnees.nom} was updated.`
+            : `User ${donnees.nom} was created. A confirmation email was sent to them.`,
         },
       });
     } catch (e) {
@@ -83,7 +83,7 @@ export default function FormulaireUtilisateur() {
         setErreurs(e.erreurs);
         setErreurGenerale(e.message);
       } else {
-        setErreurGenerale('Une erreur inattendue est survenue.');
+        setErreurGenerale('An unexpected error occurred.');
       }
       setEnvoi(false);
     }
@@ -96,72 +96,72 @@ export default function FormulaireUtilisateur() {
   return (
     <section className="page page-etroite">
       <div className="page-entete">
-        <h1>{modification ? 'Modification d’un utilisateur' : 'Enregistrement d’un nouvel utilisateur'}</h1>
+        <h1>{modification ? 'Edit user' : 'Register a new user'}</h1>
       </div>
 
       <form className="panneau" onSubmit={soumettre} noValidate>
         <Alerte type="erreur">{erreurGenerale}</Alerte>
 
-        <Champ id="nom" libelle="Prénom" requis erreur={erreurs.nom} aide="Il peut servir d’identifiant de connexion et doit être unique.">
+        <Champ id="nom" libelle="First name" requis erreur={erreurs.nom} aide="It can be used to sign in and must be unique.">
           <input
             id="nom"
             type="text"
             value={valeurs.nom}
             onChange={(e) => changer('nom', e.target.value)}
-            placeholder="Prénom de l’utilisateur"
-            title="Prénom de l’utilisateur"
+            placeholder="User’s first name"
+            title="User’s first name"
             maxLength={60}
             autoFocus
             aria-invalid={erreurs.nom ? 'true' : undefined}
           />
         </Champ>
 
-        <Champ id="courriel" libelle="Adresse courriel" requis erreur={erreurs.courriel} aide="Elle peut aussi servir d’identifiant de connexion.">
+        <Champ id="courriel" libelle="Email address" requis erreur={erreurs.courriel} aide="It can also be used to sign in.">
           <input
             id="courriel"
             type="email"
             value={valeurs.courriel}
             onChange={(e) => changer('courriel', e.target.value)}
-            placeholder="nom@exemple.ca"
-            title="Adresse courriel de l’utilisateur"
+            placeholder="name@example.com"
+            title="User’s email address"
             maxLength={120}
             aria-invalid={erreurs.courriel ? 'true' : undefined}
           />
         </Champ>
 
-        <Champ id="role" libelle="Rôle" erreur={erreurs.role}>
-          <select id="role" value={valeurs.role} onChange={(e) => changer('role', e.target.value)} title="Un superutilisateur peut agir pour les autres utilisateurs">
-            <option value="U">Utilisateur</option>
-            <option value="S">Super utilisateur</option>
-            {valeurs.role === 'A' && <option value="A">Administrateur</option>}
+        <Champ id="role" libelle="Role" erreur={erreurs.role}>
+          <select id="role" value={valeurs.role} onChange={(e) => changer('role', e.target.value)} title="A superuser can act on behalf of other users">
+            <option value="U">User</option>
+            <option value="S">Superuser</option>
+            {valeurs.role === 'A' && <option value="A">Administrator</option>}
           </select>
         </Champ>
 
         <Champ
           id="motDePasse"
-          libelle={modification ? 'Nouveau mot de passe' : 'Mot de passe'}
+          libelle={modification ? 'New password' : 'Password'}
           requis={!modification}
           erreur={erreurs.motDePasse}
-          aide={modification ? 'Laissez vide pour conserver le mot de passe actuel.' : 'Au moins 6 caractères.'}
+          aide={modification ? 'Leave blank to keep the current password.' : 'At least 6 characters.'}
         >
           <input
             id="motDePasse"
             type="password"
             value={valeurs.motDePasse}
             onChange={(e) => changer('motDePasse', e.target.value)}
-            placeholder="Mot de passe"
+            placeholder="Password"
             autoComplete="new-password"
             aria-invalid={erreurs.motDePasse ? 'true' : undefined}
           />
         </Champ>
 
-        <Champ id="confirmation" libelle="Confirmation du mot de passe" requis={!modification} erreur={erreurs.confirmation}>
+        <Champ id="confirmation" libelle="Confirm password" requis={!modification} erreur={erreurs.confirmation}>
           <input
             id="confirmation"
             type="password"
             value={valeurs.confirmation}
             onChange={(e) => changer('confirmation', e.target.value)}
-            placeholder="Saisissez-le une seconde fois"
+            placeholder="Enter it again"
             autoComplete="new-password"
             aria-invalid={erreurs.confirmation ? 'true' : undefined}
           />
@@ -169,10 +169,10 @@ export default function FormulaireUtilisateur() {
 
         <div className="formulaire-actions">
           <button type="submit" className="bouton bouton-primaire" disabled={envoi}>
-            {envoi ? 'Enregistrement…' : modification ? 'Enregistrer les modifications' : 'Enregistrer l’utilisateur'}
+            {envoi ? 'Saving…' : modification ? 'Save changes' : 'Save user'}
           </button>
           <Link to="/administration/utilisateurs" className="bouton bouton-secondaire">
-            Annuler
+            Cancel
           </Link>
         </div>
       </form>

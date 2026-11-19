@@ -19,7 +19,7 @@ export default function SuppressionDvd() {
     setErreurAction('');
     try {
       await api.supprimerFilm(id);
-      navigate(retour, { state: { message: `Le DVD « ${film.titreFrancais} » a été supprimé.` } });
+      navigate(retour, { state: { message: `The DVD “${film.titreFrancais}” was deleted.` } });
     } catch (e) {
       setErreurAction(e.message);
       setEnvoi(false);
@@ -30,24 +30,23 @@ export default function SuppressionDvd() {
     <section className="page page-etroite">
       {chargement && <Chargement />}
       <Alerte type="erreur">{erreur}</Alerte>
-      {film && !film.permissions.supprimer && <Alerte type="erreur">Vous ne pouvez pas supprimer ce DVD.</Alerte>}
+      {film && !film.permissions.supprimer && <Alerte type="erreur">You can’t delete this DVD.</Alerte>}
       {film && (
         <>
           <DetailsDvd film={film} />
           {film.permissions.supprimer && (
             <div className="panneau confirmation confirmation-danger">
-              <h2>Confirmer la suppression</h2>
+              <h2>Confirm deletion</h2>
               <p>
-                Voulez-vous vraiment supprimer le DVD « {film.titreFrancais} » ? Cette opération est définitive : le DVD sera retiré
-                de la base de données et les utilisateurs concernés seront avisés par courriel.
+                Do you really want to delete the DVD “{film.titreFrancais}”? This cannot be undone: the DVD will be removed from the database and the users concerned will be notified by email.
               </p>
               <Alerte type="erreur">{erreurAction}</Alerte>
               <div className="formulaire-actions">
                 <button type="button" className="bouton bouton-danger" onClick={confirmer} disabled={envoi}>
-                  {envoi ? 'Suppression…' : 'Oui, supprimer ce DVD'}
+                  {envoi ? 'Deleting…' : 'Yes, delete this DVD'}
                 </button>
                 <button type="button" className="bouton bouton-secondaire" onClick={() => navigate(retour)} disabled={envoi}>
-                  Non, annuler
+                  No, cancel
                 </button>
               </div>
             </div>
@@ -56,7 +55,7 @@ export default function SuppressionDvd() {
       )}
       {!chargement && !film && (
         <Link to={retour} className="bouton bouton-secondaire">
-          Retour à la liste
+          Back to list
         </Link>
       )}
     </section>

@@ -14,20 +14,20 @@ export async function authentifier(req, res, next) {
   const [type, jeton] = entete.split(' ');
 
   if (type !== 'Bearer' || !jeton) {
-    throw new ErreurHttp(401, 'Authentification requise.');
+    throw new ErreurHttp(401, 'Authentication required.');
   }
 
   let charge;
   try {
     charge = jwt.verify(jeton, config.jwtSecret);
   } catch (erreur) {
-    const message = erreur.name === 'TokenExpiredError' ? 'Votre session a expiré.' : 'Jeton non valide.';
+    const message = erreur.name === 'TokenExpiredError' ? 'Your session has expired.' : 'Invalid token.';
     throw new ErreurHttp(401, message);
   }
 
   const utilisateur = await User.findById(charge.sub);
   if (!utilisateur) {
-    throw new ErreurHttp(401, 'Utilisateur introuvable.');
+    throw new ErreurHttp(401, 'User not found.');
   }
 
   req.user = utilisateur;
@@ -37,7 +37,7 @@ export async function authentifier(req, res, next) {
 export function exigerRole(...roles) {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      throw new ErreurHttp(403, 'Vous n’avez pas les droits nécessaires pour cette action.');
+      throw new ErreurHttp(403, 'You don’t have the permissions needed for this action.');
     }
     next();
   };
@@ -46,7 +46,7 @@ export function exigerRole(...roles) {
 export function verifierIdParam(nom = 'id') {
   return (req, res, next) => {
     if (!/^[0-9a-fA-F]{24}$/.test(req.params[nom] ?? '')) {
-      throw new ErreurHttp(400, 'Identifiant non valide.');
+      throw new ErreurHttp(400, 'Invalid identifier.');
     }
     next();
   };

@@ -77,15 +77,15 @@ export async function verifierUnicite({ nom, courriel }, idExclu) {
       continue;
     }
     if (normaliser(u.nom) === normaliser(nom)) {
-      erreurs.nom = 'Ce prénom est déjà utilisé par un autre utilisateur.';
+      erreurs.nom = 'This first name is already used by another user.';
     }
     if (u.courriel === courriel) {
-      erreurs.courriel = 'Cette adresse courriel est déjà utilisée.';
+      erreurs.courriel = 'This email address is already in use.';
     }
   }
 
   if (normaliser(nom) === normaliser(NOM_ADMIN)) {
-    erreurs.nom = 'Ce nom est réservé.';
+    erreurs.nom = 'This name is reserved.';
   }
 
   return erreurs;

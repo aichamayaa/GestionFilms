@@ -4,21 +4,21 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { ROLES } from '../constantes.js';
 
 const LIENS_UTILISATEUR = [
-  { vers: '/dvds', libelle: 'Tous les DVDs', fin: true, aide: 'Afficher les DVDs de tous les utilisateurs' },
-  { vers: '/dvds/en-main', libelle: 'Mes DVDs en main', aide: 'Afficher les DVDs que j’ai en main' },
-  { vers: '/dvds/utilisateurs', libelle: 'DVDs d’un autre utilisateur', aide: 'Afficher les DVDs d’un autre utilisateur' },
-  { vers: '/dvds/ajout', libelle: 'Ajouter un DVD', aide: 'Ajouter un nouveau DVD à la collection' },
-  { vers: '/personnalisation', libelle: 'Personnalisation', aide: 'Modifier mon mot de passe et mes préférences' },
-  { vers: '/courriel', libelle: 'Envoyer un courriel', aide: 'Transmettre un message à un ou plusieurs utilisateurs' },
-  { vers: '/courriels', libelle: 'Courriels envoyés', aide: 'Consulter les courriels envoyés par l’application' },
+  { vers: '/dvds', libelle: 'All DVDs', fin: true, aide: 'Show every user’s DVDs' },
+  { vers: '/dvds/en-main', libelle: 'DVDs I’m holding', aide: 'Show the DVDs I currently have' },
+  { vers: '/dvds/utilisateurs', libelle: 'Another user’s DVDs', aide: 'Show another user’s DVDs' },
+  { vers: '/dvds/ajout', libelle: 'Add a DVD', aide: 'Add a new DVD to the collection' },
+  { vers: '/personnalisation', libelle: 'Settings', aide: 'Change my password and preferences' },
+  { vers: '/courriel', libelle: 'Send an email', aide: 'Send a message to one or more users' },
+  { vers: '/courriels', libelle: 'Sent emails', aide: 'View the emails sent by the app' },
 ];
 
 const LIENS_ADMIN = [
-  { vers: '/dvds', libelle: 'Tous les DVDs', fin: true, aide: 'Afficher les DVDs de tous les utilisateurs' },
-  { vers: '/dvds/utilisateurs', libelle: 'DVDs d’un utilisateur', aide: 'Afficher les DVDs d’un utilisateur' },
-  { vers: '/administration/utilisateurs', libelle: 'Gestion des utilisateurs', aide: 'Gérer les comptes des utilisateurs' },
-  { vers: '/courriel', libelle: 'Envoyer un courriel', aide: 'Transmettre un message à un ou plusieurs utilisateurs' },
-  { vers: '/courriels', libelle: 'Courriels envoyés', aide: 'Consulter les courriels envoyés par l’application' },
+  { vers: '/dvds', libelle: 'All DVDs', fin: true, aide: 'Show every user’s DVDs' },
+  { vers: '/dvds/utilisateurs', libelle: 'A user’s DVDs', aide: 'Show a user’s DVDs' },
+  { vers: '/administration/utilisateurs', libelle: 'User management', aide: 'Manage user accounts' },
+  { vers: '/courriel', libelle: 'Send an email', aide: 'Send a message to one or more users' },
+  { vers: '/courriels', libelle: 'Sent emails', aide: 'View the emails sent by the app' },
 ];
 
 export default function MenuLayout() {
@@ -36,8 +36,8 @@ export default function MenuLayout() {
     <div className="application">
       <header className="entete">
         <div className="entete-interieur">
-          <NavLink to="/dvds" end className="marque" title="Retour à l’accueil">
-            Gestion de films
+          <NavLink to="/dvds" end className="marque" title="Back to home">
+            Film Management
           </NavLink>
           <button
             type="button"
@@ -48,7 +48,7 @@ export default function MenuLayout() {
           >
             Menu
           </button>
-          <nav id="navigation-principale" className={`navigation${menuOuvert ? ' navigation-ouverte' : ''}`} aria-label="Navigation principale">
+          <nav id="navigation-principale" className={`navigation${menuOuvert ? ' navigation-ouverte' : ''}`} aria-label="Main navigation">
             {liens.map((lien) => (
               <NavLink
                 key={lien.vers}
@@ -67,8 +67,8 @@ export default function MenuLayout() {
               {utilisateur.nom}
             </span>
             <span className="badge badge-role">{ROLES[utilisateur.role]}</span>
-            <button type="button" className="bouton bouton-contour" onClick={seDeconnecter} title="Fermer ma session">
-              Déconnexion
+            <button type="button" className="bouton bouton-contour" onClick={seDeconnecter} title="End my session">
+              Log out
             </button>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function MenuLayout() {
       <main className="contenu">
         <Outlet />
       </main>
-      <footer className="pied">Gestion de films · Projet full-stack par Aicha M. Touré · React, Express, MongoDB</footer>
+      <footer className="pied">Film Management · Full-stack project by Aicha M. Touré · React, Express, MongoDB</footer>
     </div>
   );
 }

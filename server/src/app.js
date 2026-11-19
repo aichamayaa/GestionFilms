@@ -65,7 +65,7 @@ export default async function handler(req, res) {
   } catch (erreur) {
     pret = null;
     console.error(erreur);
-    return res.status(500).json({ message: 'Erreur de connexion à la base de données.' });
+    return res.status(500).json({ message: 'Database connection error.' });
   }
   return app(req, res);
 }

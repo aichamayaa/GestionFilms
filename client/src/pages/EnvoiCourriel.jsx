@@ -78,23 +78,23 @@ export default function EnvoiCourriel() {
     return (
       <section className="page page-etroite">
         <div className="page-entete">
-          <h1>Message transmis</h1>
+          <h1>Message sent</h1>
         </div>
         <Alerte type={courriel.statut === 'echec' ? 'erreur' : 'succes'}>
           {courriel.statut === 'echec'
-            ? 'Le serveur de courriel a refusé l’envoi du message.'
+            ? 'The email server rejected the message.'
             : simulation
-              ? 'Aucun serveur SMTP n’est configuré : le message n’a pas été expédié, mais il est présenté ci-dessous.'
-              : 'Le message a été envoyé.'}
+              ? 'No SMTP server is configured: the message was not actually sent, but it is shown below.'
+              : 'The message was sent.'}
         </Alerte>
         <div className="panneau courriel-apercu">
           <dl className="fiche-donnees">
             <div className="fiche-ligne">
-              <dt>Destinataires</dt>
+              <dt>Recipients</dt>
               <dd>{courriel.destinataires.map((d) => `${d.nom} <${d.courriel}>`).join(', ')}</dd>
             </div>
             <div className="fiche-ligne">
-              <dt>Objet</dt>
+              <dt>Subject</dt>
               <dd>{courriel.sujet}</dd>
             </div>
             <div className="fiche-ligne">
@@ -107,10 +107,10 @@ export default function EnvoiCourriel() {
         </div>
         <div className="formulaire-actions">
           <button type="button" className="bouton bouton-primaire" onClick={nouveauMessage}>
-            Écrire un autre message
+            Write another message
           </button>
           <Link to="/courriels" className="bouton bouton-secondaire">
-            Voir les courriels envoyés
+            View sent emails
           </Link>
         </div>
       </section>
@@ -120,30 +120,30 @@ export default function EnvoiCourriel() {
   return (
     <section className="page page-etroite">
       <div className="page-entete">
-        <h1>Envoyer un courriel</h1>
+        <h1>Send an email</h1>
       </div>
 
       <form className="panneau" onSubmit={soumettre} noValidate>
         <Alerte type="erreur">{erreurGenerale || erreurAnnuaire}</Alerte>
 
-        <Champ id="mode" libelle="Destinataires">
-          <select id="mode" value={mode} onChange={(e) => setMode(e.target.value)} title="Choisir à qui le message sera transmis">
-            <option value="un">Un utilisateur</option>
-            <option value="plusieurs">Plusieurs utilisateurs</option>
-            <option value="tous">Tous les utilisateurs</option>
+        <Champ id="mode" libelle="Recipients">
+          <select id="mode" value={mode} onChange={(e) => setMode(e.target.value)} title="Choose who will receive the message">
+            <option value="un">One user</option>
+            <option value="plusieurs">Several users</option>
+            <option value="tous">All users</option>
           </select>
         </Champ>
 
         {mode === 'un' && (
-          <Champ id="destinataire" libelle="Utilisateur" erreur={erreurs.destinataires}>
+          <Champ id="destinataire" libelle="User" erreur={erreurs.destinataires}>
             <select
               id="destinataire"
               value={unDestinataire}
               onChange={(e) => setUnDestinataire(e.target.value)}
-              title="Choisir le destinataire du message"
+              title="Choose the message recipient"
               aria-invalid={erreurs.destinataires ? 'true' : undefined}
             >
-              <option value="">Choisir un utilisateur</option>
+              <option value="">Choose a user</option>
               {autres.map((u) => (
                 <option key={u._id} value={u._id}>
                   {u.nom}
@@ -154,7 +154,7 @@ export default function EnvoiCourriel() {
         )}
 
         {mode === 'plusieurs' && (
-          <Groupe libelle="Utilisateurs" erreur={erreurs.destinataires}>
+          <Groupe libelle="Users" erreur={erreurs.destinataires}>
             <div className="cases-grille">
               {autres.map((u) => (
                 <CaseACocher
@@ -168,25 +168,25 @@ export default function EnvoiCourriel() {
             </div>
             <div className="formulaire-actions">
               <button type="button" className="bouton bouton-petit bouton-secondaire" onClick={() => setPlusieurs(autres.map((u) => u._id))}>
-                Tout cocher
+                Select all
               </button>
               <button type="button" className="bouton bouton-petit bouton-secondaire" onClick={() => setPlusieurs([])}>
-                Tout décocher
+                Deselect all
               </button>
             </div>
           </Groupe>
         )}
 
-        {mode === 'tous' && <p className="aide">Le message sera transmis à tous les autres utilisateurs.</p>}
+        {mode === 'tous' && <p className="aide">The message will be sent to all other users.</p>}
 
-        <Champ id="sujet" libelle="Objet" requis erreur={erreurs.sujet}>
+        <Champ id="sujet" libelle="Subject" requis erreur={erreurs.sujet}>
           <input
             id="sujet"
             type="text"
             value={sujet}
             onChange={(e) => setSujet(e.target.value)}
-            placeholder="Objet du message"
-            title="Objet du message (150 caractères au maximum)"
+            placeholder="Message subject"
+            title="Message subject (150 characters maximum)"
             maxLength={150}
             aria-invalid={erreurs.sujet ? 'true' : undefined}
           />
@@ -198,15 +198,15 @@ export default function EnvoiCourriel() {
             rows={8}
             value={corps}
             onChange={(e) => setCorps(e.target.value)}
-            placeholder="Écrivez votre message ici"
-            title="Corps du message (5000 caractères au maximum)"
+            placeholder="Write your message here"
+            title="Message body (5000 characters maximum)"
             maxLength={5000}
             aria-invalid={erreurs.corps ? 'true' : undefined}
           />
         </Champ>
 
         <button type="submit" className="bouton bouton-primaire" disabled={envoi}>
-          {envoi ? 'Envoi en cours…' : 'Envoyer le message'}
+          {envoi ? 'Sending…' : 'Send message'}
         </button>
       </form>
     </section>

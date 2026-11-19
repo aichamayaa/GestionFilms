@@ -26,7 +26,7 @@ const televerseur = multer({
   limits: { fileSize: 2 * 1024 * 1024, files: 1 },
   fileFilter: (req, file, cb) => {
     if (!EXTENSIONS[file.mimetype]) {
-      return cb(new ErreurHttp(400, 'Format d’image non accepté (JPEG, PNG, WebP ou GIF).'));
+      return cb(new ErreurHttp(400, 'Image format not accepted (JPEG, PNG, WebP or GIF).'));
     }
     cb(null, true);
   },
@@ -36,7 +36,7 @@ const router = Router();
 
 router.post('/', authentifier, exigerRole('U', 'S', 'A'), televerseur.single('image'), (req, res) => {
   if (!req.file) {
-    throw new ErreurHttp(400, 'Aucune image n’a été reçue.');
+    throw new ErreurHttp(400, 'No image was received.');
   }
   res.status(201).json({ nomFichier: req.file.filename });
 });

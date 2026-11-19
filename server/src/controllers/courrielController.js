@@ -19,17 +19,17 @@ export async function envoyer(req, res) {
   }
 
   if (destinataires.length === 0) {
-    throw new ErreurHttp(400, 'Aucun destinataire valide.', { destinataires: 'Aucun destinataire valide.' });
+    throw new ErreurHttp(400, 'No valid recipient.', { destinataires: 'No valid recipient.' });
   }
 
   const signature = estAdminIntegre(req.user)
-    ? 'L’administrateur'
+    ? 'The administrator'
     : `${req.user.nom} (${req.user.courriel})`;
 
   const entree = await envoyerCourriel({
     destinataires,
     sujet: donnees.sujet,
-    corps: `Message de ${signature}\n\n${donnees.corps}`,
+    corps: `Message from ${signature}\n\n${donnees.corps}`,
     expediteur: { nom: req.user.nom, courriel: estAdminIntegre(req.user) ? null : req.user.courriel },
     repondreA: estAdminIntegre(req.user) ? undefined : req.user.courriel,
   });

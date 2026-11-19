@@ -23,13 +23,13 @@ export async function connexion(req, res) {
   const { utilisateur, ambigu } = await trouverParIdentifiant(identifiant);
 
   if (ambigu) {
-    throw new ErreurHttp(401, 'Plusieurs utilisateurs portent ce prénom. Utilisez plutôt votre adresse courriel.');
+    throw new ErreurHttp(401, 'Several users have this first name. Please use your email address instead.');
   }
 
   const valide = await comparerMotDePasse(motDePasse, utilisateur ? utilisateur.motDePasseHache : HACHE_BIDON);
 
   if (!utilisateur || !valide) {
-    throw new ErreurHttp(401, 'Identifiant ou mot de passe incorrect.');
+    throw new ErreurHttp(401, 'Incorrect username or password.');
   }
 
   res.json({ token: creerJeton(utilisateur), utilisateur: presenterUtilisateur(utilisateur) });
@@ -41,7 +41,7 @@ export async function inscription(req, res) {
   const motDePasse = String(req.body.motDePasse ?? '');
 
   if (!nom || !courriel || motDePasse.length < 6) {
-    throw new ErreurHttp(400, 'Prénom, courriel et mot de passe (6 caractères min.) sont requis.');
+    throw new ErreurHttp(400, 'First name, email and password (6 characters minimum) are required.');
   }
 
   const erreurs = await verifierUnicite({ nom, courriel });
@@ -64,27 +64,27 @@ export async function moi(req, res) {
 
 export async function changerMotDePasse(req, res) {
   if (estAdminIntegre(req.user)) {
-    throw new ErreurHttp(403, 'Le mot de passe de l’administrateur ne peut pas être modifié.');
+    throw new ErreurHttp(403, 'The administrator’s password can’t be changed.');
   }
 
   const { ancienMotDePasse, nouveauMotDePasse } = valider(changementMotDePasseSchema, req.body);
   const utilisateur = await User.findById(req.user._id).select('+motDePasseHache');
 
   if (!(await comparerMotDePasse(ancienMotDePasse, utilisateur.motDePasseHache))) {
-    throw new ErreurHttp(400, 'L’ancien mot de passe est incorrect.', {
-      ancienMotDePasse: 'L’ancien mot de passe est incorrect.',
+    throw new ErreurHttp(400, 'The current password is incorrect.', {
+      ancienMotDePasse: 'The current password is incorrect.',
     });
   }
 
   utilisateur.motDePasseHache = await hacherMotDePasse(nouveauMotDePasse);
   await utilisateur.save();
 
-  res.json({ message: 'Votre mot de passe a été modifié.' });
+  res.json({ message: 'Your password was changed.' });
 }
 
 export async function modifierPreferences(req, res) {
   if (estAdminIntegre(req.user)) {
-    throw new ErreurHttp(403, 'Les données de l’administrateur ne peuvent pas être modifiées.');
+    throw new ErreurHttp(403, 'The administrator’s data can’t be changed.');
   }
 
   const donnees = valider(preferencesSchema, req.body);

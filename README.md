@@ -1,66 +1,68 @@
-# Gestion de films
+# Film Management
 
-Application web full-stack pour gérer une collection de DVD partagée entre plusieurs utilisateurs : consultation du catalogue, emprunts, appropriation de films, préférences personnelles et notifications par courriel.
+Full-stack web application for managing a DVD collection shared between several users: browsing the catalog, borrowing, claiming films, personal preferences and email notifications.
 
-**Démo en ligne : https://gestionfilms.vercel.app**
+**Live demo: https://gestionfilms.vercel.app**
 
-## Compte de démonstration
+## Demo account
 
-Connectez-vous avec :
+Sign in with:
 
-- Identifiant : `[courriel ou prénom d'un utilisateur de donnees.json]`
-- Mot de passe : `[son motDePasse dans donnees.json]`
+- Username: `Chantal`
+- Password: `DemoChantal!1`
 
-Vous pouvez aussi cliquer sur **Créer un compte** pour vous inscrire.
+You can also click **Create an account** to sign up.
 
-## Fonctionnalités
+> The demo data (film titles, summaries and user names) is in French. The interface itself is in English.
 
-- Authentification par jeton JWT (connexion et inscription)
-- Mots de passe hachés avec bcrypt
-- Catalogue de films avec acteurs, réalisateurs et producteurs
-- Gestion des emprunts
-- Rôles utilisateur et administrateur
-- Préférences par utilisateur (nombre de films par page, couleurs, notifications)
-- Envoi de courriels par SMTP (Gmail)
+## Features
+
+- JWT authentication (sign in and sign up)
+- Passwords hashed with bcrypt
+- Film catalog with actors, directors and producers
+- Borrowing management
+- User, superuser and administrator roles
+- Per-user preferences (films per page, colors, notifications)
+- Email sending over SMTP (Gmail)
 
 ## Technologies
 
-- **Frontend :** React, Vite, React Router
-- **Backend :** Node.js, Express
-- **Base de données :** MongoDB Atlas (Mongoose)
-- **Déploiement :** Vercel (client et serveur dans un seul projet)
+- **Frontend:** React, Vite, React Router
+- **Backend:** Node.js, Express
+- **Database:** MongoDB Atlas (Mongoose)
+- **Deployment:** Vercel (client and server in a single project)
 
-## Lancer le projet en local
+## Run the project locally
 
-1. Cloner le dépôt :
+1. Clone the repository:
    ```
    git clone https://github.com/aichamayaa/GestionFilms.git
    ```
-2. Créer `server/.env` à partir de `server/.env.example` et remplir les valeurs.
-3. Installer et peupler la base :
+2. Create `server/.env` from `server/.env.example` and fill in the values.
+3. Install dependencies and seed the database:
    ```
    cd server
    npm install
    node --env-file=.env src/seed/seed.js
    node --env-file=.env src/index.js
    ```
-4. Dans un second terminal :
+4. In a second terminal:
    ```
    cd client
    npm install
    npm run dev
    ```
 
-L'API démarre sur `http://localhost:3001`.
+The API starts on `http://localhost:3001`.
 
-## Variables d'environnement
+## Environment variables
 
-Voir `server/.env.example`. Sur Vercel, elles se configurent dans *Settings → Environment Variables*.
+See `server/.env.example`. On Vercel, they are set in *Settings → Environment Variables*.
 
-## Limites connues
+## Known limitations
 
-- Sur la version en ligne, les pochettes téléversées ne sont pas conservées (le disque de Vercel est en lecture seule). Les pochettes du jeu de données sont incluses dans le projet.
+- On the online version, uploaded cover images are not kept (Vercel's disk is read-only). The covers from the seed data are included in the project.
 
-## Auteure
+## Author
 
-Aicha M. Toure · https://github.com/aichamayaa
+Aicha M. Touré · https://github.com/aichamayaa

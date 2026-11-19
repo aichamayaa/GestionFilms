@@ -23,9 +23,9 @@ export default function Pagination({ page, nbPages, onChanger }) {
         className="bouton bouton-secondaire"
         disabled={page <= 1}
         onClick={() => onChanger(page - 1)}
-        title="Page précédente"
+        title="Previous page"
       >
-        Précédent
+        Previous
       </button>
       <ul className="pagination-pages">
         {construirePages(page, nbPages).map((element) =>
@@ -40,7 +40,7 @@ export default function Pagination({ page, nbPages, onChanger }) {
                 className={element === page ? 'page-bouton page-actuelle' : 'page-bouton'}
                 aria-current={element === page ? 'page' : undefined}
                 onClick={() => onChanger(element)}
-                title={`Aller à la page ${element}`}
+                title={`Go to page ${element}`}
               >
                 {element}
               </button>
@@ -53,9 +53,9 @@ export default function Pagination({ page, nbPages, onChanger }) {
         className="bouton bouton-secondaire"
         disabled={page >= nbPages}
         onClick={() => onChanger(page + 1)}
-        title="Page suivante"
+        title="Next page"
       >
-        Suivant
+        Next
       </button>
     </nav>
   );

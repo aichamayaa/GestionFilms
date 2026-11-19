@@ -17,10 +17,10 @@ import { config } from '../config.js';
 async function chargerUtilisateur(id) {
   const utilisateur = await User.findById(id);
   if (!utilisateur) {
-    throw new ErreurHttp(404, 'Cet utilisateur est introuvable.');
+    throw new ErreurHttp(404, 'This user could not be found.');
   }
   if (estAdminIntegre(utilisateur)) {
-    throw new ErreurHttp(403, 'Les données de l’administrateur ne peuvent pas être modifiées.');
+    throw new ErreurHttp(403, 'The administrator’s data can’t be changed.');
   }
   return utilisateur;
 }
@@ -73,7 +73,7 @@ export async function creer(req, res) {
   const conflits = await verifierUnicite(donnees);
 
   if (Object.keys(conflits).length > 0) {
-    throw new ErreurHttp(409, 'Ce prénom ou ce courriel existe déjà.', conflits);
+    throw new ErreurHttp(409, 'This first name or email already exists.', conflits);
   }
 
   const utilisateur = await User.create({
@@ -85,15 +85,15 @@ export async function creer(req, res) {
 
   await envoyerCourriel({
     destinataires: [{ nom: utilisateur.nom, courriel: utilisateur.courriel }],
-    sujet: 'Bienvenue dans Gestion de films',
+    sujet: 'Welcome to Film Management',
     corps: [
-      `Bonjour ${utilisateur.nom},`,
+      `Hello ${utilisateur.nom},`,
       '',
-      'Votre compte a été créé.',
-      `Vous pouvez vous connecter avec votre prénom (${utilisateur.nom}) ou votre courriel (${utilisateur.courriel}).`,
-      `Adresse de l’application : ${config.urlClient}/connexion`,
+      'Your account has been created.',
+      `You can sign in with your first name (${utilisateur.nom}) or your email (${utilisateur.courriel}).`,
+      `App address: ${config.urlClient}/connexion`,
       '',
-      'Gestion de films',
+      'Film Management',
     ].join('\n'),
   });
 
@@ -106,7 +106,7 @@ export async function modifier(req, res) {
   const conflits = await verifierUnicite(donnees, utilisateur._id);
 
   if (Object.keys(conflits).length > 0) {
-    throw new ErreurHttp(409, 'Ce prénom ou ce courriel existe déjà.', conflits);
+    throw new ErreurHttp(409, 'This first name or email already exists.', conflits);
   }
 
   const ancienNom = utilisateur.nom;
@@ -129,7 +129,7 @@ export async function supprimer(req, res) {
   const utilisateur = await chargerUtilisateur(req.params.id);
 
   if (utilisateur.role === 'A') {
-    throw new ErreurHttp(409, 'Un administrateur ne peut pas être supprimé.');
+    throw new ErreurHttp(409, 'An administrator can’t be deleted.');
   }
 
   const [possedes, enMain] = await Promise.all([
@@ -140,7 +140,7 @@ export async function supprimer(req, res) {
   if (possedes > 0 || enMain > 0) {
     throw new ErreurHttp(
       409,
-      `Impossible de supprimer ${utilisateur.nom} : cet utilisateur possède ${possedes} DVD(s) et en a ${enMain} en main. Transférez ou supprimez ces DVDs d’abord.`
+      `Can’t delete ${utilisateur.nom}: this user owns ${possedes} DVD(s) and is holding ${enMain}. Transfer or delete those DVDs first.`
     );
   }
 
@@ -148,5 +148,5 @@ export async function supprimer(req, res) {
   await Film.updateMany({ utilisateurMAJ: utilisateur._id }, { $unset: { utilisateurMAJ: 1 } });
   await User.deleteOne({ _id: utilisateur._id });
 
-  res.json({ message: 'L’utilisateur a été supprimé.' });
+  res.json({ message: 'The user was deleted.' });
 }

@@ -5,9 +5,9 @@ import Alerte from '../components/Alerte.jsx';
 import Chargement from '../components/Chargement.jsx';
 
 const STATUTS = {
-  simule: 'Simulé',
-  envoye: 'Envoyé',
-  echec: 'Échec',
+  simule: 'Simulated',
+  envoye: 'Sent',
+  echec: 'Failed',
 };
 
 export default function BoiteEnvoi() {
@@ -42,23 +42,22 @@ export default function BoiteEnvoi() {
   return (
     <section className="page page-etroite">
       <div className="page-entete">
-        <h1>Courriels envoyés</h1>
+        <h1>Sent emails</h1>
         <button type="button" className="bouton bouton-secondaire" onClick={() => charger()} disabled={chargement}>
-          Actualiser
+          Refresh
         </button>
       </div>
 
       <Alerte type="erreur">{erreur}</Alerte>
       {donnees?.simulation && (
         <Alerte type="info">
-          Aucun serveur SMTP n’est configuré. Les courriels ne sont pas expédiés : ils sont conservés ici, avec l’adresse des destinataires,
-          l’objet et le corps du message. Les messages sont effacés au redémarrage du serveur.
+          No SMTP server is configured. Emails are not actually sent: they are kept here with the recipients’ addresses, subject and body. Messages are cleared when the server restarts.
         </Alerte>
       )}
 
       {chargement && !donnees && <Chargement />}
 
-      {donnees && donnees.courriels.length === 0 && <p className="vide panneau">Aucun courriel n’a été envoyé pour le moment.</p>}
+      {donnees && donnees.courriels.length === 0 && <p className="vide panneau">No emails have been sent yet.</p>}
 
       {donnees && donnees.courriels.length > 0 && (
         <ul className="liste-courriels">
@@ -70,7 +69,7 @@ export default function BoiteEnvoi() {
               </div>
               <p className="aide">{formaterDateHeure(courriel.date)}</p>
               <p>
-                <strong>À :</strong> {courriel.destinataires.map((d) => `${d.nom} <${d.courriel}>`).join(', ')}
+                <strong>To:</strong> {courriel.destinataires.map((d) => `${d.nom} <${d.courriel}>`).join(', ')}
               </p>
               <pre className="courriel-corps">{courriel.corps}</pre>
               {courriel.erreur && <p className="message-erreur">{courriel.erreur}</p>}

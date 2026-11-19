@@ -7,7 +7,7 @@ export default function RouteProtegee() {
   const location = useLocation();
 
   if (!pret) {
-    return <Chargement texte="Vérification de la session…" />;
+    return <Chargement texte="Checking your session…" />;
   }
 
   if (!utilisateur) {

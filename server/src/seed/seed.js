@@ -21,7 +21,7 @@ function indexerParNom(documents) {
 function chercher(index, nom, genre) {
   const document = index.get(nom);
   if (!document) {
-    throw new Error(`${genre} introuvable dans le jeu de données : ${nom}`);
+    throw new Error(`${genre} not found in the dataset: ${nom}`);
   }
   return document;
 }
@@ -61,7 +61,7 @@ async function peupler() {
 
   const films = [];
   for (const f of donnees.films) {
-    const detenteur = chercher(parUtilisateur, f.detenteur, 'Utilisateur');
+    const detenteur = chercher(parUtilisateur, f.detenteur, 'User');
     const film = new Film({
       titreFrancais: f.titreFrancais,
       titreOriginal: f.titreOriginal ?? undefined,
@@ -78,13 +78,13 @@ async function peupler() {
       visibleATous: f.visibleATous ?? true,
       nbDisques: f.nbDisques ?? undefined,
       imagePochette: f.imagePochette ?? undefined,
-      acteurs: f.acteurs.map((nom) => chercher(parActeur, nom, 'Acteur')._id),
-      realisateurId: chercher(parRealisateur, f.realisateur, 'Réalisateur')._id,
-      producteurId: chercher(parProducteur, f.producteur, 'Producteur')._id,
-      proprietaireId: chercher(parUtilisateur, f.proprietaire, 'Utilisateur')._id,
+      acteurs: f.acteurs.map((nom) => chercher(parActeur, nom, 'Actor')._id),
+      realisateurId: chercher(parRealisateur, f.realisateur, 'Director')._id,
+      producteurId: chercher(parProducteur, f.producteur, 'Producer')._id,
+      proprietaireId: chercher(parUtilisateur, f.proprietaire, 'User')._id,
       detenteurId: detenteur._id,
       detenteurNom: detenteur.nom,
-      utilisateurMAJ: chercher(parUtilisateur, f.utilisateurMAJ, 'Utilisateur')._id,
+      utilisateurMAJ: chercher(parUtilisateur, f.utilisateurMAJ, 'User')._id,
       dateMAJ: new Date(`${f.dateMAJ}T12:00:00.000Z`),
     });
     films.push(await film.save());
@@ -93,22 +93,22 @@ async function peupler() {
 
   const emprunts = donnees.emprunts.map((e) => ({
     filmId: chercher(new Map([...parTitre].map(([titre, film]) => [titre, { nom: titre, _id: film._id }])), e.film, 'Film')._id,
-    utilisateurId: chercher(parUtilisateur, e.utilisateur, 'Utilisateur')._id,
+    utilisateurId: chercher(parUtilisateur, e.utilisateur, 'User')._id,
     dateEmprunt: new Date(`${e.dateEmprunt}T12:00:00.000Z`),
   }));
   await Emprunt.insertMany(emprunts);
 
-  console.log('Base de données peuplée :');
-  console.log(`  ${utilisateurs.length} utilisateurs (et le compte administrateur intégré)`);
-  console.log(`  ${acteurs.length} acteurs, ${realisateurs.length} réalisateurs, ${producteurs.length} producteurs`);
+  console.log('Database seeded:');
+  console.log(`  ${utilisateurs.length} users (plus the built-in administrator account)`);
+  console.log(`  ${acteurs.length} actors, ${realisateurs.length} directors, ${producteurs.length} producers`);
   console.log(`  ${films.length} films`);
-  console.log(`  ${emprunts.length} emprunts`);
+  console.log(`  ${emprunts.length} loans`);
 }
 
 peupler()
   .then(() => deconnecter())
   .catch(async (erreur) => {
-    console.error('Échec du peuplement :', erreur.message);
+    console.error('Seeding failed:', erreur.message);
     await mongoose.disconnect();
     process.exit(1);
   });
