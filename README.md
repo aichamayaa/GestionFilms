@@ -1,12 +1,12 @@
 # Film Management / Gestion de films
 
-**[🇬🇧 English](#-english) · [🇫🇷 Français](#-français)**
+**[English](#-english) · [Français](#-français)**
 
 **Live demo / Démo en ligne : [https://gestionfilms.vercel.app](https://gestionfilms.vercel.app)**
 
 ---
 
-## 🇬🇧 English
+## English
 
 Full-stack web application for managing a DVD collection shared between several users: browsing the catalog, borrowing, claiming films, personal preferences and email notifications.
 
@@ -81,7 +81,7 @@ Aicha M. Touré · [https://github.com/aichamayaa](https://github.com/aichamayaa
 
 ---
 
-## 🇫🇷 Français
+## Français
 
 Application Web full-stack de gestion d'une collection de DVD partagée entre plusieurs utilisateurs : consultation du catalogue, emprunts, appropriation de films, préférences personnelles et notifications par courriel.
 
