@@ -1,8 +1,11 @@
 import { Link, Outlet, useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext.jsx';
-import { ROLES } from '../constantes.js';
+import { libelleRole } from '../constantes.js';
+import SelecteurLangue from './SelecteurLangue.jsx';
 
 export default function FocusLayout() {
+  const { t } = useTranslation();
   const { utilisateur } = useAuth();
   const location = useLocation();
   const retour = location.state?.from ?? '/dvds';
@@ -11,13 +14,14 @@ export default function FocusLayout() {
     <div className="application">
       <header className="entete">
         <div className="entete-interieur">
-          <span className="marque">Film Management</span>
+          <span className="marque">{t('common.appName')}</span>
           <div className="entete-espace" />
           <div className="session">
+            <SelecteurLangue />
             <span className="session-nom">{utilisateur.nom}</span>
-            <span className="badge badge-role">{ROLES[utilisateur.role]}</span>
-            <Link to={retour} className="bouton bouton-contour" title="Back to the DVD list">
-              Back to list
+            <span className="badge badge-role">{libelleRole(utilisateur.role)}</span>
+            <Link to={retour} className="bouton bouton-contour" title={t('common.backToListTitle')}>
+              {t('common.backToList')}
             </Link>
           </div>
         </div>
@@ -25,7 +29,7 @@ export default function FocusLayout() {
       <main className="contenu">
         <Outlet />
       </main>
-      <footer className="pied">Film Management · Full-stack project by Aicha M. Touré · React, Express, MongoDB</footer>
+      <footer className="pied">{t('footer.text')}</footer>
     </div>
   );
 }

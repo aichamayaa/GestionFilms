@@ -6,8 +6,10 @@ import { formaterDate } from '../utils/format.js';
 import Alerte from '../components/Alerte.jsx';
 import Chargement from '../components/Chargement.jsx';
 import DetailsDvd from '../components/DetailsDvd.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function DetailDvd() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const retour = useRetour();
   const { film, erreur, chargement } = useFilm(id);
@@ -25,8 +27,8 @@ export default function DetailDvd() {
   return (
     <section className="page page-etroite">
       <div className="barre-retour">
-        <Link to={retour} className="bouton bouton-secondaire" title="Back to the DVD list">
-          Back to list
+        <Link to={retour} className="bouton bouton-secondaire" title={t('common.backToListTitle')}>
+          {t('common.backToList')}
         </Link>
       </div>
       {chargement && <Chargement />}
@@ -36,19 +38,19 @@ export default function DetailDvd() {
           <DetailsDvd film={film} />
           {emprunts.length > 0 && (
             <div className="panneau historique">
-              <h2>Borrowing history</h2>
+              <h2>{t('history.title')}</h2>
               <table className="tableau">
                 <thead>
                   <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">User</th>
+                    <th scope="col">{t('history.date')}</th>
+                    <th scope="col">{t('history.user')}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {emprunts.map((emprunt) => (
                     <tr key={emprunt._id}>
                       <td>{formaterDate(emprunt.dateEmprunt)}</td>
-                      <td>{emprunt.utilisateur?.nom ?? 'Deleted user'}</td>
+                      <td>{emprunt.utilisateur?.nom ?? t('common.deletedUser')}</td>
                     </tr>
                   ))}
                 </tbody>

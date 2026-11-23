@@ -17,7 +17,8 @@ import {
 } from '../services/films.js';
 import { resoudreActeurs, resoudreProducteur, resoudreRealisateur } from '../services/personnes.js';
 import { aviser } from '../services/courriel.js';
-import { COURRIEL_ADMIN, traduire } from '../constantes.js';
+import { COURRIEL_ADMIN } from '../constantes.js';
+import { courrielAjout, courrielAppropriation, courrielSuppression } from '../services/gabarits.js';
 
 const PORTEES = ['tous', 'en-main', 'utilisateur'];
 const TRIS = ['titre', 'utilisateur', 'utilisateur-titre'];
@@ -38,10 +39,6 @@ const CHAMPS_SIMPLES = [
   'nbDisques',
   'imagePochette',
 ];
-
-function formaterDate(date) {
-  return new Date(date).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
-}
 
 async function chargerFilm(id) {
   const film = await Film.findById(id);
@@ -168,23 +165,13 @@ export async function ajouter(req, res) {
 
   await film.populate(POPULATION_DETAIL);
 
-  const aPropos = cible._id.equals(req.user._id) ? '' : ` for ${cible.nom}`;
-  await aviser(
-    'courrielSiAjout',
-    `New DVD: ${film.titreFrancais}`,
-    [
-      'Hello,',
-      '',
-      `${req.user.nom} added the DVD “${film.titreFrancais}”${aPropos} to the collection.`,
-      film.categorie ? `Category: ${traduire(film.categorie)}` : null,
-      film.anneeSortie ? `Release year: ${film.anneeSortie}` : null,
-      `Holder: ${cible.nom}`,
-      '',
-      'Film Management',
-    ]
-      .filter((ligne) => ligne !== null)
-      .join('\n')
-  );
+  const gabaritAjout = courrielAjout({
+    auteur: req.user.nom,
+    film,
+    cible: cible.nom,
+    pourAutrui: !cible._id.equals(req.user._id),
+  });
+  await aviser('courrielSiAjout', gabaritAjout.sujet, gabaritAjout.corps);
 
   res.status(201).json({ film: formaterDetail(film, req.user) });
 }
@@ -218,20 +205,8 @@ export async function supprimer(req, res) {
   await Film.deleteOne({ _id: film._id });
   await Emprunt.deleteMany({ filmId: film._id });
 
-  await aviser(
-    'courrielSiSuppression',
-    `DVD removed: ${film.titreFrancais}`,
-    [
-      'Hello,',
-      '',
-      `${req.user.nom} removed the DVD “${film.titreFrancais}” from the collection.`,
-      film.detenteurNom ? `It was held by: ${film.detenteurNom}` : null,
-      '',
-      'Film Management',
-    ]
-      .filter((ligne) => ligne !== null)
-      .join('\n')
-  );
+  const gabaritSuppression = courrielSuppression({ auteur: req.user.nom, film });
+  await aviser('courrielSiSuppression', gabaritSuppression.sujet, gabaritSuppression.corps);
 
   res.json({ message: 'The DVD was deleted.' });
 }
@@ -256,7 +231,7 @@ export async function approprier(req, res) {
     throw new ErreurHttp(400, `This DVD is already held by ${nouveau.nom}.`);
   }
 
-  const ancienNom = film.detenteurNom || 'nobody';
+  const ancienNom = film.detenteurNom || '';
 
   film.detenteurId = nouveau._id;
   film.detenteurNom = nouveau.nom;
@@ -266,20 +241,14 @@ export async function approprier(req, res) {
 
   await Emprunt.create({ filmId: film._id, utilisateurId: nouveau._id });
 
-  const parQui = nouveau._id.equals(req.user._id) ? '' : ` (action performed by ${req.user.nom})`;
-  await aviser(
-    'courrielSiAppropriation',
-    `DVD changed hands: ${film.titreFrancais}`,
-    [
-      'Hello,',
-      '',
-      `The DVD “${film.titreFrancais}” is now held by ${nouveau.nom}${parQui}.`,
-      `It was previously held by: ${ancienNom}`,
-      `Date: ${formaterDate(film.dateMAJ)}`,
-      '',
-      'Film Management',
-    ].join('\n')
-  );
+  const gabaritAppropriation = courrielAppropriation({
+    auteur: req.user.nom,
+    film,
+    nouveau: nouveau.nom,
+    parAutrui: !nouveau._id.equals(req.user._id),
+    ancienNom,
+  });
+  await aviser('courrielSiAppropriation', gabaritAppropriation.sujet, gabaritAppropriation.corps);
 
   await film.populate(POPULATION_DETAIL);
   res.json({ film: formaterDetail(film, req.user) });

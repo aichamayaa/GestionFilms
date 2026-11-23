@@ -1,3 +1,5 @@
+import i18n, { langueCourante } from './i18n/index.js';
+
 export const CATEGORIES = [
   "Action",
   "Adolescent",
@@ -82,19 +84,13 @@ export const SUPPLEMENTS = [
   "Visionneur de scénario-maquette"
 ];
 
-export const ROLES = {
-  A: 'Administrator',
-  S: 'Superuser',
-  U: 'User',
-};
+export function libelleRole(code) {
+  return i18n.t(`roles.${code}`);
+}
 
 export const NB_PAR_PAGE_OPTIONS = Array.from({ length: 32 }, (_, i) => 6 + i * 3);
 
-export const TRIS = [
-  { valeur: 'titre', libelle: 'French title' },
-  { valeur: 'utilisateur', libelle: 'User name' },
-  { valeur: 'utilisateur-titre', libelle: 'User name, then title' },
-];
+export const TRIS = ['titre', 'utilisateur', 'utilisateur-titre'];
 
 const LIBELLES_EN = {
   // Categories
@@ -176,11 +172,15 @@ const LIBELLES_EN = {
 };
 
 // The values stored in the database stay in French (categories, formats, languages, extras).
-// These helpers only change how they are displayed.
+// These helpers only change how they are displayed: French as stored, English via the table above.
 export function traduire(valeur) {
+  if (langueCourante() === 'fr') {
+    return valeur;
+  }
   return LIBELLES_EN[valeur] ?? valeur;
 }
 
 export function trierParLibelle(liste) {
-  return [...liste].sort((a, b) => traduire(a).localeCompare(traduire(b), 'en'));
+  const langue = langueCourante();
+  return [...liste].sort((a, b) => traduire(a).localeCompare(traduire(b), langue));
 }

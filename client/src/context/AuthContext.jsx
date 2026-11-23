@@ -3,6 +3,8 @@ import { api, definirJeton, definirSurNonAutorise } from '../api/client.js';
 
 const CLE_STOCKAGE = 'gestion-films-jeton';
 
+export const SESSION_EXPIREE = 'SESSION_EXPIREE';
+
 const AuthContext = createContext(null);
 
 function lireJetonStocke() {
@@ -54,7 +56,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     definirSurNonAutorise((message) => {
-      deconnecter(message || 'Your session has expired. Please sign in again.');
+      deconnecter(message || SESSION_EXPIREE);
     });
   }, [deconnecter]);
 
@@ -73,7 +75,7 @@ export function AuthProvider({ children }) {
         if (erreur.name === 'AbortError') {
           return;
         }
-        deconnecter(erreur.statut === 401 ? 'Your session has expired. Please sign in again.' : '');
+        deconnecter(erreur.statut === 401 ? SESSION_EXPIREE : '');
       });
     return () => controleur.abort();
   }, [deconnecter]);
@@ -88,7 +90,7 @@ export function AuthProvider({ children }) {
     }
     const delai = Math.max(expiration - Date.now(), 0);
     const minuterie = setTimeout(() => {
-      deconnecter('Your session has expired. Please sign in again.');
+      deconnecter(SESSION_EXPIREE);
     }, Math.min(delai, 2147483000));
     return () => clearTimeout(minuterie);
   }, [jeton, deconnecter]);

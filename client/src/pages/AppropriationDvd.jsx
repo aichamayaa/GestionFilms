@@ -7,8 +7,10 @@ import Alerte from '../components/Alerte.jsx';
 import { Champ } from '../components/Champ.jsx';
 import Chargement from '../components/Chargement.jsx';
 import DetailsDvd from '../components/DetailsDvd.jsx';
+import { Trans, useTranslation } from 'react-i18next';
 
 export default function AppropriationDvd() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const retour = useRetour();
@@ -40,7 +42,7 @@ export default function AppropriationDvd() {
     try {
       await api.approprierFilm(id, estSuper ? { nouveauDetenteurId } : {});
       navigate(retour, {
-        state: { message: `The DVD “${film.titreFrancais}” is now held by ${nomCible}.` },
+        state: { message: t('claim.success', { titre: film.titreFrancais, nom: nomCible }) },
       });
     } catch (e) {
       setErreurAction(e.message);
@@ -52,31 +54,31 @@ export default function AppropriationDvd() {
     <section className="page page-etroite">
       {chargement && <Chargement />}
       <Alerte type="erreur">{erreur}</Alerte>
-      {film && !film.permissions.approprier && <Alerte type="erreur">You can’t claim this DVD.</Alerte>}
+      {film && !film.permissions.approprier && <Alerte type="erreur">{t('claim.forbidden')}</Alerte>}
       {film && (
         <>
           <DetailsDvd film={film} />
           {film.permissions.approprier && (
             <div className="panneau confirmation">
-              <h2>Claim DVD</h2>
+              <h2>{t('claim.heading')}</h2>
               {estSuper ? (
                 <>
                   <p>
-                    This DVD is currently held by <strong>{film.detenteur?.nom ?? 'nobody'}</strong>. Choose the member who now has it.
+                    <Trans i18nKey="claim.superText" values={{ nom: film.detenteur?.nom ?? t('common.nobodyLower') }} components={{ 1: <strong /> }} />
                   </p>
-                  <Champ id="nouveauDetenteur" libelle="New holder" aide="You are doing this on behalf of the selected member.">
+                  <Champ id="nouveauDetenteur" libelle={t('claim.newHolder')} aide={t('claim.newHolderHelp')}>
                     <select
                       id="nouveauDetenteur"
                       value={nouveauDetenteurId}
                       onChange={(e) => setNouveauDetenteurId(e.target.value)}
-                      title="Member who now has the DVD"
+                      title={t('claim.newHolderTitle')}
                     >
-                      <option value="">Choose a member</option>
+                      <option value="">{t('claim.chooseMember')}</option>
                       {utilisateurs
                         .filter((u) => u._id !== detenteurActuelId)
                         .map((u) => (
                           <option key={u._id} value={u._id}>
-                            {u._id === utilisateur._id ? `${u.nom} (me)` : u.nom}
+                            {u._id === utilisateur._id ? t('add.me', { nom: u.nom }) : u.nom}
                           </option>
                         ))}
                     </select>
@@ -84,17 +86,20 @@ export default function AppropriationDvd() {
                 </>
               ) : (
                 <p>
-                  Confirm that you now have the DVD “{film.titreFrancais}”, currently held by{' '}
-                  <strong>{film.detenteur?.nom ?? 'nobody'}</strong>. The users concerned will be notified by email.
+                  <Trans
+                    i18nKey="claim.userText"
+                    values={{ titre: film.titreFrancais, nom: film.detenteur?.nom ?? t('common.nobodyLower') }}
+                    components={{ 1: <strong /> }}
+                  />
                 </p>
               )}
               <Alerte type="erreur">{erreurAction}</Alerte>
               <div className="formulaire-actions">
                 <button type="button" className="bouton bouton-primaire" onClick={confirmer} disabled={envoi || !peutConfirmer}>
-                  {envoi ? 'Saving…' : 'Confirm claim'}
+                  {envoi ? t('common.saving') : t('claim.confirm')}
                 </button>
                 <button type="button" className="bouton bouton-secondaire" onClick={() => navigate(retour)} disabled={envoi}>
-                  Cancel
+                  {t('common.cancel')}
                 </button>
               </div>
             </div>
@@ -103,7 +108,7 @@ export default function AppropriationDvd() {
       )}
       {!chargement && !film && (
         <Link to={retour} className="bouton bouton-secondaire">
-          Back to list
+          {t('common.backToList')}
         </Link>
       )}
     </section>

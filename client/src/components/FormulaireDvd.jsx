@@ -5,6 +5,7 @@ import { ajoutFilmSchema, validerFormulaire } from '../validation.js';
 import { urlPochette } from '../utils/format.js';
 import Alerte from './Alerte.jsx';
 import { CaseACocher, Champ, Groupe } from './Champ.jsx';
+import { useTranslation } from 'react-i18next';
 
 export const VALEURS_VIDES = {
   titreFrancais: '',
@@ -69,6 +70,7 @@ export default function FormulaireDvd({
   utilisateursCibles,
   informationPourQui,
 }) {
+  const { t } = useTranslation();
   const [valeurs, setValeurs] = useState(valeursInitiales);
   const [erreurs, setErreurs] = useState({});
   const [erreurGenerale, setErreurGenerale] = useState('');
@@ -123,11 +125,11 @@ export default function FormulaireDvd({
       return;
     }
     if (!['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(fichier.type)) {
-      setErreurs((e) => ({ ...e, imagePochette: 'Choose a JPEG, PNG, WebP or GIF image.' }));
+      setErreurs((e) => ({ ...e, imagePochette: t('form.imageType') }));
       return;
     }
     if (fichier.size > 2 * 1024 * 1024) {
-      setErreurs((e) => ({ ...e, imagePochette: 'The image must not exceed 2 MB.' }));
+      setErreurs((e) => ({ ...e, imagePochette: t('form.imageSize') }));
       return;
     }
     setTeleversement(true);
@@ -148,7 +150,7 @@ export default function FormulaireDvd({
     const { donnees, erreurs: erreursClient } = validerFormulaire(ajoutFilmSchema, valeurs);
     if (Object.keys(erreursClient).length > 0) {
       setErreurs(erreursClient);
-      setErreurGenerale('The form contains errors. Fix the fields in red.');
+      setErreurGenerale(t('form.errors'));
       return;
     }
 
@@ -161,7 +163,7 @@ export default function FormulaireDvd({
         setErreurs(erreur.erreurs);
         setErreurGenerale(erreur.message);
       } else {
-        setErreurGenerale('An unexpected error occurred.');
+        setErreurGenerale(t('common.unexpected'));
       }
       setEnvoi(false);
     }
@@ -173,18 +175,18 @@ export default function FormulaireDvd({
   return (
     <form ref={formulaire} className="panneau formulaire-dvd" onSubmit={soumettre} noValidate>
       <h1 className="formulaire-titre">{titre}</h1>
-      <p className="aide">Fields marked with an asterisk (*) are required. Only the French title is required.</p>
+      <p className="aide">{t('form.required')}</p>
 
       {informationPourQui && <Alerte type="info">{informationPourQui}</Alerte>}
       <Alerte type="erreur">{erreurGenerale}</Alerte>
 
       {utilisateursCibles && (
-        <Champ id="pourUtilisateurId" libelle="Add this DVD for" erreur={erreurs.pourUtilisateurId} aide="As a superuser, you choose who you are doing this for.">
+        <Champ id="pourUtilisateurId" libelle={t('form.addFor')} erreur={erreurs.pourUtilisateurId} aide={t('form.addForHelp')}>
           <select
             id="pourUtilisateurId"
             value={valeurs.pourUtilisateurId}
             onChange={(e) => changer('pourUtilisateurId', e.target.value)}
-            title="User who will own and hold the DVD"
+            title={t('form.addForTitle')}
           >
             {utilisateursCibles.map((u) => (
               <option key={u._id} value={u._id}>
@@ -199,12 +201,12 @@ export default function FormulaireDvd({
         <div className="formulaire-image">
           <div className="apercu-pochette">
             {urlImage ? (
-              <img src={urlImage} alt="Cover preview" />
+              <img src={urlImage} alt={t('form.coverPreview')} />
             ) : (
-              <span>No cover</span>
+              <span>{t('form.noCover')}</span>
             )}
           </div>
-          <Champ id="imagePochette" libelle="Cover image" erreur={erreurs.imagePochette} aide="JPEG, PNG, WebP or GIF, 2 MB maximum.">
+          <Champ id="imagePochette" libelle={t('form.coverImage')} erreur={erreurs.imagePochette} aide={t('form.coverHelp')}>
             <input
               id="imagePochette"
               type="file"
@@ -212,26 +214,26 @@ export default function FormulaireDvd({
               onChange={choisirImage}
               disabled={televersement}
               aria-invalid={erreurs.imagePochette ? 'true' : undefined}
-              title="Choose an image for the DVD cover"
+              title={t('form.coverTitle')}
             />
           </Champ>
-          {televersement && <p className="aide">Uploading…</p>}
+          {televersement && <p className="aide">{t('form.uploading')}</p>}
           {valeurs.imagePochette && (
             <button type="button" className="bouton bouton-petit bouton-secondaire" onClick={() => changer('imagePochette', '')}>
-              Remove image
+              {t('form.removeImage')}
             </button>
           )}
         </div>
 
         <div className="formulaire-champs">
-          <Champ id="titreFrancais" libelle="French title" requis erreur={erreurs.titreFrancais}>
+          <Champ id="titreFrancais" libelle={t('form.frenchTitle')} requis erreur={erreurs.titreFrancais}>
             <input
               id="titreFrancais"
               type="text"
               value={valeurs.titreFrancais}
               onChange={(e) => changer('titreFrancais', e.target.value)}
-              placeholder="e.g. Le Sillage du Nord"
-              title="Title shown in the list. Two DVDs can’t have the same title."
+              placeholder={t('form.frenchTitlePh')}
+              title={t('form.frenchTitleTitle')}
               maxLength={200}
               aria-invalid={erreurs.titreFrancais ? 'true' : undefined}
               aria-describedby={erreurs.titreFrancais ? 'titreFrancais-erreur' : undefined}
@@ -239,82 +241,82 @@ export default function FormulaireDvd({
             />
           </Champ>
 
-          <Champ id="titreOriginal" libelle="Original title" erreur={erreurs.titreOriginal}>
+          <Champ id="titreOriginal" libelle={t('form.originalTitle')} erreur={erreurs.titreOriginal}>
             <input
               id="titreOriginal"
               type="text"
               value={valeurs.titreOriginal}
               onChange={(e) => changer('titreOriginal', e.target.value)}
-              placeholder="Title in the original language"
-              title="Film title in its original language"
+              placeholder={t('form.originalTitlePh')}
+              title={t('form.originalTitleTitle')}
               maxLength={200}
               aria-invalid={erreurs.titreOriginal ? 'true' : undefined}
             />
           </Champ>
 
           <div className="champs-ligne">
-            <Champ id="anneeSortie" libelle="Release year" erreur={erreurs.anneeSortie}>
+            <Champ id="anneeSortie" libelle={t('form.year')} erreur={erreurs.anneeSortie}>
               <input
                 id="anneeSortie"
                 type="number"
                 inputMode="numeric"
                 value={valeurs.anneeSortie}
                 onChange={(e) => changer('anneeSortie', e.target.value)}
-                placeholder="e.g. 2019"
-                title="Film release year (between 1888 and 2100)"
+                placeholder={t('form.yearPh')}
+                title={t('form.yearTitle')}
                 aria-invalid={erreurs.anneeSortie ? 'true' : undefined}
               />
             </Champ>
-            <Champ id="dureeMinutes" libelle="Duration (in minutes)" erreur={erreurs.dureeMinutes}>
+            <Champ id="dureeMinutes" libelle={t('form.duration')} erreur={erreurs.dureeMinutes}>
               <input
                 id="dureeMinutes"
                 type="number"
                 inputMode="numeric"
                 value={valeurs.dureeMinutes}
                 onChange={(e) => changer('dureeMinutes', e.target.value)}
-                placeholder="e.g. 118"
-                title="Film duration in minutes (1 to 9999)"
+                placeholder={t('form.durationPh')}
+                title={t('form.durationTitle')}
                 aria-invalid={erreurs.dureeMinutes ? 'true' : undefined}
               />
             </Champ>
-            <Champ id="nbDisques" libelle="Number of discs" erreur={erreurs.nbDisques}>
+            <Champ id="nbDisques" libelle={t('form.discs')} erreur={erreurs.nbDisques}>
               <input
                 id="nbDisques"
                 type="number"
                 inputMode="numeric"
                 value={valeurs.nbDisques}
                 onChange={(e) => changer('nbDisques', e.target.value)}
-                placeholder="e.g. 1"
-                title="Number of discs in the set (1 to 99)"
+                placeholder={t('form.discsPh')}
+                title={t('form.discsTitle')}
                 aria-invalid={erreurs.nbDisques ? 'true' : undefined}
               />
             </Champ>
           </div>
 
           <div className="champs-ligne">
-            <Champ id="categorie" libelle="Category" erreur={erreurs.categorie}>
+            <Champ id="categorie" libelle={t('form.category')} erreur={erreurs.categorie}>
               <select
                 id="categorie"
                 value={valeurs.categorie}
                 onChange={(e) => changer('categorie', e.target.value)}
-                title="Choose the film category"
+                title={t('form.categoryTitle')}
                 aria-invalid={erreurs.categorie ? 'true' : undefined}
               >
-                <option value="">Choose a category</option>
+                <option value="">{t('form.chooseCategory')}</option>
                 {trierParLibelle(CATEGORIES).map((categorie) => (
                   <option key={categorie} value={categorie}>{traduire(categorie)}</option>
                 ))}
               </select>
             </Champ>
-            <Champ id="format" libelle="Format" erreur={erreurs.format}>
+            <Champ id="format" libelle={t('form.format')} erreur={erreurs.format}>
               <select
                 id="format"
                 value={valeurs.format}
                 onChange={(e) => changer('format', e.target.value)}
-                title="Choose the disc format"
+                title={t('form.formatTitle')}
                 aria-invalid={erreurs.format ? 'true' : undefined}
               >
-                <option value="">Choose a format</option>
+                <option value="">{t('form.chooseFormat')}</option>
                 {FORMATS.map((format) => (
                   <option key={format} value={format}>{traduire(format)}</option>
                 ))}
@@ -323,15 +325,15 @@ export default function FormulaireDvd({
           </div>
 
           <div className="champs-ligne">
-            <Champ id="realisateur" libelle="Director" erreur={erreurs.realisateur} aide="Choose a suggested name or type a new one.">
+            <Champ id="realisateur" libelle={t('form.director')} erreur={erreurs.realisateur} aide={t('form.nameHelp')}>
               <input
                 id="realisateur"
                 type="text"
                 list="liste-realisateurs"
                 value={valeurs.realisateur}
                 onChange={(e) => changer('realisateur', e.target.value)}
-                placeholder="Director’s name"
-                title="Director’s name"
+                placeholder={t('form.directorPh')}
+                title={t('form.directorPh')}
                 maxLength={100}
                 aria-invalid={erreurs.realisateur ? 'true' : undefined}
               />
@@ -341,15 +343,15 @@ export default function FormulaireDvd({
                 ))}
               </datalist>
             </Champ>
-            <Champ id="producteur" libelle="Producer" erreur={erreurs.producteur} aide="Choose a suggested name or type a new one.">
+            <Champ id="producteur" libelle={t('form.producer')} erreur={erreurs.producteur} aide={t('form.nameHelp')}>
               <input
                 id="producteur"
                 type="text"
                 list="liste-producteurs"
                 value={valeurs.producteur}
                 onChange={(e) => changer('producteur', e.target.value)}
-                placeholder="Producer’s name"
-                title="Producer’s name"
+                placeholder={t('form.producerPh')}
+                title={t('form.producerPh')}
                 maxLength={100}
                 aria-invalid={erreurs.producteur ? 'true' : undefined}
               />
@@ -361,7 +363,7 @@ export default function FormulaireDvd({
             </Champ>
           </div>
 
-          <Groupe libelle="Main actors (three maximum)" erreur={erreurs.acteurs}>
+          <Groupe libelle={t('form.actors')} erreur={erreurs.acteurs}>
             <div className="champs-ligne">
               {valeurs.acteurs.map((acteur, index) => (
                 <input
@@ -371,10 +373,10 @@ export default function FormulaireDvd({
                   list="liste-acteurs"
                   value={acteur}
                   onChange={(e) => changerActeur(index, e.target.value)}
-                  placeholder={`Actor ${index + 1}`}
-                  title={`Name of actor ${index + 1}`}
+                  placeholder={t('form.actorPh', { n: index + 1 })}
+                  title={t('form.actorTitle', { n: index + 1 })}
                   maxLength={100}
-                  aria-label={`Actor ${index + 1}`}
+                  aria-label={t('form.actorPh', { n: index + 1 })}
                   aria-invalid={erreurs.acteurs && index === 0 ? 'true' : undefined}
                 />
               ))}
@@ -387,7 +389,7 @@ export default function FormulaireDvd({
           </Groupe>
 
           <div className="champs-ligne">
-            <Groupe libelle="Languages" erreur={erreurs.langues}>
+            <Groupe libelle={t('form.languages')} erreur={erreurs.langues}>
               {LANGUES.map((langue) => (
                 <CaseACocher
                   key={langue}
@@ -398,7 +400,7 @@ export default function FormulaireDvd({
                 />
               ))}
             </Groupe>
-            <Groupe libelle="Subtitles" erreur={erreurs.sousTitres}>
+            <Groupe libelle={t('form.subtitles')} erreur={erreurs.sousTitres}>
               {LANGUES.map((langue) => (
                 <CaseACocher
                   key={langue}
@@ -412,9 +414,9 @@ export default function FormulaireDvd({
           </div>
 
           <Groupe
-            libelle={`Available extras (${valeurs.supplements.length} of 3)`}
+            libelle={t('form.extras', { count: valeurs.supplements.length })}
             erreur={erreurs.supplements}
-            aide="You can choose up to three extras."
+            aide={t('form.extrasHelp')}
           >
             <div className="cases-grille">
               {trierParLibelle(SUPPLEMENTS).map((supplement) => {
@@ -433,38 +435,38 @@ export default function FormulaireDvd({
             </div>
           </Groupe>
 
-          <Champ id="resume" libelle="Film summary" erreur={erreurs.resume}>
+          <Champ id="resume" libelle={t('form.summary')} erreur={erreurs.resume}>
             <textarea
               id="resume"
               rows={4}
               value={valeurs.resume}
               onChange={(e) => changer('resume', e.target.value)}
-              placeholder="Summary in a few lines"
-              title="Film summary (2000 characters maximum)"
+              placeholder={t('form.summaryPh')}
+              title={t('form.summaryTitle')}
               maxLength={2000}
               aria-invalid={erreurs.resume ? 'true' : undefined}
             />
           </Champ>
 
-          <Groupe libelle="Other information">
+          <Groupe libelle={t('form.other')}>
             <CaseACocher
               id="dvdOriginal"
-              libelle="Original DVD (not a copy)"
+              libelle={t('form.originalCheck')}
               coche={valeurs.dvdOriginal}
               onChange={(v) => changer('dvdOriginal', v)}
             />
             <CaseACocher
               id="versionEtendue"
-              libelle="Extended edition"
+              libelle={t('form.extendedCheck')}
               coche={valeurs.versionEtendue}
               onChange={(v) => changer('versionEtendue', v)}
             />
             <CaseACocher
               id="visibleATous"
-              libelle="Visible to all users"
+              libelle={t('form.visibleCheck')}
               coche={valeurs.visibleATous}
               onChange={(v) => changer('visibleATous', v)}
-              aide="If unchecked, only the owner and the holder can see this DVD."
+              aide={t('form.visibleHelp')}
             />
           </Groupe>
         </div>
@@ -472,10 +474,10 @@ export default function FormulaireDvd({
 
       <div className="formulaire-actions">
         <button type="submit" className="bouton bouton-primaire" disabled={envoi || televersement}>
-          {envoi ? 'Saving…' : libelleBouton}
+          {envoi ? t('common.saving') : libelleBouton}
         </button>
         <button type="button" className="bouton bouton-secondaire" onClick={onAnnuler} disabled={envoi}>
-          Cancel
+          {t('common.cancel')}
         </button>
       </div>
     </form>

@@ -6,8 +6,10 @@ import { useAnnuaire, useRetour } from '../utils/hooks.js';
 import Alerte from '../components/Alerte.jsx';
 import Chargement from '../components/Chargement.jsx';
 import FormulaireDvd, { VALEURS_VIDES } from '../components/FormulaireDvd.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function AjoutDvd() {
+  const { t } = useTranslation();
   const { utilisateur, estSuper } = useAuth();
   const navigate = useNavigate();
   const retour = useRetour();
@@ -19,13 +21,13 @@ export default function AjoutDvd() {
     }
     return utilisateurs.map((u) => ({
       _id: u._id,
-      libelle: u._id === utilisateur._id ? `${u.nom} (me)` : u.nom,
+      libelle: u._id === utilisateur._id ? t('add.me', { nom: u.nom }) : u.nom,
     }));
-  }, [estSuper, utilisateurs, utilisateur._id]);
+  }, [estSuper, utilisateurs, utilisateur._id, t]);
 
   async function ajouter(donnees) {
     const reponse = await api.ajouterFilm(donnees);
-    navigate(retour, { state: { message: `The DVD “${reponse.film.titreFrancais}” was added.` } });
+    navigate(retour, { state: { message: t('add.success', { titre: reponse.film.titreFrancais }) } });
   }
 
   if (estSuper && chargement) {
@@ -36,9 +38,9 @@ export default function AjoutDvd() {
     <section className="page page-etroite">
       <Alerte type="erreur">{erreur}</Alerte>
       <FormulaireDvd
-        titre="Add a DVD"
+        titre={t('add.title')}
         valeursInitiales={{ ...VALEURS_VIDES, pourUtilisateurId: estSuper ? utilisateur._id : '' }}
-        libelleBouton="Add DVD"
+        libelleBouton={t('add.button')}
         onSoumettre={ajouter}
         onAnnuler={() => navigate(retour)}
         utilisateursCibles={cibles}

@@ -1,17 +1,22 @@
+import i18n, { langueCourante } from '../i18n/index.js';
 import { traduire } from '../constantes.js';
+
+function localeDate() {
+  return langueCourante() === 'fr' ? 'fr-CA' : 'en-CA';
+}
 
 export function formaterDate(valeur) {
   if (!valeur) {
-    return 'Not specified';
+    return i18n.t('common.notSpecified');
   }
-  return new Date(valeur).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+  return new Date(valeur).toLocaleDateString(localeDate(), { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 export function formaterDateHeure(valeur) {
   if (!valeur) {
     return '';
   }
-  return new Date(valeur).toLocaleString('en-CA', {
+  return new Date(valeur).toLocaleString(localeDate(), {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -22,16 +27,16 @@ export function formaterDateHeure(valeur) {
 
 export function formaterOuiNon(valeur) {
   if (valeur === true) {
-    return 'Yes';
+    return i18n.t('common.yes');
   }
   if (valeur === false) {
-    return 'No';
+    return i18n.t('common.no');
   }
-  return 'Not specified';
+  return i18n.t('common.notSpecified');
 }
 
 export function formaterListe(valeurs) {
-  return valeurs && valeurs.length > 0 ? valeurs.map(traduire).join(', ') : 'None';
+  return valeurs && valeurs.length > 0 ? valeurs.map(traduire).join(', ') : i18n.t('common.none');
 }
 
 export function urlPochette(fichier) {

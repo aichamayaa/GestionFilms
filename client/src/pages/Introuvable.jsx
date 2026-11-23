@@ -1,13 +1,15 @@
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 export default function Introuvable() {
+  const { t } = useTranslation();
   return (
     <section className="page page-etroite">
       <div className="panneau vide">
-        <h1>Page not found</h1>
-        <p>The page you’re looking for doesn’t exist or has been moved.</p>
+        <h1>{t('notFound.title')}</h1>
+        <p>{t('notFound.text')}</p>
         <Link to="/dvds" className="bouton bouton-primaire">
-          Back to the DVD list
+          {t('notFound.back')}
         </Link>
       </div>
     </section>

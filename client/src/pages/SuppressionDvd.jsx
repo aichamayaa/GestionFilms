@@ -5,8 +5,10 @@ import { useFilm, useRetour } from '../utils/hooks.js';
 import Alerte from '../components/Alerte.jsx';
 import Chargement from '../components/Chargement.jsx';
 import DetailsDvd from '../components/DetailsDvd.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function SuppressionDvd() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const retour = useRetour();
@@ -19,7 +21,7 @@ export default function SuppressionDvd() {
     setErreurAction('');
     try {
       await api.supprimerFilm(id);
-      navigate(retour, { state: { message: `The DVD “${film.titreFrancais}” was deleted.` } });
+      navigate(retour, { state: { message: t('delete.success', { titre: film.titreFrancais }) } });
     } catch (e) {
       setErreurAction(e.message);
       setEnvoi(false);
@@ -30,23 +32,23 @@ export default function SuppressionDvd() {
     <section className="page page-etroite">
       {chargement && <Chargement />}
       <Alerte type="erreur">{erreur}</Alerte>
-      {film && !film.permissions.supprimer && <Alerte type="erreur">You can’t delete this DVD.</Alerte>}
+      {film && !film.permissions.supprimer && <Alerte type="erreur">{t('delete.forbidden')}</Alerte>}
       {film && (
         <>
           <DetailsDvd film={film} />
           {film.permissions.supprimer && (
             <div className="panneau confirmation confirmation-danger">
-              <h2>Confirm deletion</h2>
+              <h2>{t('delete.heading')}</h2>
               <p>
-                Do you really want to delete the DVD “{film.titreFrancais}”? This cannot be undone: the DVD will be removed from the database and the users concerned will be notified by email.
+                {t('delete.text', { titre: film.titreFrancais })}
               </p>
               <Alerte type="erreur">{erreurAction}</Alerte>
               <div className="formulaire-actions">
                 <button type="button" className="bouton bouton-danger" onClick={confirmer} disabled={envoi}>
-                  {envoi ? 'Deleting…' : 'Yes, delete this DVD'}
+                  {envoi ? t('delete.deleting') : t('delete.yes')}
                 </button>
                 <button type="button" className="bouton bouton-secondaire" onClick={() => navigate(retour)} disabled={envoi}>
-                  No, cancel
+                  {t('delete.no')}
                 </button>
               </div>
             </div>
@@ -55,7 +57,7 @@ export default function SuppressionDvd() {
       )}
       {!chargement && !film && (
         <Link to={retour} className="bouton bouton-secondaire">
-          Back to list
+          {t('common.backToList')}
         </Link>
       )}
     </section>

@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { config } from './config.js';
 import { gestionnaireErreurs, routeInconnue } from './middleware/erreurs.js';
+import { choisirLangue, middlewareLangue, traduireMessage } from './i18n.js';
 import authRoutes from './routes/auth.js';
 import filmRoutes from './routes/films.js';
 import utilisateurRoutes from './routes/utilisateurs.js';
@@ -23,6 +24,7 @@ export function creerApp() {
 
   app.use(cors({ origin: config.urlClient }));
   app.use(express.json({ limit: '1mb' }));
+  app.use(middlewareLangue);
 
   app.use('/pochettes', express.static(config.dossierPochettes, { maxAge: '1d' }));
 
@@ -65,7 +67,8 @@ export default async function handler(req, res) {
   } catch (erreur) {
     pret = null;
     console.error(erreur);
-    return res.status(500).json({ message: 'Database connection error.' });
+    const langue = choisirLangue(req.headers['accept-language']);
+    return res.status(500).json({ message: traduireMessage('Database connection error.', langue) });
   }
   return app(req, res);
 }

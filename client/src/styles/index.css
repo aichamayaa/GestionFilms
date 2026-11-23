@@ -929,3 +929,39 @@ input[type='file'] {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }
+
+/* Language switcher */
+.selecteur-langue {
+  display: inline-flex;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.langue-bouton {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 0.3rem 0.6rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.langue-bouton + .langue-bouton {
+  border-left: 1px solid currentColor;
+}
+.langue-bouton.langue-active {
+  background: #fff;
+  color: #1f3864;
+}
+.connexion-langue {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+.connexion-langue .selecteur-langue {
+  color: #1f3864;
+}
+.connexion-langue .langue-active {
+  background: #1f3864;
+  color: #fff;
+}

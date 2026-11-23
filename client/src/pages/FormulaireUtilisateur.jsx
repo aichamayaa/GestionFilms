@@ -5,10 +5,12 @@ import { creationUtilisateurSchema, modificationUtilisateurSchema, validerFormul
 import Alerte from '../components/Alerte.jsx';
 import { Champ } from '../components/Champ.jsx';
 import Chargement from '../components/Chargement.jsx';
+import { useTranslation } from 'react-i18next';
 
 const VIDE = { nom: '', courriel: '', motDePasse: '', confirmation: '', role: 'U' };
 
 export default function FormulaireUtilisateur() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const modification = Boolean(id);
@@ -74,8 +76,8 @@ export default function FormulaireUtilisateur() {
       navigate('/administration/utilisateurs', {
         state: {
           message: modification
-            ? `User ${donnees.nom} was updated.`
-            : `User ${donnees.nom} was created. A confirmation email was sent to them.`,
+            ? t('admin.updated', { nom: donnees.nom })
+            : t('admin.created', { nom: donnees.nom }),
         },
       });
     } catch (e) {
@@ -83,7 +85,7 @@ export default function FormulaireUtilisateur() {
         setErreurs(e.erreurs);
         setErreurGenerale(e.message);
       } else {
-        setErreurGenerale('An unexpected error occurred.');
+        setErreurGenerale(t('common.unexpected'));
       }
       setEnvoi(false);
     }
@@ -96,72 +98,72 @@ export default function FormulaireUtilisateur() {
   return (
     <section className="page page-etroite">
       <div className="page-entete">
-        <h1>{modification ? 'Edit user' : 'Register a new user'}</h1>
+        <h1>{modification ? t('admin.editUser') : t('admin.newUser')}</h1>
       </div>
 
       <form className="panneau" onSubmit={soumettre} noValidate>
         <Alerte type="erreur">{erreurGenerale}</Alerte>
 
-        <Champ id="nom" libelle="First name" requis erreur={erreurs.nom} aide="It can be used to sign in and must be unique.">
+        <Champ id="nom" libelle={t('admin.firstName')} requis erreur={erreurs.nom} aide={t('admin.firstNameHelp')}>
           <input
             id="nom"
             type="text"
             value={valeurs.nom}
             onChange={(e) => changer('nom', e.target.value)}
-            placeholder="User’s first name"
-            title="User’s first name"
+            placeholder={t('admin.firstNamePh')}
+            title={t('admin.firstNamePh')}
             maxLength={60}
             autoFocus
             aria-invalid={erreurs.nom ? 'true' : undefined}
           />
         </Champ>
 
-        <Champ id="courriel" libelle="Email address" requis erreur={erreurs.courriel} aide="It can also be used to sign in.">
+        <Champ id="courriel" libelle={t('admin.emailAddress')} requis erreur={erreurs.courriel} aide={t('admin.emailHelp')}>
           <input
             id="courriel"
             type="email"
             value={valeurs.courriel}
             onChange={(e) => changer('courriel', e.target.value)}
             placeholder="name@example.com"
-            title="User’s email address"
+            title={t('admin.emailTitle')}
             maxLength={120}
             aria-invalid={erreurs.courriel ? 'true' : undefined}
           />
         </Champ>
 
-        <Champ id="role" libelle="Role" erreur={erreurs.role}>
-          <select id="role" value={valeurs.role} onChange={(e) => changer('role', e.target.value)} title="A superuser can act on behalf of other users">
-            <option value="U">User</option>
-            <option value="S">Superuser</option>
-            {valeurs.role === 'A' && <option value="A">Administrator</option>}
+        <Champ id="role" libelle={t('admin.role')} erreur={erreurs.role}>
+          <select id="role" value={valeurs.role} onChange={(e) => changer('role', e.target.value)} title={t('admin.roleTitle')}>
+            <option value="U">{t('roles.U')}</option>
+            <option value="S">{t('roles.S')}</option>
+            {valeurs.role === 'A' && <option value="A">{t('roles.A')}</option>}
           </select>
         </Champ>
 
         <Champ
           id="motDePasse"
-          libelle={modification ? 'New password' : 'Password'}
+          libelle={modification ? t('admin.newPassword') : t('admin.password')}
           requis={!modification}
           erreur={erreurs.motDePasse}
-          aide={modification ? 'Leave blank to keep the current password.' : 'At least 6 characters.'}
+          aide={modification ? t('admin.passwordHelpEdit') : t('admin.passwordHelpNew')}
         >
           <input
             id="motDePasse"
             type="password"
             value={valeurs.motDePasse}
             onChange={(e) => changer('motDePasse', e.target.value)}
-            placeholder="Password"
+            placeholder={t('admin.password')}
             autoComplete="new-password"
             aria-invalid={erreurs.motDePasse ? 'true' : undefined}
           />
         </Champ>
 
-        <Champ id="confirmation" libelle="Confirm password" requis={!modification} erreur={erreurs.confirmation}>
+        <Champ id="confirmation" libelle={t('admin.confirmPassword')} requis={!modification} erreur={erreurs.confirmation}>
           <input
             id="confirmation"
             type="password"
             value={valeurs.confirmation}
             onChange={(e) => changer('confirmation', e.target.value)}
-            placeholder="Enter it again"
+            placeholder={t('admin.confirmPh')}
             autoComplete="new-password"
             aria-invalid={erreurs.confirmation ? 'true' : undefined}
           />
@@ -169,10 +171,10 @@ export default function FormulaireUtilisateur() {
 
         <div className="formulaire-actions">
           <button type="submit" className="bouton bouton-primaire" disabled={envoi}>
-            {envoi ? 'Saving…' : modification ? 'Save changes' : 'Save user'}
+            {envoi ? t('common.saving') : modification ? t('admin.saveChanges') : t('admin.saveUser')}
           </button>
           <Link to="/administration/utilisateurs" className="bouton bouton-secondaire">
-            Cancel
+            {t('common.cancel')}
           </Link>
         </div>
       </form>

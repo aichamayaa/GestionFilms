@@ -8,14 +8,16 @@ import Alerte from '../components/Alerte.jsx';
 import CarteDvd from '../components/CarteDvd.jsx';
 import Chargement from '../components/Chargement.jsx';
 import Pagination from '../components/Pagination.jsx';
+import { useTranslation } from 'react-i18next';
 
 const TITRES = {
-  tous: 'All users’ DVDs',
-  'en-main': 'DVDs I’m holding',
-  utilisateur: 'Another user’s DVDs',
+  tous: 'list.titleAll',
+  'en-main': 'list.titleHeld',
+  utilisateur: 'list.titleUser',
 };
 
 export default function ListeDvds({ portee }) {
+  const { t } = useTranslation();
   const { utilisateur, estAdmin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -94,11 +96,12 @@ export default function ListeDvds({ portee }) {
   return (
     <section className="page">
       <div className="page-entete">
-        <h1>{recherche ? 'Search results' : TITRES[portee]}</h1>
+        <h1>{recherche ? t('list.searchResults') : t(TITRES[portee])}</h1>
         {donnees && (
           <p className="page-compte" aria-live="polite">
-            {donnees.total} DVD{donnees.total > 1 ? 's' : ''}
-            {donnees.utilisateur ? ` held by ${donnees.utilisateur.nom}` : ''}
+            {donnees.utilisateur
+              ? t('list.countHeld', { count: donnees.total, nom: donnees.utilisateur.nom })
+              : t('list.count', { count: donnees.total })}
           </p>
         )}
       </div>
@@ -111,14 +114,14 @@ export default function ListeDvds({ portee }) {
       {portee === 'utilisateur' && (
         <div className="panneau barre-outils">
           <div className="champ champ-ligne">
-            <label htmlFor="choix-utilisateur">{estAdmin ? 'User' : 'Other user'}</label>
+            <label htmlFor="choix-utilisateur">{estAdmin ? t('list.user') : t('list.otherUser')}</label>
             <select
               id="choix-utilisateur"
               value={idChoisi}
               onChange={(e) => modifierParametres({ u: e.target.value, page: 1 })}
-              title="Choose the user whose DVDs you want to see"
+              title={t('list.chooseUserTitle')}
             >
-              <option value="">Choose a user</option>
+              <option value="">{t('list.chooseUser')}</option>
               {choix.map((u) => (
                 <option key={u._id} value={u._id}>
                   {u.nom}
@@ -133,41 +136,41 @@ export default function ListeDvds({ portee }) {
         <div className="panneau barre-outils">
           <form className="recherche" onSubmit={lancerRecherche} role="search">
             <label htmlFor="recherche" className="sr-seulement">
-              Search for a title
+              {t('list.searchLabel')}
             </label>
             <input
               id="recherche"
               type="search"
               value={saisie}
               onChange={(e) => setSaisie(e.target.value)}
-              placeholder="French or original title, full or partial"
-              title="Search part or all of the French or original title"
+              placeholder={t('list.searchPh')}
+              title={t('list.searchTitle')}
             />
             <button type="submit" className="bouton bouton-primaire">
-              Search
+              {t('list.search')}
             </button>
             {recherche && (
               <button
                 type="button"
                 className="bouton bouton-secondaire"
                 onClick={() => modifierParametres({ q: '', page: 1 })}
-                title="Show all DVDs again"
+                title={t('list.backTitle')}
               >
-                Back
+                {t('list.back')}
               </button>
             )}
           </form>
           <div className="champ champ-ligne">
-            <label htmlFor="tri">Sort by</label>
+            <label htmlFor="tri">{t('list.sortBy')}</label>
             <select
               id="tri"
               value={tri}
               onChange={(e) => modifierParametres({ tri: e.target.value === 'titre' ? '' : e.target.value, page: 1 })}
-              title="Choose the alphabetical display order"
+              title={t('list.sortTitle')}
             >
               {TRIS.map((option) => (
-                <option key={option.valeur} value={option.valeur}>
-                  {option.libelle}
+                <option key={option} value={option}>
+                  {t(`sorts.${option}`)}
                 </option>
               ))}
             </select>
@@ -178,16 +181,16 @@ export default function ListeDvds({ portee }) {
       {chargement && <Chargement />}
 
       {!chargement && portee === 'utilisateur' && !idChoisi && (
-        <p className="vide panneau">Choose a user from the list to see their DVDs.</p>
+        <p className="vide panneau">{t('list.pickUser')}</p>
       )}
 
       {!chargement && donnees && donnees.films.length === 0 && (
         <p className="vide panneau">
           {recherche
-            ? `No DVD matches “${q}”.`
+            ? t('list.noMatch', { q })
             : portee === 'en-main'
-              ? 'You aren’t holding any DVDs right now.'
-              : 'No DVDs to display.'}
+              ? t('list.notHolding')
+              : t('list.noDvds')}
         </p>
       )}
 
@@ -205,7 +208,7 @@ export default function ListeDvds({ portee }) {
             ))}
           </ol>
           <p className="page-position">
-            Page {donnees.page} of {donnees.nbPages}
+            {t('list.pageOf', { page: donnees.page, total: donnees.nbPages })}
           </p>
           <Pagination page={donnees.page} nbPages={donnees.nbPages} onChanger={(p) => modifierParametres({ page: p })} />
         </>

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 function construirePages(page, nbPages) {
   const pages = new Set([1, nbPages, page - 1, page, page + 1]);
   const valides = [...pages].filter((p) => p >= 1 && p <= nbPages).sort((a, b) => a - b);
@@ -12,20 +14,21 @@ function construirePages(page, nbPages) {
 }
 
 export default function Pagination({ page, nbPages, onChanger }) {
+  const { t } = useTranslation();
   if (nbPages <= 1) {
     return null;
   }
 
   return (
-    <nav className="pagination" aria-label="Pagination">
+    <nav className="pagination" aria-label={t('pagination.aria')}>
       <button
         type="button"
         className="bouton bouton-secondaire"
         disabled={page <= 1}
         onClick={() => onChanger(page - 1)}
-        title="Previous page"
+        title={t('pagination.previousTitle')}
       >
-        Previous
+        {t('pagination.previous')}
       </button>
       <ul className="pagination-pages">
         {construirePages(page, nbPages).map((element) =>
@@ -40,7 +43,7 @@ export default function Pagination({ page, nbPages, onChanger }) {
                 className={element === page ? 'page-bouton page-actuelle' : 'page-bouton'}
                 aria-current={element === page ? 'page' : undefined}
                 onClick={() => onChanger(element)}
-                title={`Go to page ${element}`}
+                title={t('pagination.goTo', { page: element })}
               >
                 {element}
               </button>
@@ -53,9 +56,9 @@ export default function Pagination({ page, nbPages, onChanger }) {
         className="bouton bouton-secondaire"
         disabled={page >= nbPages}
         onClick={() => onChanger(page + 1)}
-        title="Next page"
+        title={t('pagination.nextTitle')}
       >
-        Next
+        {t('pagination.next')}
       </button>
     </nav>
   );

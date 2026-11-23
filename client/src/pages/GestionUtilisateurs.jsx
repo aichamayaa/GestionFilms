@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { api } from '../api/client.js';
-import { ROLES } from '../constantes.js';
+import { libelleRole } from '../constantes.js';
 import Alerte from '../components/Alerte.jsx';
 import Chargement from '../components/Chargement.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function GestionUtilisateurs() {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const [utilisateurs, setUtilisateurs] = useState([]);
@@ -48,7 +50,7 @@ export default function GestionUtilisateurs() {
     setErreur('');
     try {
       await api.supprimerUtilisateur(utilisateur._id);
-      setMessage(`User ${utilisateur.nom} was deleted.`);
+      setMessage(t('admin.deleted', { nom: utilisateur.nom }));
       setASupprimer(null);
       charger();
     } catch (e) {
@@ -62,9 +64,9 @@ export default function GestionUtilisateurs() {
   return (
     <section className="page">
       <div className="page-entete">
-        <h1>User management</h1>
-        <Link to="/administration/utilisateurs/nouveau" className="bouton bouton-primaire" title="Register a new user">
-          Add a user
+        <h1>{t('admin.title')}</h1>
+        <Link to="/administration/utilisateurs/nouveau" className="bouton bouton-primaire" title={t('admin.addTitle')}>
+          {t('admin.add')}
         </Link>
       </div>
 
@@ -80,16 +82,16 @@ export default function GestionUtilisateurs() {
       {!chargement && (
         <div className="panneau tableau-conteneur">
           <table className="tableau">
-            <caption className="sr-seulement">List of users and superusers</caption>
+            <caption className="sr-seulement">{t('admin.caption')}</caption>
             <thead>
               <tr>
-                <th scope="col">No.</th>
-                <th scope="col">First name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-                <th scope="col">DVDs owned</th>
-                <th scope="col">DVDs held</th>
-                <th scope="col">Actions</th>
+                <th scope="col">{t('admin.no')}</th>
+                <th scope="col">{t('common.firstName')}</th>
+                <th scope="col">{t('common.email')}</th>
+                <th scope="col">{t('admin.role')}</th>
+                <th scope="col">{t('admin.owned')}</th>
+                <th scope="col">{t('admin.held')}</th>
+                <th scope="col">{t('admin.actions')}</th>
               </tr>
             </thead>
             <tbody>
@@ -98,28 +100,28 @@ export default function GestionUtilisateurs() {
                   <td>{index + 1}</td>
                   <td>{u.nom}</td>
                   <td>{u.courriel}</td>
-                  <td>{ROLES[u.role]}</td>
+                  <td>{libelleRole(u.role)}</td>
                   <td>{u.nbPossedes}</td>
                   <td>{u.nbEnMain}</td>
                   <td>
                     {aSupprimer === u._id ? (
                       <div className="actions-ligne">
-                        <span>Delete?</span>
+                        <span>{t('admin.deleteQ')}</span>
                         <button type="button" className="bouton bouton-petit bouton-danger" onClick={() => supprimer(u)} disabled={suppression}>
-                          Confirm
+                          {t('common.confirm')}
                         </button>
                         <button type="button" className="bouton bouton-petit bouton-secondaire" onClick={() => setASupprimer(null)} disabled={suppression}>
-                          Cancel
+                          {t('common.cancel')}
                         </button>
                       </div>
                     ) : (
                       <div className="actions-ligne">
-                        <Link to={`/administration/utilisateurs/${u._id}`} className="bouton bouton-petit bouton-secondaire" title={`Edit ${u.nom}`}>
-                          Edit
+                        <Link to={`/administration/utilisateurs/${u._id}`} className="bouton bouton-petit bouton-secondaire" title={t('admin.editTitle', { nom: u.nom })}>
+                          {t('common.edit')}
                         </Link>
                         {u.role !== 'A' && (
-                          <button type="button" className="bouton bouton-petit bouton-danger-contour" onClick={() => setASupprimer(u._id)} title={`Delete ${u.nom}`}>
-                            Delete
+                          <button type="button" className="bouton bouton-petit bouton-danger-contour" onClick={() => setASupprimer(u._id)} title={t('admin.deleteTitle', { nom: u.nom })}>
+                            {t('common.delete')}
                           </button>
                         )}
                       </div>

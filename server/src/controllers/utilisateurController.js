@@ -1,3 +1,4 @@
+import { courrielBienvenue } from '../services/gabarits.js';
 import User from '../models/User.js';
 import Film from '../models/Film.js';
 import Emprunt from '../models/Emprunt.js';
@@ -85,16 +86,7 @@ export async function creer(req, res) {
 
   await envoyerCourriel({
     destinataires: [{ nom: utilisateur.nom, courriel: utilisateur.courriel }],
-    sujet: 'Welcome to Film Management',
-    corps: [
-      `Hello ${utilisateur.nom},`,
-      '',
-      'Your account has been created.',
-      `You can sign in with your first name (${utilisateur.nom}) or your email (${utilisateur.courriel}).`,
-      `App address: ${config.urlClient}/connexion`,
-      '',
-      'Film Management',
-    ].join('\n'),
+    ...courrielBienvenue({ utilisateur, url: config.urlClient }),
   });
 
   res.status(201).json({ utilisateur: presenterUtilisateur(utilisateur) });

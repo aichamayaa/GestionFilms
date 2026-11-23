@@ -6,8 +6,10 @@ import { messageSchema, validerFormulaire } from '../validation.js';
 import { useAnnuaire } from '../utils/hooks.js';
 import Alerte from '../components/Alerte.jsx';
 import { CaseACocher, Champ, Groupe } from '../components/Champ.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function EnvoiCourriel() {
+  const { t } = useTranslation();
   const { utilisateur } = useAuth();
   const [params] = useSearchParams();
   const { utilisateurs, erreur: erreurAnnuaire } = useAnnuaire();
@@ -78,27 +80,27 @@ export default function EnvoiCourriel() {
     return (
       <section className="page page-etroite">
         <div className="page-entete">
-          <h1>Message sent</h1>
+          <h1>{t('compose.sentTitle')}</h1>
         </div>
         <Alerte type={courriel.statut === 'echec' ? 'erreur' : 'succes'}>
           {courriel.statut === 'echec'
-            ? 'The email server rejected the message.'
+            ? t('compose.rejected')
             : simulation
-              ? 'No SMTP server is configured: the message was not actually sent, but it is shown below.'
-              : 'The message was sent.'}
+              ? t('compose.simulated')
+              : t('compose.sent')}
         </Alerte>
         <div className="panneau courriel-apercu">
           <dl className="fiche-donnees">
             <div className="fiche-ligne">
-              <dt>Recipients</dt>
+              <dt>{t('compose.recipientsLabel')}</dt>
               <dd>{courriel.destinataires.map((d) => `${d.nom} <${d.courriel}>`).join(', ')}</dd>
             </div>
             <div className="fiche-ligne">
-              <dt>Subject</dt>
+              <dt>{t('common.subject')}</dt>
               <dd>{courriel.sujet}</dd>
             </div>
             <div className="fiche-ligne">
-              <dt>Message</dt>
+              <dt>{t('common.message')}</dt>
               <dd>
                 <pre className="courriel-corps">{courriel.corps}</pre>
               </dd>
@@ -107,10 +109,10 @@ export default function EnvoiCourriel() {
         </div>
         <div className="formulaire-actions">
           <button type="button" className="bouton bouton-primaire" onClick={nouveauMessage}>
-            Write another message
+            {t('compose.another')}
           </button>
           <Link to="/courriels" className="bouton bouton-secondaire">
-            View sent emails
+            {t('compose.viewSent')}
           </Link>
         </div>
       </section>
@@ -120,30 +122,30 @@ export default function EnvoiCourriel() {
   return (
     <section className="page page-etroite">
       <div className="page-entete">
-        <h1>Send an email</h1>
+        <h1>{t('compose.title')}</h1>
       </div>
 
       <form className="panneau" onSubmit={soumettre} noValidate>
         <Alerte type="erreur">{erreurGenerale || erreurAnnuaire}</Alerte>
 
-        <Champ id="mode" libelle="Recipients">
-          <select id="mode" value={mode} onChange={(e) => setMode(e.target.value)} title="Choose who will receive the message">
-            <option value="un">One user</option>
-            <option value="plusieurs">Several users</option>
-            <option value="tous">All users</option>
+        <Champ id="mode" libelle={t('compose.recipients')}>
+          <select id="mode" value={mode} onChange={(e) => setMode(e.target.value)} title={t('compose.recipientsTitle')}>
+            <option value="un">{t('compose.one')}</option>
+            <option value="plusieurs">{t('compose.several')}</option>
+            <option value="tous">{t('compose.all')}</option>
           </select>
         </Champ>
 
         {mode === 'un' && (
-          <Champ id="destinataire" libelle="User" erreur={erreurs.destinataires}>
+          <Champ id="destinataire" libelle={t('compose.user')} erreur={erreurs.destinataires}>
             <select
               id="destinataire"
               value={unDestinataire}
               onChange={(e) => setUnDestinataire(e.target.value)}
-              title="Choose the message recipient"
+              title={t('compose.userTitle')}
               aria-invalid={erreurs.destinataires ? 'true' : undefined}
             >
-              <option value="">Choose a user</option>
+              <option value="">{t('compose.chooseUser')}</option>
               {autres.map((u) => (
                 <option key={u._id} value={u._id}>
                   {u.nom}
@@ -154,7 +156,7 @@ export default function EnvoiCourriel() {
         )}
 
         {mode === 'plusieurs' && (
-          <Groupe libelle="Users" erreur={erreurs.destinataires}>
+          <Groupe libelle={t('compose.users')} erreur={erreurs.destinataires}>
             <div className="cases-grille">
               {autres.map((u) => (
                 <CaseACocher
@@ -168,45 +170,45 @@ export default function EnvoiCourriel() {
             </div>
             <div className="formulaire-actions">
               <button type="button" className="bouton bouton-petit bouton-secondaire" onClick={() => setPlusieurs(autres.map((u) => u._id))}>
-                Select all
+                {t('compose.selectAll')}
               </button>
               <button type="button" className="bouton bouton-petit bouton-secondaire" onClick={() => setPlusieurs([])}>
-                Deselect all
+                {t('compose.deselectAll')}
               </button>
             </div>
           </Groupe>
         )}
 
-        {mode === 'tous' && <p className="aide">The message will be sent to all other users.</p>}
+        {mode === 'tous' && <p className="aide">{t('compose.allNote')}</p>}
 
-        <Champ id="sujet" libelle="Subject" requis erreur={erreurs.sujet}>
+        <Champ id="sujet" libelle={t('compose.subject')} requis erreur={erreurs.sujet}>
           <input
             id="sujet"
             type="text"
             value={sujet}
             onChange={(e) => setSujet(e.target.value)}
-            placeholder="Message subject"
-            title="Message subject (150 characters maximum)"
+            placeholder={t('compose.subjectPh')}
+            title={t('compose.subjectTitle')}
             maxLength={150}
             aria-invalid={erreurs.sujet ? 'true' : undefined}
           />
         </Champ>
 
-        <Champ id="corps" libelle="Message" requis erreur={erreurs.corps}>
+        <Champ id="corps" libelle={t('compose.body')} requis erreur={erreurs.corps}>
           <textarea
             id="corps"
             rows={8}
             value={corps}
             onChange={(e) => setCorps(e.target.value)}
-            placeholder="Write your message here"
-            title="Message body (5000 characters maximum)"
+            placeholder={t('compose.bodyPh')}
+            title={t('compose.bodyTitle')}
             maxLength={5000}
             aria-invalid={erreurs.corps ? 'true' : undefined}
           />
         </Champ>
 
         <button type="submit" className="bouton bouton-primaire" disabled={envoi}>
-          {envoi ? 'Sending…' : 'Send message'}
+          {envoi ? t('compose.sending') : t('compose.send')}
         </button>
       </form>
     </section>

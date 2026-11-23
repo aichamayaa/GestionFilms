@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link, Navigate, useLocation } from 'react-router';
-import { useAuth } from '../context/AuthContext.jsx';
+import { SESSION_EXPIREE, useAuth } from '../context/AuthContext.jsx';
+import SelecteurLangue from '../components/SelecteurLangue.jsx';
 import { ErreurApi } from '../api/client.js';
 import { connexionSchema, validerFormulaire } from '../validation.js';
 import Alerte from '../components/Alerte.jsx';
 import { Champ } from '../components/Champ.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function Connexion() {
+  const { t } = useTranslation();
   const { utilisateur, pret, connecter, messageSession } = useAuth();
   const location = useLocation();
   const [identifiant, setIdentifiant] = useState('');
@@ -34,7 +37,7 @@ export default function Connexion() {
     try {
       await connecter(identifiant.trim(), motDePasse);
     } catch (erreur) {
-      setErreurGenerale(erreur instanceof ErreurApi ? erreur.message : 'An unexpected error occurred.');
+      setErreurGenerale(erreur instanceof ErreurApi ? erreur.message : t('common.unexpected'));
       setEnvoi(false);
     }
   }
@@ -42,45 +45,48 @@ export default function Connexion() {
   return (
     <div className="connexion-page">
       <div className="connexion-carte panneau">
-        <h1 className="connexion-titre">Film Management</h1>
-        <p className="connexion-sous-titre">Sign in to browse the group’s DVD collection.</p>
+        <div className="connexion-langue">
+          <SelecteurLangue />
+        </div>
+        <h1 className="connexion-titre">{t('common.appName')}</h1>
+        <p className="connexion-sous-titre">{t('login.subtitle')}</p>
 
-        <Alerte type="info">{messageSession}</Alerte>
+        <Alerte type="info">{messageSession === SESSION_EXPIREE ? t('session.expired') : messageSession}</Alerte>
         <Alerte type="erreur">{erreurGenerale}</Alerte>
 
         <form onSubmit={soumettre} noValidate>
-          <Champ id="identifiant" libelle="Username" erreur={erreurs.identifiant}>
+          <Champ id="identifiant" libelle={t('login.username')} erreur={erreurs.identifiant}>
             <input
               id="identifiant"
               type="text"
               value={identifiant}
               onChange={(e) => setIdentifiant(e.target.value)}
-              placeholder="First name or email address"
-              title="Enter your first name or email address"
+              placeholder={t('login.usernamePh')}
+              title={t('login.usernameTitle')}
               autoComplete="username"
               autoFocus
               aria-invalid={erreurs.identifiant ? 'true' : undefined}
             />
           </Champ>
-          <Champ id="motDePasse" libelle="Password" erreur={erreurs.motDePasse}>
+          <Champ id="motDePasse" libelle={t('login.password')} erreur={erreurs.motDePasse}>
             <input
               id="motDePasse"
               type="password"
               value={motDePasse}
               onChange={(e) => setMotDePasse(e.target.value)}
-              placeholder="Your password"
-              title="Enter your password"
+              placeholder={t('login.passwordPh')}
+              title={t('login.passwordTitle')}
               autoComplete="current-password"
               aria-invalid={erreurs.motDePasse ? 'true' : undefined}
             />
           </Champ>
           <button type="submit" className="bouton bouton-primaire bouton-large" disabled={envoi}>
-            {envoi ? 'Signing in…' : 'Sign in'}
+            {envoi ? t('login.signingIn') : t('login.signIn')}
           </button>
         </form>
 
         <p className="connexion-sous-titre">
-          No account? <Link to="/inscription">Create an account</Link>
+          {t('login.noAccount')} <Link to="/inscription">{t('login.createAccount')}</Link>
         </p>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { messageSchema, valider } from '../validation/schemas.js';
 import { envoyerCourriel, lireBoite, smtpActif } from '../services/courriel.js';
 import { estAdminIntegre } from '../services/utilisateurs.js';
 import { COURRIEL_ADMIN } from '../constantes.js';
+import { enteteMessage } from '../services/gabarits.js';
 
 export async function envoyer(req, res) {
   const donnees = valider(messageSchema, req.body);
@@ -22,14 +23,13 @@ export async function envoyer(req, res) {
     throw new ErreurHttp(400, 'No valid recipient.', { destinataires: 'No valid recipient.' });
   }
 
-  const signature = estAdminIntegre(req.user)
-    ? 'The administrator'
-    : `${req.user.nom} (${req.user.courriel})`;
+  const signature = estAdminIntegre(req.user) ? null : `${req.user.nom} (${req.user.courriel})`;
+  const entete = enteteMessage(signature ?? 'the administrator', signature ?? 'l’administrateur');
 
   const entree = await envoyerCourriel({
     destinataires,
     sujet: donnees.sujet,
-    corps: `Message from ${signature}\n\n${donnees.corps}`,
+    corps: `${entete}\n\n${donnees.corps}`,
     expediteur: { nom: req.user.nom, courriel: estAdminIntegre(req.user) ? null : req.user.courriel },
     repondreA: estAdminIntegre(req.user) ? undefined : req.user.courriel,
   });

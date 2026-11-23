@@ -3,14 +3,10 @@ import { api } from '../api/client.js';
 import { formaterDateHeure } from '../utils/format.js';
 import Alerte from '../components/Alerte.jsx';
 import Chargement from '../components/Chargement.jsx';
-
-const STATUTS = {
-  simule: 'Simulated',
-  envoye: 'Sent',
-  echec: 'Failed',
-};
+import { useTranslation } from 'react-i18next';
 
 export default function BoiteEnvoi() {
+  const { t } = useTranslation();
   const [donnees, setDonnees] = useState(null);
   const [erreur, setErreur] = useState('');
   const [chargement, setChargement] = useState(true);
@@ -42,22 +38,22 @@ export default function BoiteEnvoi() {
   return (
     <section className="page page-etroite">
       <div className="page-entete">
-        <h1>Sent emails</h1>
+        <h1>{t('emails.title')}</h1>
         <button type="button" className="bouton bouton-secondaire" onClick={() => charger()} disabled={chargement}>
-          Refresh
+          {t('emails.refresh')}
         </button>
       </div>
 
       <Alerte type="erreur">{erreur}</Alerte>
       {donnees?.simulation && (
         <Alerte type="info">
-          No SMTP server is configured. Emails are not actually sent: they are kept here with the recipients’ addresses, subject and body. Messages are cleared when the server restarts.
+          {t('emails.simulation')}
         </Alerte>
       )}
 
       {chargement && !donnees && <Chargement />}
 
-      {donnees && donnees.courriels.length === 0 && <p className="vide panneau">No emails have been sent yet.</p>}
+      {donnees && donnees.courriels.length === 0 && <p className="vide panneau">{t('emails.none')}</p>}
 
       {donnees && donnees.courriels.length > 0 && (
         <ul className="liste-courriels">
@@ -65,11 +61,11 @@ export default function BoiteEnvoi() {
             <li key={courriel.id} className="panneau courriel">
               <div className="courriel-entete">
                 <h2>{courriel.sujet}</h2>
-                <span className={`badge badge-${courriel.statut}`}>{STATUTS[courriel.statut]}</span>
+                <span className={`badge badge-${courriel.statut}`}>{t(`emails.status.${courriel.statut}`)}</span>
               </div>
               <p className="aide">{formaterDateHeure(courriel.date)}</p>
               <p>
-                <strong>To:</strong> {courriel.destinataires.map((d) => `${d.nom} <${d.courriel}>`).join(', ')}
+                <strong>{t('emails.to')}</strong> {courriel.destinataires.map((d) => `${d.nom} <${d.courriel}>`).join(', ')}
               </p>
               <pre className="courriel-corps">{courriel.corps}</pre>
               {courriel.erreur && <p className="message-erreur">{courriel.erreur}</p>}
